@@ -1,0 +1,16 @@
+﻿<Page x:Class="DFF.Pages.NormalBattle"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DFF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="240" d:DesignWidth="320"
+      Title="NormalBattle"
+      Loaded="BattleEndKey">
+
+    <Grid Background="Red">
+        <Label x:Name="Beta" Content="*Insert Battle Theme*" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+        <Label x:Name="Back" Content="Press ENTER to go back" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,50" FontSize="15"/>
+    </Grid>
+</Page>

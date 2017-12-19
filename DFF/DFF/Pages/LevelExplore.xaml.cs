@@ -99,6 +99,7 @@ namespace DFF.Pages
                             {
                                 EnemyList.RemoveAt(i);
                                 Characters.Children.RemoveAt(i + 1);
+
                             }
                         }
                         LevelMap.PlayerClearAround(Player.PosX, Player.PosY);

@@ -46,6 +46,7 @@ namespace DFF.Classes
             Canvas.SetLeft(EnemyCanvas, Canvas.GetLeft(EnemyCanvas) + (EnemyX * 24) + 24);
             Canvas.SetTop(EnemyCanvas, Canvas.GetTop(EnemyCanvas) + (EnemyY * 24) + 24);
             Map[EnemyX, EnemyY] = 2;
+
         }
 
         public bool PlayerPosition(Key Direction, int HeroX, int HeroY)

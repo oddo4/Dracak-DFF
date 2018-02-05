@@ -1,0 +1,14 @@
+﻿<Window x:Class="MainDFF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MainDFF"
+        mc:Ignorable="d"
+        Title="DFF" Height="480" Width="640">
+    <Viewbox>
+        <Grid Width="320" Height="240">
+            <Frame x:Name="MainFrame" Source="Pages/MainMenu.xaml" NavigationUIVisibility="Hidden"/>
+        </Grid>
+    </Viewbox>
+</Window>

@@ -54,7 +54,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Pages\MainMenu.xaml">
+    <Page Include="Pages\LevelSelectPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -62,6 +66,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AMenuSelectAction.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -72,11 +77,15 @@
     <Compile Include="BattleCharacter\CharacterDescription.cs" />
     <Compile Include="BattleCharacter\CharacterStats.cs" />
     <Compile Include="BattleCharacter\ACharacterClass.cs" />
-    <Compile Include="BattleCharacter\CharacterClass\ClassVanguard.cs" />
+    <Compile Include="CharacterClass\ClassVanguard.cs" />
     <Compile Include="Interface\IAttackColumn.cs" />
     <Compile Include="Interface\IAttackBehavior.cs" />
-    <Compile Include="Pages\MainMenu.xaml.cs">
-      <DependentUpon>MainMenu.xaml</DependentUpon>
+    <Compile Include="Pages\LevelSelectPage.xaml.cs">
+      <DependentUpon>LevelSelectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenuSelectAction.cs" />
+    <Compile Include="Pages\MainMenuPage.xaml.cs">
+      <DependentUpon>MainMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -114,6 +123,9 @@
   <ItemGroup>
     <Resource Include="Resources\cursor.png" />
     <Resource Include="Resources\MainMenuBG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Alert.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

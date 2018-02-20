@@ -4,11 +4,56 @@
              xmlns:local="clr-namespace:MainDFF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="MenuSelect" TargetType="Label">
+        <Style x:Key="MenuSelect" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Foreground" Value="DarkSlateGray"/>
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Typography.Capitals" Value="SmallCaps"/>
+        </Style>
+        <Style x:Key="LevelMenuHelp" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="8" />
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Typography.Capitals" Value="SmallCaps"/>
+        </Style>
+        <Style x:Key="LevelMenuInfo" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="8" />
-            <Setter Property="Padding" Value="2" />
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="Padding" Value="5,0,0,0" />
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Typography.Capitals" Value="SmallCaps"/>
+        </Style>
+        <Style x:Key="LevelMenuSelect" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="FontSize" Value="8" />
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="Padding" Value="5,0,5,2" />
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Typography.Capitals" Value="SmallCaps"/>
+        </Style>
+        <Style x:Key="LevelMenuIcon" TargetType="Image">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Margin" Value="0,4,0,0" />
+            <Setter Property="Height" Value="25" />
+        </Style>
+        <Style x:Key="MenuRectangle" TargetType="Rectangle">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Fill" Value="#FF0C1FF0" />
+            <Setter Property="Stroke" Value="WhiteSmoke" />
+            <Setter Property="StrokeThickness" Value="1.5" />
+            <Setter Property="RadiusX" Value="2" />
+            <Setter Property="RadiusY" Value="2" />
         </Style>
     </Application.Resources>
 </Application>

@@ -1,0 +1,41 @@
+﻿<Page x:Class="MainDFF.MainMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MainDFF"
+      mc:Ignorable="d" 
+      d:DesignHeight="240" d:DesignWidth="320"
+      Title="MainMenu"
+      Loaded="MenuKey_Loaded">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/MainMenuBG.png" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid x:Name="gridMenu" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15,15,20,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="MenuCursor" Source="/Resources/cursor.png" Height="14" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0"/>
+            <TextBlock Style="{StaticResource MenuSelect}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0">
+                New Game
+            </TextBlock>
+            <TextBlock Style="{StaticResource MenuSelect}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0">
+                Load Game
+            </TextBlock>
+            <TextBlock Style="{StaticResource MenuSelect}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,0">
+                Options
+            </TextBlock>
+            <TextBlock Style="{StaticResource MenuSelect}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,0">
+                Quit
+            </TextBlock>
+        </Grid>
+    </Grid>
+</Page>

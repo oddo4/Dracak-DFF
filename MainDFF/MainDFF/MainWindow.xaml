@@ -5,10 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MainDFF"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
+        Background="Black"
         Title="DFF" Height="480" Width="640">
     <Viewbox>
         <Grid Width="320" Height="240">
-            <Frame x:Name="MainFrame" Source="Pages/MainMenu.xaml" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="MainFrame" Source="Pages/MainMenuPage.xaml" NavigationUIVisibility="Hidden"/>
         </Grid>
     </Viewbox>
 </Window>

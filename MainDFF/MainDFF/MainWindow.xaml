@@ -8,10 +8,12 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
         Background="Black"
-        Title="DFF" Height="480" Width="640">
+        Title="DFF" Height="480" Width="640"
+        WindowState="Normal"
+        WindowStyle="SingleBorderWindow">
     <Viewbox>
         <Grid Width="320" Height="240">
-            <Frame x:Name="MainFrame" Source="Pages/MainMenuPage.xaml" NavigationUIVisibility="Hidden"/>
+            <Frame x:Name="MainFrame" Source="Pages/TitleScreenPage.xaml" NavigationUIVisibility="Hidden"/>
         </Grid>
     </Viewbox>
 </Window>

@@ -23,6 +23,13 @@ namespace MainDFF
         public MainWindow()
         {
             InitializeComponent();
+            App.window = GetWindow(this);
+            //Fullscreen();
+        }
+        private void Fullscreen()
+        {
+            App.window.WindowState = WindowState.Maximized;
+            App.window.WindowStyle = WindowStyle.None;
         }
     }
 }

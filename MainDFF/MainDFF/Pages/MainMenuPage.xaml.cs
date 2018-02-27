@@ -13,45 +13,75 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MainDFF.Classes.ControlActions.MenuActions;
+using MainDFF.Pages;
 
-namespace MainDFF
+namespace MainDFF.Pages
 {
     /// <summary>
-    /// Interakční logika pro MainMenu.xaml
+    /// Interakční logika pro MainMenuPage.xaml
     /// </summary>
-    public partial class MainMenu : Page
+    public partial class MainMenuPage : Page
     {
-        Window window;
         MainMenuSelectAction menuAction = new MainMenuSelectAction();
-        public MainMenu()
+        public MainMenuPage()
         {
             InitializeComponent();
+            ChangeMarginGrid(0);
         }
         private void MenuKey_Loaded(object sender, RoutedEventArgs e)
         {
-            window = Window.GetWindow(this);
-            window.KeyDown += MenuKeyDown;
+            App.window.KeyDown += MenuKeyDown;
         }
         private void MenuKeyDown(object sender, KeyEventArgs e)
         {
-            var current = Grid.GetRow(MenuCursor);
-            var max = gridMenu.RowDefinitions.Count - 1;
-            var selected = menuAction.GetCursor(e.Key, current, max, window);
+            var max = LowerMenu.Children.Count - 1;
+            var selected = menuAction.GetDirection(e.Key, max);
             if (selected > -1)
             {
-                Grid.SetRow(MenuCursor, selected);
+                ChangeMarginGrid(selected);
             }
             else if (selected == -1)
             {
-                Debug.WriteLine("E0001");
+                Debug.WriteLine("E1001");
             }
             else
             {
-                if (menuAction.NavigateToPage != null)
+                switch (selected)
                 {
-                    NavigationService.Navigate(menuAction.NavigateToPage);
+                    case -2:
+                        if (menuAction.NavigateToPage != null)
+                        {
+                            NavigationService.Navigate(menuAction.NavigateToPage);
+                            ResetEvent();
+                        }
+                        break;
+                    case -3:
+                        ChangeMarginGrid(4);
+                        break;
+                    case -4:
+                        NavigationService.GoBack();
+                        ResetEvent();
+                        break;
+                    default:
+                        break;
                 }
             }
+        }
+        private void ChangeMarginGrid(int selected)
+        {
+            ((Grid)LowerMenu.Children[menuAction.CurrentIndex]).Margin = new Thickness(0, 0, 0, 0);
+            ((Rectangle)((Grid)LowerMenu.Children[menuAction.CurrentIndex]).Children[0]).Stroke = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF535969"));
+            ((Grid)LowerMenu.Children[selected]).Margin = new Thickness(0, -2, 0, 2);
+            ((Rectangle)((Grid)LowerMenu.Children[selected]).Children[0]).Stroke = Brushes.WhiteSmoke;
+
+            menuAction.CurrentIndex = selected;
+        }
+        private void ResetEvent()
+        {
+            App.window.KeyDown -= MenuKeyDown;
+            ChangeMarginGrid(0);
+            menuAction = new MainMenuSelectAction();
         }
     }
 }

@@ -4,24 +4,17 @@
              xmlns:local="clr-namespace:MainDFF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <!-- TitleScreenPage START -->
         <Style x:Key="MenuSelect" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="10" />
-            <Setter Property="Foreground" Value="DarkSlateGray"/>
             <Setter Property="Padding" Value="2" />
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
         </Style>
-        <Style x:Key="LevelMenuHelp" TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="8" />
-            <Setter Property="Foreground" Value="WhiteSmoke"/>
-            <Setter Property="Padding" Value="2" />
-            <Setter Property="FontWeight" Value="DemiBold"/>
-            <Setter Property="Typography.Capitals" Value="SmallCaps"/>
-        </Style>
+        <!-- TitleScreenPage END -->
+        <!-- MainMenuPage START -->
         <Style x:Key="LevelMenuInfo" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -46,14 +39,54 @@
             <Setter Property="Margin" Value="0,4,0,0" />
             <Setter Property="Height" Value="25" />
         </Style>
+        <!-- TitleScreenPage END -->
+        <!-- PartySelectPage START -->
+        <Style x:Key="PartyMemberName" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Typography.Capitals" Value="SmallCaps"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+        <Style x:Key="PartyMemberClass" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="FontSize" Value="8"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+        <!-- PartySelectPage END -->
+        <!-- GeneralStyles START -->
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="DarkSlateGray"/>
+        </Style>
         <Style x:Key="MenuRectangle" TargetType="Rectangle">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Fill" Value="#FF0C1FF0" />
-            <Setter Property="Stroke" Value="WhiteSmoke" />
+            <Setter Property="Fill" >
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="-45" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF1E232C" Offset="0"/>
+                        <GradientStop Color="#FF454D63" Offset="0.635"/>
+                        <GradientStop Color="#FF282C38" Offset="0.973"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Stroke" Value="#FF535969" />
             <Setter Property="StrokeThickness" Value="1.5" />
             <Setter Property="RadiusX" Value="2" />
             <Setter Property="RadiusY" Value="2" />
         </Style>
+        <!-- GeneralStyles END -->
     </Application.Resources>
 </Application>

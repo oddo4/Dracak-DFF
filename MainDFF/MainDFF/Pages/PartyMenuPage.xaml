@@ -1,0 +1,44 @@
+﻿<Page x:Class="MainDFF.Pages.PartyMenuPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MainDFF.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="240" d:DesignWidth="320"
+      Title="PartyMenuPage"
+      Loaded="MenuKey_Loaded">
+
+    <Grid Background="DarkGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="15"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,0,0">
+            <Rectangle Style="{StaticResource MenuRectangle}" Height="15" Width="320"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="Help" Margin="0,0,0,0"/>
+                <TextBlock x:Name="txtBlkInformation" Style="{StaticResource LevelMenuInfo}" Text="Information" Margin="0,0,0,0"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <TextBlock>
+                PartyMenu
+            </TextBlock>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,0,0">
+            <Rectangle Style="{StaticResource MenuRectangle}"  Height="15" Width="320"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="ENTER Confirm" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0" FontSize="6"/>
+                <TextBlock Style="{StaticResource LevelMenuInfo}"  Text="BACKSPACE Back" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0" FontSize="6"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

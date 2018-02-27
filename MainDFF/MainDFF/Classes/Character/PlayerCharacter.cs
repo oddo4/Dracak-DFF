@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MainDFF.Classes.Character
+{
+    class PlayerCharacter : Character
+    {
+        public ACharacterClass CharacterClass { get; set; }
+    }
+}

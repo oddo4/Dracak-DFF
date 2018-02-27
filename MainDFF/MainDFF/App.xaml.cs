@@ -13,5 +13,6 @@ namespace MainDFF
     /// </summary>
     public partial class App : Application
     {
+        static public Window window;
     }
 }

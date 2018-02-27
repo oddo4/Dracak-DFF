@@ -54,6 +54,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BattlePage.xaml.cs">
+      <DependentUpon>BattlePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\AStoryboardAnimation.cs" />
+    <Compile Include="Classes\EnemyStoryBoardAnimation.cs" />
+    <Compile Include="Classes\TileMap.cs" />
+    <Page Include="BattlePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PartyMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LevelPlayPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\LevelSelectPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -62,30 +80,55 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\PartyMenuPages\PartySelectPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TitleScreenPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AMenuSelectAction.cs" />
+    <Compile Include="Classes\SpriteAnimation.cs" />
+    <Compile Include="Classes\ControlActions\MoveActions\AMoveAction.cs" />
+    <Compile Include="Classes\ControlActions\MenuActions\PartyMenuAction.cs" />
+    <Compile Include="Pages\PartyMenuPage.xaml.cs">
+      <DependentUpon>PartyMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LevelPlayPage.xaml.cs">
+      <DependentUpon>LevelPlayPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\ControlActions\MenuActions\LevelSelectAction.cs" />
+    <Compile Include="Pages\LevelSelectPage.xaml.cs">
+      <DependentUpon>LevelSelectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\ControlActions\MenuActions\AMenuSelectAction.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AttackBehaviors\BasicAttackBehavior.cs" />
-    <Compile Include="BattleCharacter\Character.cs" />
-    <Compile Include="BattleCharacter\CharacterAnimation.cs" />
-    <Compile Include="BattleCharacter\CharacterDescription.cs" />
-    <Compile Include="BattleCharacter\CharacterStats.cs" />
-    <Compile Include="BattleCharacter\ACharacterClass.cs" />
-    <Compile Include="CharacterClass\ClassVanguard.cs" />
+    <Compile Include="Classes\AttackBehaviors\BasicAttackBehavior.cs" />
+    <Compile Include="Classes\Character\Character.cs" />
+    <Compile Include="Classes\Character\CharacterAnimation.cs" />
+    <Compile Include="Classes\Character\CharacterDescription.cs" />
+    <Compile Include="Classes\Character\CharacterStats.cs" />
+    <Compile Include="Classes\Character\ACharacterClass.cs" />
+    <Compile Include="Classes\Character\CharacterClass\ClassVanguard.cs" />
     <Compile Include="Interface\IAttackColumn.cs" />
     <Compile Include="Interface\IAttackBehavior.cs" />
-    <Compile Include="Pages\LevelSelectPage.xaml.cs">
-      <DependentUpon>LevelSelectPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainMenuSelectAction.cs" />
+    <Compile Include="Classes\ControlActions\MenuActions\MainMenuSelectAction.cs" />
     <Compile Include="Pages\MainMenuPage.xaml.cs">
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PartyMenuPages\PartySelectPage.xaml.cs">
+      <DependentUpon>PartySelectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\ControlActions\MenuActions\TitleScreenSelectAction.cs" />
+    <Compile Include="Pages\TitleScreenPage.xaml.cs">
+      <DependentUpon>TitleScreenPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -93,7 +136,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BattleCharacter\PlayerCharacter.cs" />
+    <Compile Include="Classes\Character\PlayerCharacter.cs" />
+    <Compile Include="Classes\ControlActions\MenuActions\PartySelectAction.cs" />
+    <Compile Include="Classes\ControlActions\MoveActions\PlayerMoveAction.cs" />
+    <Compile Include="Classes\PlayerStoryboardAnimation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -111,7 +157,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="BattleCharacter\CharacterDiagram.cd" />
+    <None Include="Classes\Character\CharacterDiagram.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -121,11 +167,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Alert.png" />
+    <Resource Include="Resources\CharacterPanels\Panel15.png" />
     <Resource Include="Resources\cursor.png" />
     <Resource Include="Resources\MainMenuBG.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Alert.png" />
+    <Resource Include="Resources\CharacterSprites\Exploration\HeroWalk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\CharacterSprites\Battle\" />
+    <Folder Include="Resources\CharacterSprites\Monsters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CharacterSprites\Exploration\EnemyWalk.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

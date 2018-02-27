@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="15"/>
-            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="15"/>
         </Grid.ColumnDefinitions>
@@ -28,10 +28,169 @@
                 <TextBlock x:Name="txtBlkInformation" Style="{StaticResource LevelMenuInfo}" Text="Information" Margin="0,0,0,0"/>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="1">
-            <TextBlock>
-                PartyMenu
+        <Grid Style="{StaticResource GridPartyMenu}" Grid.Row="1" Grid.Column="1" Margin="0,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="MenuCursor" Source="/Resources/cursor.png" Height="14" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0"/>
+            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0">
+                Status
             </TextBlock>
+            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0">
+                Equipment
+            </TextBlock>
+            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,0">
+                Item
+            </TextBlock>
+            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,0">
+                Skill
+            </TextBlock>
+            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,0">
+                Member
+            </TextBlock>
+            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,0">
+                Options
+            </TextBlock>
+            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="6" Grid.Column="1" Margin="0,0,0,0">
+                Abort
+            </TextBlock>
+        </Grid>
+        <Grid Style="{StaticResource GridPartyMembers}" Grid.Row="1" Grid.Column="2" Margin="0,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="17*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="13*"/>
+                <ColumnDefinition Width="17*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel x:Name="PartyMembers" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Grid Background="LightGray">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="15"/>
+                    </Grid.RowDefinitions>
+                    <Canvas Grid.Row="0" Grid.RowSpan="3" Height="141" Width="65" ClipToBounds="True">
+                        <Image Source="/Resources/CharacterPanels/Panel15.png" Height="141" Canvas.Top="0" Canvas.Left="0"/>
+                    </Canvas>
+                    <TextBlock Style="{StaticResource PartyMenuMemberNameSmall}" Grid.Row="1">
+                            Noctis
+                    </TextBlock>
+                    <StackPanel Grid.Row="2" Margin="5,0">
+                        <TextBlock Style="{StaticResource PartyMenuHp}">
+                        HP
+                        </TextBlock>
+                        <ProgressBar Style="{StaticResource HpBar}"/>
+                    </StackPanel>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="5,0,2.5,0">
+                            <TextBlock Style="{StaticResource PartyMenuMp}" Grid.Column="0">
+                            MP
+                            </TextBlock>
+                            <ProgressBar Style="{StaticResource MpBar}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="2.5,0,5,0">
+                            <TextBlock Style="{StaticResource PartyMenuSp}" Grid.Column="1">
+                            SP
+                            </TextBlock>
+                            <ProgressBar Style="{StaticResource SpBar}"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Grid Background="DarkGray">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="15"/>
+                    </Grid.RowDefinitions>
+                    <Canvas Grid.Row="0" Grid.RowSpan="3" Height="141" Width="65" ClipToBounds="True">
+                        <Image Source="/Resources/CharacterPanels/Panel15.png" Height="141" Canvas.Top="0" Canvas.Left="0"/>
+                    </Canvas>
+                    <TextBlock Style="{StaticResource PartyMenuMemberNameSmall}" Grid.Row="1">
+                            Noctis
+                    </TextBlock>
+                    <StackPanel Grid.Row="2" Margin="5,0">
+                        <TextBlock Style="{StaticResource PartyMenuHp}">
+                        HP
+                        </TextBlock>
+                        <ProgressBar Style="{StaticResource HpBar}"/>
+                    </StackPanel>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="5,0,2.5,0">
+                            <TextBlock Style="{StaticResource PartyMenuMp}" Grid.Column="0">
+                            MP
+                            </TextBlock>
+                            <ProgressBar Style="{StaticResource MpBar}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="2.5,0,5,0">
+                            <TextBlock Style="{StaticResource PartyMenuSp}" Grid.Column="1">
+                            SP
+                            </TextBlock>
+                            <ProgressBar Style="{StaticResource SpBar}"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Grid Background="Gray">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="15"/>
+                    </Grid.RowDefinitions>
+                    <Canvas Grid.Row="0" Grid.RowSpan="3" Height="141" Width="65" ClipToBounds="True">
+                        <Image Source="/Resources/CharacterPanels/Panel15.png" Height="141" Canvas.Top="0" Canvas.Left="0"/>
+                    </Canvas>
+                    <TextBlock Style="{StaticResource PartyMenuMemberNameSmall}" Grid.Row="1">
+                            Noctis
+                    </TextBlock>
+                    <StackPanel Grid.Row="2" Margin="5,0">
+                        <TextBlock Style="{StaticResource PartyMenuHp}">
+                        HP
+                        </TextBlock>
+                        <ProgressBar Style="{StaticResource HpBar}"/>
+                    </StackPanel>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="5,0,2.5,0">
+                            <TextBlock Style="{StaticResource PartyMenuMp}" Grid.Column="0">
+                            MP
+                            </TextBlock>
+                            <ProgressBar Style="{StaticResource MpBar}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="2.5,0,5,0">
+                            <TextBlock Style="{StaticResource PartyMenuSp}" Grid.Column="1">
+                            SP
+                            </TextBlock>
+                            <ProgressBar Style="{StaticResource SpBar}"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,0,0">
             <Rectangle Style="{StaticResource MenuRectangle}"  Height="15" Width="320"/>

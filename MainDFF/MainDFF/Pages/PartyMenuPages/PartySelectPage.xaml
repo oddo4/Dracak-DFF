@@ -37,7 +37,7 @@
                     <RowDefinition Height="15"/>
                 </Grid.RowDefinitions>
                 <Canvas Grid.Row="0" Grid.RowSpan="3" Height="210" Width="97" ClipToBounds="True">
-                    <Image Source="/Resources/CharacterPanels/Panel15.png" Width="194" Canvas.Top="0" Canvas.Left="0"/>
+                    <Image Source="/Resources/CharacterPanels/Panel15.png" Height="210" Canvas.Top="0" Canvas.Left="0"/>
                 </Canvas>
                 <TextBlock Style="{StaticResource PartyMemberName}" Grid.Row="1">
                     Noctis
@@ -47,10 +47,36 @@
                 </TextBlock>
             </Grid>
             <Grid Background="DarkGray">
-                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="15"/>
+                </Grid.RowDefinitions>
+                <Canvas Grid.Row="0" Grid.RowSpan="3" Height="210" Width="97" ClipToBounds="True">
+                    <Image Source="/Resources/CharacterPanels/Panel15.png" Height="210" Canvas.Top="0" Canvas.Left="0"/>
+                </Canvas>
+                <TextBlock Style="{StaticResource PartyMemberName}" Grid.Row="1">
+                    Noctis
+                </TextBlock>
+                <TextBlock Style="{StaticResource PartyMemberClass}" Grid.Row="2">
+                    Assassin
+                </TextBlock>
             </Grid>
             <Grid Background="Gray">
-                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="15"/>
+                </Grid.RowDefinitions>
+                <Canvas Grid.Row="0" Grid.RowSpan="3" Height="210" Width="97" ClipToBounds="True">
+                    <Image Source="/Resources/CharacterPanels/Panel15.png" Height="210" Canvas.Top="0" Canvas.Left="0"/>
+                </Canvas>
+                <TextBlock Style="{StaticResource PartyMemberName}" Grid.Row="1">
+                    Noctis
+                </TextBlock>
+                <TextBlock Style="{StaticResource PartyMemberClass}" Grid.Row="2">
+                    Assassin
+                </TextBlock>
             </Grid>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Right">

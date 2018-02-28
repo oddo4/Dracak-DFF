@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DFF.Classes
+namespace MainDFF.Classes
 {
-    class Player
+    class EnemySetMovement
     {
         
     }

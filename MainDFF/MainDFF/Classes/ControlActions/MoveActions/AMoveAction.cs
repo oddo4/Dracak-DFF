@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace MainDFF.Classes.ControlActions.MoveActions
@@ -13,7 +14,8 @@ namespace MainDFF.Classes.ControlActions.MoveActions
         public Point BegPos = new Point(131, 77);
         public Point Pos = new Point();
         public SpriteAnimation SpriteAnimation = new SpriteAnimation();
-        public PlayerStoryboardAnimation PlayerStoryboard = new PlayerStoryboardAnimation();
+        public AStoryboardAnimation StoryboardAnimation;
+        public Page NavigateToPage = null;
         public int MoveCharacter(int direction, int current, int max)
         {
             switch (direction)

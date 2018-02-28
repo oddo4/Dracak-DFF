@@ -17,6 +17,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace MainDFF.Pages
 {
@@ -25,12 +26,18 @@ namespace MainDFF.Pages
     /// </summary>
     public partial class LevelPlayPage : Page
     {
-        PlayerMoveAction moveAction = new PlayerMoveAction();
+        PlayerMoveAction moveAction = new PlayerMoveAction(new Point(0,1));
         TileMap tileMap = new TileMap();
+        CharacterSetOnMap setCharacter = new CharacterSetOnMap();
+        List<EnemyMoveAction> enemyList = new List<EnemyMoveAction>();
+        DispatcherTimer MainTimer = new DispatcherTimer();
         public LevelPlayPage()
         {
             InitializeComponent();
-            CreateEnemy();
+            CreateTimer();
+            CreateEnemy(4);
+            setCharacter.SetEnemyOnMap(enemyList, MapCanvas);
+            setCharacter.SetPlayerOnMap(moveAction, MapCanvas);
         }
         private void MenuKey_Loaded(object sender, RoutedEventArgs e)
         {
@@ -38,66 +45,83 @@ namespace MainDFF.Pages
         }
         private void MenuKeyDown(object sender, KeyEventArgs e)
         {
-            if (moveAction.PlayerStoryboard.AnimationComplete)
+            if (moveAction.StoryboardAnimation.AnimationComplete)
             {
-                moveAction.PlayerStoryboard.MainStoryboard.Completed += new EventHandler(AnimationCompleted);
+                moveAction.StoryboardAnimation.MainStoryboard.Completed += new EventHandler(AnimationCompleted);
                 var max = MapGrid.RowDefinitions.Count - 1;
                 var selected = moveAction.GetDirection(e.Key, max);
-                if (selected > -1)
+                if (selected > 0)
                 {
-                    switch (selected)
-                    {
-                        case 1:
-                            moveAction.PlayerStoryboard.CreateStoryboard(e.Key, MapCanvas, PlayerGrid);
-                            moveAction.SpriteAnimation.CreateSprite(e.Key, PlayerImage);
-                            moveAction.PlayerStoryboard.MainStoryboard.Begin();
-                            break;
-                        default:
-                            break;
-                    }
+                    moveAction.StoryboardAnimation.CreateStoryboard(e.Key, MapCanvas);
+                    moveAction.SpriteAnimation.CreateSprite(e.Key, PlayerImage);
+                    moveAction.StoryboardAnimation.MainStoryboard.Begin();
                 }
                 else if (selected == -1)
                 {
                     Debug.WriteLine("E3001");
                 }
-                else
+                else if (selected < -1)
                 {
-                    switch (selected)
-                    {
-                        case -2:
-                            break;
-                        case -3:
-                            NavigationService.Navigate(new PartyMenuPage());
-                            ResetEvent();
-                            break;
-                        default:
-                            break;
-                    }
+                    NavigationService.Navigate(moveAction.NavigateToPage);
+                    ResetEvent();
                 }
             }
         }
         private void AnimationCompleted(object sender, EventArgs e)
         {
-            moveAction.PlayerStoryboard.AnimationCompleted();
+            moveAction.StoryboardAnimation.AnimationCompleted();
         }
         private void ResetEvent()
         {
             App.window.KeyDown -= MenuKeyDown;
             moveAction = new PlayerMoveAction();
         }
-        private void CreateEnemy()
+        private void CreateEnemy(int Count)
         {
-            Image image = new Image() { Height = 232, Width = 232, Margin = new Thickness(0,0,0,29) };
-            image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/CharacterSprites/Exploration/EnemyWalk.png"));
-            Canvas.SetLeft(image, 0);
-            Canvas.SetTop(image, 0);
-            Canvas canvas = new Canvas() { Height = 58, Width = 58, ClipToBounds = true };
-            Canvas.SetLeft(canvas, 131);
-            Canvas.SetTop(canvas, 77);
+            Random rand = new Random();
+            for (int i = 0; i < Count; i++)
+            {
+                Image image = new Image() { Height = 232, Width = 232, Margin = new Thickness(0, 0, 0, 29) };
+                image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/CharacterSprites/Exploration/EnemyWalk.png"));
+                Canvas.SetLeft(image, 0);
+                Canvas.SetTop(image, 0);
+                Canvas canvas = new Canvas() { Height = 58, Width = 58, ClipToBounds = true };
+                Canvas.SetLeft(canvas, 131);
+                Canvas.SetTop(canvas, 77);
 
-            canvas.Children.Add(image);
-            Canvas.SetZIndex(canvas, 1);
-            MapCanvas.Children.Add(canvas);
+                canvas.Children.Add(image);
+                Canvas.SetZIndex(canvas, 1);
+                MapCanvas.Children.Add(canvas);
+
+                enemyList.Add(new EnemyMoveAction(new Point(rand.Next(0, 15), rand.Next(0, 15))));
+            }
+        }
+        private void CreateTimer()
+        {
+            MainTimer.Interval = new TimeSpan(0, 0, 1);
+            MainTimer.Tick += new EventHandler(TimerUpdate);
+            MainTimer.Start();
+        }
+        private void TimerUpdate(object sender, EventArgs e)
+        {
+            EnemyWalk();
+        }
+        private void EnemyWalk()
+        {
+            for (int i = 0; i < enemyList.Count; i++)
+            {
+                if (!enemyList[i].MoveSettings.CheckSteps())
+                {
+                    var direction = enemyList[i].MoveSettings.Direction;
+                    var enemyCanvas = (Canvas)MapCanvas.Children[i + 1];
+                    var enemyImage = (Image)enemyCanvas.Children[0];
+
+                    enemyList[i].StoryboardAnimation.CreateStoryboard(direction, enemyCanvas);
+                    enemyList[i].SpriteAnimation.CreateSprite(direction, enemyImage);
+                    enemyList[i].StoryboardAnimation.MainStoryboard.Begin();
+                    enemyList[i].MoveSettings.StepsCount++;
+                }
+            }
         }
     }
 }

@@ -50,7 +50,7 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
             </Canvas>
-            <Canvas x:Name="PlayerGrid" Height="58" Width="58" Canvas.Top="77" Canvas.Left="131" Canvas.ZIndex="0" ClipToBounds="True" Margin="0,0,0,29">
+            <Canvas x:Name="PlayerCanvas" Height="58" Width="58" Canvas.Top="77" Canvas.Left="131" Canvas.ZIndex="0" ClipToBounds="True" Margin="0,0,0,29">
                 <Image x:Name="PlayerImage" Source="/Resources/CharacterSprites/Exploration/HeroWalk.png" Height="232" Width="232" Canvas.Top="0" Canvas.Left="0"/>
             </Canvas>
         </Canvas>

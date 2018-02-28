@@ -12,7 +12,7 @@ namespace MainDFF.Classes
 {
     public class PlayerStoryboardAnimation : AStoryboardAnimation
     {
-        public override void CreateStoryboard(Key direction, Canvas MapCanvas, Canvas PlayerCanvas)
+        public override void CreateStoryboard(Key direction, Canvas MapCanvas)
         {
             Point MapPos = new Point(Canvas.GetLeft(MapCanvas), Canvas.GetTop(MapCanvas));
             //Point PlayerPos = new Point(Canvas.GetLeft(PlayerCanvas), Canvas.GetTop(PlayerCanvas));
@@ -75,11 +75,6 @@ namespace MainDFF.Classes
             }
 
             AnimationComplete = false;
-        }
-        public void AnimationCompleted()
-        {
-            MainStoryboard = new Storyboard();
-            AnimationComplete = true;
         }
     }
 }

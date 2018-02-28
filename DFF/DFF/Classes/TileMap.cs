@@ -12,7 +12,7 @@ namespace DFF.Classes
     {
         // array values
         // 0 - empty
-        // 1 - player
+        // 9 - player
         // 2 - enemy
         // 3 - enemy field of view
         // 4 - enemy weakness
@@ -250,7 +250,7 @@ namespace DFF.Classes
 
         public bool CheckConflict(int Direction, int HeroX, int HeroY)
         {
-            if (Map[HeroX, HeroY] == 3)
+            /*if (Map[HeroX, HeroY] == 3)
             {
                 //NormalBattle
             }
@@ -286,7 +286,7 @@ namespace DFF.Classes
                     default:
                         break;
                 }
-            }
+            }*/
 
             return false;
         }

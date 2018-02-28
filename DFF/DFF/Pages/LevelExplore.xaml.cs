@@ -40,10 +40,10 @@ namespace DFF.Pages
             MainTimer.Interval = new TimeSpan(0, 0, 1);
             MainTimer.Tick += new EventHandler(EnemyMove);
             MainTimer.Start();
-            Player = new Classes.PlayerMovement(1,1);
+            Player = new Classes.PlayerMovement(3,3);
             ParserContext(context);
             CreateTileMap();
-            SpawnEnemy(1);
+            SpawnEnemy(3);
 
             LevelMap.SetPlayerOnMap(MapCanvas, HeroCanvas, Player.PosX, Player.PosY);
         }
@@ -159,7 +159,7 @@ namespace DFF.Pages
         {
             for (int i = 0; i < Count; i++)
             {
-                Classes.EnemyPosition Enemy = new Classes.EnemyPosition(2, 3, 0, 1, 1, 4);
+                Classes.EnemyPosition Enemy = new Classes.EnemyPosition(rand.Next(1, 16), rand.Next(1, 16), rand.Next(0, 4), rand.Next(1, 4), rand.Next(0, 3), rand.Next(1, 5));
 
                 if (LevelMap.EnemyPosition(Enemy.PosX, Enemy.PosY, Enemy.Type, Enemy.Steps))
                 {

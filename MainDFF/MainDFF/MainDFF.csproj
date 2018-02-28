@@ -58,7 +58,11 @@
       <DependentUpon>BattlePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\AStoryboardAnimation.cs" />
-    <Compile Include="Classes\EnemyStoryBoardAnimation.cs" />
+    <Compile Include="Classes\CharacterSetOnMap.cs" />
+    <Compile Include="Classes\ControlActions\MoveActions\EnemyMoveAction.cs" />
+    <Compile Include="Classes\EnemyMoveSettings.cs" />
+    <Compile Include="Classes\EnemySetMovement.cs" />
+    <Compile Include="Classes\EnemyStoryboardAnimation.cs" />
     <Compile Include="Classes\TileMap.cs" />
     <Page Include="BattlePage.xaml">
       <SubType>Designer</SubType>

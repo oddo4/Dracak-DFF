@@ -1,5 +1,4 @@
-﻿using MainDFF.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,20 +8,18 @@ using System.Windows.Input;
 
 namespace MainDFF.Classes.ControlActions.MoveActions
 {
-    class PlayerMoveAction : AMoveAction
+    class EnemyMoveAction : AMoveAction
     {
-        public PlayerMoveAction()
+        public EnemySetMovement SetMovement { get; set; }
+        public EnemyMoveSettings MoveSettings = new EnemyMoveSettings();
+        public EnemyMoveAction(Point pos)
         {
-            StoryboardAnimation = new PlayerStoryboardAnimation();
-        }
-        public PlayerMoveAction(Point pos)
-        {
-            StoryboardAnimation = new PlayerStoryboardAnimation();
+            StoryboardAnimation = new EnemyStoryboardAnimation();
             Pos = pos;
         }
         public override int GetDirection(Key key, int max)
         {
-            switch(key)
+            switch (key)
             {
                 case Key.Up:
                     if (Pos.Y != MoveCharacter(0, (int)Pos.Y, max))
@@ -65,8 +62,7 @@ namespace MainDFF.Classes.ControlActions.MoveActions
                         return 0;
                     }
                 case Key.Back:
-                    NavigateToPage = new PartyMenuPage();
-                    return -2;
+                    return -3;
                 default:
                     return 0;
             }

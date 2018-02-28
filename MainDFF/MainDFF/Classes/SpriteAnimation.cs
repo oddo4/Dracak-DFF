@@ -13,7 +13,6 @@ namespace MainDFF.Classes
     public class SpriteAnimation
     {
         public Point SpritePos = new Point();
-        //public Image SpriteSource { get; set; }
 
         public void CreateSprite(Key direction, Image SpriteImage)
         {
@@ -64,10 +63,6 @@ namespace MainDFF.Classes
 
                 SpriteTimer.Stop();
             }
-        }
-        public void AnimationCompleted()
-        {
-
         }
     }
 }

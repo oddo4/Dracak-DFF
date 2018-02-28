@@ -27,17 +27,22 @@ namespace MainDFF.Pages
         {
             InitializeComponent();
         }
+        /*public PartyMenuPage()
+        {
+            InitializeComponent();
+        }*/
         private void MenuKey_Loaded(object sender, RoutedEventArgs e)
         {
             App.window.KeyDown += MenuKeyDown;
         }
         private void MenuKeyDown(object sender, KeyEventArgs e)
         {
-            var max = 0;
+            menuAction.CurrentIndex = Grid.GetRow(MenuCursor);
+            var max = gridPartyMenu.Children.Count - 1;
             var selected = menuAction.GetDirection(e.Key, max);
             if (selected > -1)
             {
-
+                Grid.SetRow(MenuCursor, selected);
             }
             else if (selected == -1)
             {

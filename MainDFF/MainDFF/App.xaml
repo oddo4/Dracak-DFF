@@ -99,14 +99,6 @@
             <Setter Property="FontSize" Value="6"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
-            <Setter Property="TextBlock.Effect">
-                <Setter.Value>
-                    <DropShadowEffect BlurRadius="1"
-                              Direction="330"
-                              Color="Black"
-                              />
-                </Setter.Value>
-            </Setter>
         </Style>
         <Style x:Key="MpBar" TargetType="ProgressBar">
             <Setter Property="Foreground" Value="Blue"/>
@@ -132,6 +124,18 @@
             <Setter Property="Height" Value="141"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
+        </Style>
+        <Style x:Key="PanelCanvas" TargetType="Canvas">
+            <Setter Property="Width" Value="65"/>
+            <Setter Property="Height" Value="141"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+        </Style>
+        <Style x:Key="PanelImage" TargetType="Image">
+            <Setter Property="Height" Value="141"/>
+        </Style>
+        <Style x:Key="PanelShadow" TargetType="Image">
+            <Setter Property="Width" Value="65"/>
+            <Setter Property="Height" Value="141"/>
         </Style>
         <!-- PartyMenuPage END -->
         <!-- GeneralStyles START -->

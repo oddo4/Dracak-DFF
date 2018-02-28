@@ -14,9 +14,9 @@ namespace MainDFF.Classes.ControlActions.MenuActions
         {
             switch (key)
             {
-                case Key.Left:
+                case Key.Up:
                     return MoveCursor(0, max);
-                case Key.Right:
+                case Key.Down:
                     return MoveCursor(1, max);
                 case Key.Enter:
                     return ConfirmSelection();

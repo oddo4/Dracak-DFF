@@ -28,7 +28,7 @@
                 <TextBlock x:Name="txtBlkInformation" Style="{StaticResource LevelMenuInfo}" Text="Information" Margin="0,0,0,0"/>
             </StackPanel>
         </Grid>
-        <Grid Style="{StaticResource GridPartyMenu}" Grid.Row="1" Grid.Column="1" Margin="0,15">
+        <Grid x:Name="gridPartyMenu" Style="{StaticResource GridPartyMenu}" Grid.Row="1" Grid.Column="1" Margin="0,20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -65,7 +65,7 @@
                 Abort
             </TextBlock>
         </Grid>
-        <Grid Style="{StaticResource GridPartyMembers}" Grid.Row="1" Grid.Column="2" Margin="0,15">
+        <Grid Style="{StaticResource GridPartyMembers}" Grid.Row="1"  Grid.Column="2" Margin="0,20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -75,7 +75,7 @@
                 <ColumnDefinition Width="13*"/>
                 <ColumnDefinition Width="17*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel x:Name="PartyMembers" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel x:Name="PartyMembers" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal">
                 <Grid Background="LightGray">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -83,8 +83,9 @@
                         <RowDefinition Height="15"/>
                         <RowDefinition Height="15"/>
                     </Grid.RowDefinitions>
-                    <Canvas Grid.Row="0" Grid.RowSpan="3" Height="141" Width="65" ClipToBounds="True">
-                        <Image Source="/Resources/CharacterPanels/Panel15.png" Height="141" Canvas.Top="0" Canvas.Left="0"/>
+                    <Canvas Style="{StaticResource PanelCanvas}" Grid.Row="0" Grid.RowSpan="4">
+                        <Image Style="{StaticResource PanelImage}" Source="/Resources/CharacterPanels/Panel15.png" Canvas.Top="0" Canvas.Left="0"/>
+                        <Image Style="{StaticResource PanelShadow}" Grid.Row="0" Grid.RowSpan="4" Source="/Resources/PanelShadow.png"/>
                     </Canvas>
                     <TextBlock Style="{StaticResource PartyMenuMemberNameSmall}" Grid.Row="1">
                             Noctis
@@ -121,8 +122,9 @@
                         <RowDefinition Height="15"/>
                         <RowDefinition Height="15"/>
                     </Grid.RowDefinitions>
-                    <Canvas Grid.Row="0" Grid.RowSpan="3" Height="141" Width="65" ClipToBounds="True">
-                        <Image Source="/Resources/CharacterPanels/Panel15.png" Height="141" Canvas.Top="0" Canvas.Left="0"/>
+                    <Canvas Style="{StaticResource PanelCanvas}" Grid.Row="0" Grid.RowSpan="4">
+                        <Image Style="{StaticResource PanelImage}" Source="/Resources/CharacterPanels/Panel15.png" Canvas.Top="0" Canvas.Left="-66"/>
+                        <Image Style="{StaticResource PanelShadow}" Grid.Row="0" Grid.RowSpan="4" Source="/Resources/PanelShadow.png"/>
                     </Canvas>
                     <TextBlock Style="{StaticResource PartyMenuMemberNameSmall}" Grid.Row="1">
                             Noctis
@@ -159,8 +161,9 @@
                         <RowDefinition Height="15"/>
                         <RowDefinition Height="15"/>
                     </Grid.RowDefinitions>
-                    <Canvas Grid.Row="0" Grid.RowSpan="3" Height="141" Width="65" ClipToBounds="True">
-                        <Image Source="/Resources/CharacterPanels/Panel15.png" Height="141" Canvas.Top="0" Canvas.Left="0"/>
+                    <Canvas Style="{StaticResource PanelCanvas}" Grid.Row="0" Grid.RowSpan="4">
+                        <Image Style="{StaticResource PanelImage}" Source="/Resources/CharacterPanels/Panel15.png" Canvas.Top="0" Canvas.Left="0"/>
+                        <Image Style="{StaticResource PanelShadow}" Grid.Row="0" Grid.RowSpan="4" Source="/Resources/PanelShadow.png"/>
                     </Canvas>
                     <TextBlock Style="{StaticResource PartyMenuMemberNameSmall}" Grid.Row="1">
                             Noctis

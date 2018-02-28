@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MainDFF.Classes
+namespace MainDFF.Classes.Exploration
 {
-    class CharacterSetOnMap
+    class SetCharacterOnMap
     {
         public void SetPlayerOnMap(PlayerMoveAction MoveAction, Canvas MapCanvas)
         {

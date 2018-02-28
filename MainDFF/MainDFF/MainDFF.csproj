@@ -57,13 +57,15 @@
     <Compile Include="BattlePage.xaml.cs">
       <DependentUpon>BattlePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Classes\AStoryboardAnimation.cs" />
-    <Compile Include="Classes\CharacterSetOnMap.cs" />
+    <Compile Include="Classes\Exploration\EnemySettings\ClockwiseType.cs" />
+    <Compile Include="Classes\Exploration\EnemySettings\CounterClockwiseType.cs" />
+    <Compile Include="Classes\Exploration\EnemySettings\IMoveType.cs" />
+    <Compile Include="Classes\Exploration\EnemySettings\LinearType.cs" />
+    <Compile Include="Classes\Exploration\Storyboards\AStoryboardAnimation.cs" />
+    <Compile Include="Classes\Exploration\SetCharacterOnMap.cs" />
     <Compile Include="Classes\ControlActions\MoveActions\EnemyMoveAction.cs" />
-    <Compile Include="Classes\EnemyMoveSettings.cs" />
-    <Compile Include="Classes\EnemySetMovement.cs" />
-    <Compile Include="Classes\EnemyStoryboardAnimation.cs" />
-    <Compile Include="Classes\TileMap.cs" />
+    <Compile Include="Classes\Exploration\EnemySettings\EnemyMoveSettings.cs" />
+    <Compile Include="Classes\Exploration\Storyboards\EnemyStoryboardAnimation.cs" />
     <Page Include="BattlePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -96,7 +98,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Classes\SpriteAnimation.cs" />
+    <Compile Include="Classes\Exploration\SpriteAnimation.cs" />
     <Compile Include="Classes\ControlActions\MoveActions\AMoveAction.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\PartyMenuAction.cs" />
     <Compile Include="Pages\PartyMenuPage.xaml.cs">
@@ -143,7 +145,7 @@
     <Compile Include="Classes\Character\PlayerCharacter.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\PartySelectAction.cs" />
     <Compile Include="Classes\ControlActions\MoveActions\PlayerMoveAction.cs" />
-    <Compile Include="Classes\PlayerStoryboardAnimation.cs" />
+    <Compile Include="Classes\Exploration\Storyboards\PlayerStoryboardAnimation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MainDFF.Classes.Exploration.EnemySettings;
+using MainDFF.Classes.Exploration.Storyboards;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +12,11 @@ namespace MainDFF.Classes.ControlActions.MoveActions
 {
     class EnemyMoveAction : AMoveAction
     {
-        public EnemySetMovement SetMovement { get; set; }
-        public EnemyMoveSettings MoveSettings = new EnemyMoveSettings();
-        public EnemyMoveAction(Point pos)
+        public EnemyMoveSettings MoveSettings;
+        public EnemyMoveAction(Point pos, Random rand)
         {
             StoryboardAnimation = new EnemyStoryboardAnimation();
+            MoveSettings = new EnemyMoveSettings(rand);
             Pos = pos;
         }
         public override int GetDirection(Key key, int max)

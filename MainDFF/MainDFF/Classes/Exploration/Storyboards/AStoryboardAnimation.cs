@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
-namespace MainDFF.Classes
+namespace MainDFF.Classes.Exploration.Storyboards
 {
     public abstract class AStoryboardAnimation
     {

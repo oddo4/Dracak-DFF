@@ -1,4 +1,5 @@
-﻿using MainDFF.Pages;
+﻿using MainDFF.Classes.Exploration.Storyboards;
+using MainDFF.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,6 @@ namespace MainDFF.Classes.ControlActions.MoveActions
 {
     class PlayerMoveAction : AMoveAction
     {
-        public PlayerMoveAction()
-        {
-            StoryboardAnimation = new PlayerStoryboardAnimation();
-        }
         public PlayerMoveAction(Point pos)
         {
             StoryboardAnimation = new PlayerStoryboardAnimation();

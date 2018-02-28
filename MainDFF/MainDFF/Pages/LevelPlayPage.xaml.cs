@@ -1,5 +1,6 @@
 ﻿using MainDFF.Classes;
 using MainDFF.Classes.ControlActions.MoveActions;
+using MainDFF.Classes.Exploration;
 using MainDFF.Pages;
 using System;
 using System.Collections.Generic;
@@ -27,10 +28,11 @@ namespace MainDFF.Pages
     public partial class LevelPlayPage : Page
     {
         PlayerMoveAction moveAction = new PlayerMoveAction(new Point(0,1));
-        TileMap tileMap = new TileMap();
-        CharacterSetOnMap setCharacter = new CharacterSetOnMap();
+        SetCharacterOnMap setCharacter = new SetCharacterOnMap();
         List<EnemyMoveAction> enemyList = new List<EnemyMoveAction>();
         DispatcherTimer MainTimer = new DispatcherTimer();
+        SpriteAnimation spriteAnimation = new SpriteAnimation();
+        int time = 0;
         public LevelPlayPage()
         {
             InitializeComponent();
@@ -42,6 +44,7 @@ namespace MainDFF.Pages
         private void MenuKey_Loaded(object sender, RoutedEventArgs e)
         {
             App.window.KeyDown += MenuKeyDown;
+            MainTimer.Start();
         }
         private void MenuKeyDown(object sender, KeyEventArgs e)
         {
@@ -53,7 +56,7 @@ namespace MainDFF.Pages
                 if (selected > 0)
                 {
                     moveAction.StoryboardAnimation.CreateStoryboard(e.Key, MapCanvas);
-                    moveAction.SpriteAnimation.CreateSprite(e.Key, PlayerImage);
+                    spriteAnimation.CreateSprite(e.Key, PlayerImage);
                     moveAction.StoryboardAnimation.MainStoryboard.Begin();
                 }
                 else if (selected == -1)
@@ -74,7 +77,8 @@ namespace MainDFF.Pages
         private void ResetEvent()
         {
             App.window.KeyDown -= MenuKeyDown;
-            moveAction = new PlayerMoveAction();
+            MainTimer.Stop();
+            //moveAction = new PlayerMoveAction();
         }
         private void CreateEnemy(int Count)
         {
@@ -93,31 +97,34 @@ namespace MainDFF.Pages
                 Canvas.SetZIndex(canvas, 1);
                 MapCanvas.Children.Add(canvas);
 
-                enemyList.Add(new EnemyMoveAction(new Point(rand.Next(0, 15), rand.Next(0, 15))));
+                enemyList.Add(new EnemyMoveAction(new Point(rand.Next(3, 11), rand.Next(3, 11)), rand));
             }
         }
         private void CreateTimer()
         {
-            MainTimer.Interval = new TimeSpan(0, 0, 1);
+            MainTimer.Interval = new TimeSpan(0,0,1);
             MainTimer.Tick += new EventHandler(TimerUpdate);
-            MainTimer.Start();
         }
         private void TimerUpdate(object sender, EventArgs e)
         {
             EnemyWalk();
+            test.Text = time.ToString();
+            time++;
         }
         private void EnemyWalk()
         {
             for (int i = 0; i < enemyList.Count; i++)
             {
-                if (!enemyList[i].MoveSettings.CheckSteps())
+                if (!enemyList[i].MoveSettings.CheckSteps(time))
                 {
+                    enemyList[i].StoryboardAnimation.AnimationCompleted();
+
                     var direction = enemyList[i].MoveSettings.Direction;
                     var enemyCanvas = (Canvas)MapCanvas.Children[i + 1];
                     var enemyImage = (Image)enemyCanvas.Children[0];
 
                     enemyList[i].StoryboardAnimation.CreateStoryboard(direction, enemyCanvas);
-                    enemyList[i].SpriteAnimation.CreateSprite(direction, enemyImage);
+                    spriteAnimation.CreateSprite(direction, enemyImage);
                     enemyList[i].StoryboardAnimation.MainStoryboard.Begin();
                     enemyList[i].MoveSettings.StepsCount++;
                 }

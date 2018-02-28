@@ -10,6 +10,7 @@
       Loaded="MenuKey_Loaded">
     <Grid Background="White">
         <Canvas x:Name="MainCamera" Height="240" Width="320" ClipToBounds="True">
+            <TextBlock x:Name="test" Text="0"/>
             <Canvas x:Name="MapCanvas" Height="240" Width="320" Canvas.Top="0" Canvas.Left="0">
                 <Grid x:Name="MapGrid" Canvas.Top="115" Canvas.Left="147" Background="LawnGreen" ShowGridLines="True">
                     <Grid.RowDefinitions>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MainDFF.Classes.Exploration.Storyboards;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,6 @@ namespace MainDFF.Classes.ControlActions.MoveActions
     {
         public Point BegPos = new Point(131, 77);
         public Point Pos = new Point();
-        public SpriteAnimation SpriteAnimation = new SpriteAnimation();
         public AStoryboardAnimation StoryboardAnimation;
         public Page NavigateToPage = null;
         public int MoveCharacter(int direction, int current, int max)

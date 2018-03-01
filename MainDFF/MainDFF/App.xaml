@@ -138,6 +138,17 @@
             <Setter Property="Height" Value="141"/>
         </Style>
         <!-- PartyMenuPage END -->
+        <!-- BattlePage START -->
+        <Style x:Key="BattleMenuSelect" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="6" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Typography.Capitals" Value="SmallCaps"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+        <!-- BattlePage END -->
         <!-- GeneralStyles START -->
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="DarkSlateGray"/>

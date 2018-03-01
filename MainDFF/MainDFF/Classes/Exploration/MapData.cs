@@ -10,7 +10,7 @@ namespace MainDFF.Classes.Exploration
 {
     class MapData
     {
-        List<List<int>> ListMap = new List<List<int>>();
+        public List<List<int>> ListMap = new List<List<int>>();
 
         public MapData()
         {

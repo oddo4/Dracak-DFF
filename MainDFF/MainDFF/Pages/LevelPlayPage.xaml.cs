@@ -59,7 +59,8 @@ namespace MainDFF.Pages
                 {
                     moveAction.StoryboardAnimation.CreateStoryboard(e.Key, MapCanvas);
                     moveAction.SpriteAnimation.CreateSprite(e.Key, PlayerImage);
-                    moveAction.StoryboardAnimation.MainStoryboard.Begin();                    
+                    moveAction.StoryboardAnimation.MainStoryboard.Begin();
+                    CheckConflict(moveAction);
                 }
                 else if (selected == -1)
                 {
@@ -67,8 +68,7 @@ namespace MainDFF.Pages
                 }
                 else if (selected < -1)
                 {
-                    NavigationService.Navigate(moveAction.NavigateToPage);
-                    ResetEvent();
+                    NavigateToNextPage(moveAction.NavigateToPage);
                 }
             }
         }
@@ -138,6 +138,7 @@ namespace MainDFF.Pages
                     enemyMove.StoryboardAnimation.CreateStoryboard(direction, enemyCanvas);
                     enemyMove.SpriteAnimation.CreateSprite(direction, enemyImage);
                     enemyMove.StoryboardAnimation.MainStoryboard.Begin();
+                    CheckConflict(enemyMove);
                     mapData.SetEnemyOnMapData(enemyMove);
                     enemyMove.MoveSettings.StepsCount++;
                 }
@@ -146,6 +147,24 @@ namespace MainDFF.Pages
         private void UpdateMap()
         {
             testMap.Content = mapData.TestMap();
+        }
+        private void CheckConflict(AMoveAction character)
+        {
+            if (conflictChecker.Conflict(character, mapData.ListMap))
+            {
+                NavigateToNextPage(new BattlePage());
+                var index = enemyList.FindIndex(x => x.Pos == character.Pos);
+                MapCanvas.Children.RemoveAt(index + 1);
+                enemyList.RemoveAt(index);
+            }
+        }
+        private void NavigateToNextPage(Page page)
+        {
+            if (page != null)
+            {
+                NavigationService.Navigate(page);
+                ResetEvent();
+            }
         }
     }
 }

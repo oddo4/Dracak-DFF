@@ -54,7 +54,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BattlePage.xaml.cs">
+    <Compile Include="Classes\ControlActions\MenuActions\BattlePageMenuAction.cs" />
+    <Compile Include="Classes\ControlActions\MenuActions\BattlePageSkillMenu.cs" />
+    <Compile Include="Classes\ControlActions\MenuActions\BattlePageTargetMenuAction.cs" />
+    <Compile Include="Pages\BattlePage.xaml.cs">
       <DependentUpon>BattlePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Exploration\ConflictChecker.cs" />
@@ -68,7 +71,7 @@
     <Compile Include="Classes\ControlActions\MoveActions\EnemyMoveAction.cs" />
     <Compile Include="Classes\Exploration\EnemySettings\EnemyMoveSettings.cs" />
     <Compile Include="Classes\Exploration\Storyboards\EnemyStoryboardAnimation.cs" />
-    <Page Include="BattlePage.xaml">
+    <Page Include="Pages\BattlePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

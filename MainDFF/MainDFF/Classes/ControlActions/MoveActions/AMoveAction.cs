@@ -1,4 +1,5 @@
-﻿using MainDFF.Classes.Exploration.Storyboards;
+﻿using MainDFF.Classes.Exploration;
+using MainDFF.Classes.Exploration.Storyboards;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,9 @@ namespace MainDFF.Classes.ControlActions.MoveActions
     {
         public Point BegPos = new Point(131, 77);
         public Point Pos = new Point();
+        public Point LastPos = new Point();
         public AStoryboardAnimation StoryboardAnimation;
+        public SpriteAnimation SpriteAnimation = new SpriteAnimation();
         public Page NavigateToPage = null;
         public int MoveCharacter(int direction, int current, int max)
         {
@@ -43,5 +46,9 @@ namespace MainDFF.Classes.ControlActions.MoveActions
             }
         }
         public abstract int GetDirection(Key key, int max);
+        public void SetLastPos()
+        {
+            LastPos = Pos;
+        }
     }
 }

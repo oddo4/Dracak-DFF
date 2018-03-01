@@ -57,10 +57,12 @@
     <Compile Include="BattlePage.xaml.cs">
       <DependentUpon>BattlePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Exploration\ConflictChecker.cs" />
     <Compile Include="Classes\Exploration\EnemySettings\ClockwiseType.cs" />
     <Compile Include="Classes\Exploration\EnemySettings\CounterClockwiseType.cs" />
     <Compile Include="Classes\Exploration\EnemySettings\IMoveType.cs" />
     <Compile Include="Classes\Exploration\EnemySettings\LinearType.cs" />
+    <Compile Include="Classes\Exploration\MapData.cs" />
     <Compile Include="Classes\Exploration\Storyboards\AStoryboardAnimation.cs" />
     <Compile Include="Classes\Exploration\SetCharacterOnMap.cs" />
     <Compile Include="Classes\ControlActions\MoveActions\EnemyMoveAction.cs" />

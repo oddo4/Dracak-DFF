@@ -21,50 +21,21 @@ namespace MainDFF.Classes.ControlActions.MoveActions
         }
         public override int GetDirection(Key key, int max)
         {
+            SetLastPos();
             switch (key)
             {
-                case Key.Up:
-                    if (Pos.Y != MoveCharacter(0, (int)Pos.Y, max))
-                    {
-                        Pos.Y = MoveCharacter(0, (int)Pos.Y, max);
-                        return 1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                case Key.Up:        
+                    Pos.Y = MoveCharacter(0, (int)Pos.Y, max);
+                    return 1;
                 case Key.Down:
-                    if (Pos.Y != MoveCharacter(1, (int)Pos.Y, max))
-                    {
-                        Pos.Y = MoveCharacter(1, (int)Pos.Y, max);
-                        return 1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                    Pos.Y = MoveCharacter(1, (int)Pos.Y, max);
+                    return 1;
                 case Key.Left:
-                    if (Pos.X != MoveCharacter(0, (int)Pos.X, max))
-                    {
-                        Pos.X = MoveCharacter(0, (int)Pos.X, max);
-                        return 1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
+                    Pos.X = MoveCharacter(0, (int)Pos.X, max);
+                    return 1;
                 case Key.Right:
-                    if (Pos.X != MoveCharacter(1, (int)Pos.X, max))
-                    {
-                        Pos.X = MoveCharacter(1, (int)Pos.X, max);
-                        return 1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
-                case Key.Back:
-                    return -3;
+                    Pos.X = MoveCharacter(1, (int)Pos.X, max);
+                    return 1;
                 default:
                     return 0;
             }

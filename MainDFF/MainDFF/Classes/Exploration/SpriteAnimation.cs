@@ -13,7 +13,6 @@ namespace MainDFF.Classes.Exploration
     public class SpriteAnimation
     {
         public Point SpritePos = new Point();
-
         public void CreateSprite(Key direction, Image SpriteImage)
         {
             DispatcherTimer SpriteTimer = new DispatcherTimer();

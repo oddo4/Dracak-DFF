@@ -10,7 +10,12 @@
       Loaded="MenuKey_Loaded">
     <Grid Background="White">
         <Canvas x:Name="MainCamera" Height="240" Width="320" ClipToBounds="True">
-            <TextBlock x:Name="test" Text="0"/>
+            <TextBlock x:Name="test" Text="0" Panel.ZIndex="100"/>
+            <Label x:Name="testMap" Content="0" Canvas.Right="0" Panel.ZIndex="100" FontSize="6">
+                <Label.Background>
+                    <SolidColorBrush Color="WhiteSmoke" Opacity="0.75" />
+                </Label.Background>
+            </Label>
             <Canvas x:Name="MapCanvas" Height="240" Width="320" Canvas.Top="0" Canvas.Left="0">
                 <Grid x:Name="MapGrid" Canvas.Top="115" Canvas.Left="147" Background="LawnGreen" ShowGridLines="True">
                     <Grid.RowDefinitions>

@@ -19,11 +19,13 @@ namespace MainDFF.Classes.ControlActions.MoveActions
         }
         public override int GetDirection(Key key, int max)
         {
+            
             switch(key)
             {
                 case Key.Up:
                     if (Pos.Y != MoveCharacter(0, (int)Pos.Y, max))
                     {
+                        SetLastPos();
                         Pos.Y = MoveCharacter(0, (int)Pos.Y, max);
                         return 1;
                     }
@@ -34,6 +36,7 @@ namespace MainDFF.Classes.ControlActions.MoveActions
                 case Key.Down:
                     if (Pos.Y != MoveCharacter(1, (int)Pos.Y, max))
                     {
+                        SetLastPos();
                         Pos.Y = MoveCharacter(1, (int)Pos.Y, max);
                         return 1;
                     }
@@ -44,6 +47,7 @@ namespace MainDFF.Classes.ControlActions.MoveActions
                 case Key.Left:
                     if (Pos.X != MoveCharacter(0, (int)Pos.X, max))
                     {
+                        SetLastPos();
                         Pos.X = MoveCharacter(0, (int)Pos.X, max);
                         return 1;
                     }
@@ -54,6 +58,7 @@ namespace MainDFF.Classes.ControlActions.MoveActions
                 case Key.Right:
                     if (Pos.X != MoveCharacter(1, (int)Pos.X, max))
                     {
+                        SetLastPos();
                         Pos.X = MoveCharacter(1, (int)Pos.X, max);
                         return 1;
                     }

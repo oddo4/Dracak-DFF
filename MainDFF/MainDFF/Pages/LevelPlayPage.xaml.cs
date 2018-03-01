@@ -31,13 +31,15 @@ namespace MainDFF.Pages
         SetCharacterOnMap setCharacter = new SetCharacterOnMap();
         List<EnemyMoveAction> enemyList = new List<EnemyMoveAction>();
         DispatcherTimer MainTimer = new DispatcherTimer();
-        SpriteAnimation spriteAnimation = new SpriteAnimation();
+        MapData mapData = new MapData();
+        ConflictChecker conflictChecker = new ConflictChecker();
         int time = 0;
         public LevelPlayPage()
         {
             InitializeComponent();
+            mapData.SetPlayerOnMapData(moveAction);
             CreateTimer();
-            CreateEnemy(4);
+            CreateEnemy(1);
             setCharacter.SetEnemyOnMap(enemyList, MapCanvas);
             setCharacter.SetPlayerOnMap(moveAction, MapCanvas);
         }
@@ -56,8 +58,8 @@ namespace MainDFF.Pages
                 if (selected > 0)
                 {
                     moveAction.StoryboardAnimation.CreateStoryboard(e.Key, MapCanvas);
-                    spriteAnimation.CreateSprite(e.Key, PlayerImage);
-                    moveAction.StoryboardAnimation.MainStoryboard.Begin();
+                    moveAction.SpriteAnimation.CreateSprite(e.Key, PlayerImage);
+                    moveAction.StoryboardAnimation.MainStoryboard.Begin();                    
                 }
                 else if (selected == -1)
                 {
@@ -73,6 +75,8 @@ namespace MainDFF.Pages
         private void AnimationCompleted(object sender, EventArgs e)
         {
             moveAction.StoryboardAnimation.AnimationCompleted();
+            mapData.SetPlayerOnMapData(moveAction);
+            UpdateMap();
         }
         private void ResetEvent()
         {
@@ -97,7 +101,12 @@ namespace MainDFF.Pages
                 Canvas.SetZIndex(canvas, 1);
                 MapCanvas.Children.Add(canvas);
 
-                enemyList.Add(new EnemyMoveAction(new Point(rand.Next(3, 11), rand.Next(3, 11)), rand));
+                var X = rand.Next(3, 11);
+                var Y = rand.Next(3, 11);
+
+                EnemyMoveAction newEnemyMove = new EnemyMoveAction(new Point(X, Y), rand);
+                mapData.SetEnemyOnMapData(newEnemyMove);
+                enemyList.Add(newEnemyMove);
             }
         }
         private void CreateTimer()
@@ -109,6 +118,7 @@ namespace MainDFF.Pages
         {
             EnemyWalk();
             test.Text = time.ToString();
+            UpdateMap();
             time++;
         }
         private void EnemyWalk()
@@ -117,18 +127,25 @@ namespace MainDFF.Pages
             {
                 if (!enemyList[i].MoveSettings.CheckSteps(time))
                 {
-                    enemyList[i].StoryboardAnimation.AnimationCompleted();
+                    var enemyMove = enemyList[i];
+                    enemyMove.GetDirection(enemyMove.MoveSettings.Direction, MapGrid.RowDefinitions.Count - 1);
+                    enemyMove.StoryboardAnimation.AnimationCompleted();
 
-                    var direction = enemyList[i].MoveSettings.Direction;
+                    var direction = enemyMove.MoveSettings.Direction;
                     var enemyCanvas = (Canvas)MapCanvas.Children[i + 1];
                     var enemyImage = (Image)enemyCanvas.Children[0];
 
-                    enemyList[i].StoryboardAnimation.CreateStoryboard(direction, enemyCanvas);
-                    spriteAnimation.CreateSprite(direction, enemyImage);
-                    enemyList[i].StoryboardAnimation.MainStoryboard.Begin();
-                    enemyList[i].MoveSettings.StepsCount++;
+                    enemyMove.StoryboardAnimation.CreateStoryboard(direction, enemyCanvas);
+                    enemyMove.SpriteAnimation.CreateSprite(direction, enemyImage);
+                    enemyMove.StoryboardAnimation.MainStoryboard.Begin();
+                    mapData.SetEnemyOnMapData(enemyMove);
+                    enemyMove.MoveSettings.StepsCount++;
                 }
             }
+        }
+        private void UpdateMap()
+        {
+            testMap.Content = mapData.TestMap();
         }
     }
 }

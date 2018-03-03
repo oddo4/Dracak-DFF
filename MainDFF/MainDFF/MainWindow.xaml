@@ -10,7 +10,9 @@
         Background="Black"
         Title="DFF" Height="480" Width="640"
         WindowState="Normal"
-        WindowStyle="SingleBorderWindow">
+        WindowStyle="SingleBorderWindow"
+        Cursor="None"
+        IsHitTestVisible="False">
     <Viewbox>
         <Grid Width="320" Height="240">
             <Frame x:Name="MainFrame" Source="Pages/TitleScreenPage.xaml" NavigationUIVisibility="Hidden"/>

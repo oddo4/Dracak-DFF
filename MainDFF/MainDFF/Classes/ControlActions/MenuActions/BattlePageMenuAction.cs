@@ -11,18 +11,7 @@ namespace MainDFF.Classes.ControlActions.MenuActions
     {
         public override int ConfirmSelection()
         {
-            switch (CurrentIndex)
-            {
-                case 0:
-                    return -2;
-                case 1:
-                    return -2;
-                case 2:
-                    return -2;
-                default:
-                    return CurrentIndex;
-            }
-            return -1;
+            return -2;
         }
 
         public override int GetDirection(Key key, int max)

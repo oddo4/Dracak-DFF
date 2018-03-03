@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MainDFF.Classes.Character.CharacterClass
+namespace MainDFF.Classes.Battle
 {
-    class ClassVanguard : ACharacterClass
+    public abstract class ACharacterClass
     {
 
     }

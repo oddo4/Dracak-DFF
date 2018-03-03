@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MainDFF.Classes.Character
+namespace MainDFF.Classes.Battle
 {
-    public abstract class ACharacterClass
+    class PlayerCharacter : ACharacter
     {
-
+        //public ACharacterClass CharacterClass { get; set; }
     }
 }

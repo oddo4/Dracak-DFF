@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -54,9 +57,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Battle\CharactersLists.cs" />
+    <Compile Include="Classes\Battle\CharacterStatus.cs" />
+    <Compile Include="Classes\Battle\SetCharacterOnField.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\BattlePageMenuAction.cs" />
-    <Compile Include="Classes\ControlActions\MenuActions\BattlePageSkillMenu.cs" />
+    <Compile Include="Classes\ControlActions\MenuActions\BattlePageSubMenuAction.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\BattlePageTargetMenuAction.cs" />
+    <Compile Include="Classes\FileHelper\FileHelper.cs" />
     <Compile Include="Pages\BattlePage.xaml.cs">
       <DependentUpon>BattlePage.xaml</DependentUpon>
     </Compile>
@@ -103,7 +110,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Classes\Exploration\SpriteAnimation.cs" />
+    <Compile Include="Classes\SpriteAnimation.cs" />
     <Compile Include="Classes\ControlActions\MoveActions\AMoveAction.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\PartyMenuAction.cs" />
     <Compile Include="Pages\PartyMenuPage.xaml.cs">
@@ -122,12 +129,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Classes\AttackBehaviors\BasicAttackBehavior.cs" />
-    <Compile Include="Classes\Character\Character.cs" />
-    <Compile Include="Classes\Character\CharacterAnimation.cs" />
-    <Compile Include="Classes\Character\CharacterDescription.cs" />
-    <Compile Include="Classes\Character\CharacterStats.cs" />
-    <Compile Include="Classes\Character\ACharacterClass.cs" />
-    <Compile Include="Classes\Character\CharacterClass\ClassVanguard.cs" />
+    <Compile Include="Classes\Battle\ACharacter.cs" />
+    <Compile Include="Classes\Battle\CharacterDescription.cs" />
+    <Compile Include="Classes\Battle\CharacterStats.cs" />
+    <Compile Include="Classes\Battle\ACharacterClass.cs" />
+    <Compile Include="Classes\Battle\CharacterClass\ClassVanguard.cs" />
     <Compile Include="Interface\IAttackColumn.cs" />
     <Compile Include="Interface\IAttackBehavior.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\MainMenuSelectAction.cs" />
@@ -147,7 +153,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Character\PlayerCharacter.cs" />
+    <Compile Include="Classes\Battle\PlayerCharacter.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\PartySelectAction.cs" />
     <Compile Include="Classes\ControlActions\MoveActions\PlayerMoveAction.cs" />
     <Compile Include="Classes\Exploration\Storyboards\PlayerStoryboardAnimation.cs" />
@@ -168,7 +174,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Classes\Character\CharacterDiagram.cd" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -187,14 +193,21 @@
     <Resource Include="Resources\CharacterSprites\Exploration\HeroWalk.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\CharacterSprites\Battle\" />
-    <Folder Include="Resources\CharacterSprites\Monsters\" />
+    <Folder Include="DataFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\CharacterSprites\Exploration\EnemyWalk.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\PanelShadow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CharacterSprites\Battle\15\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\15\Idle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CharacterSprites\Monsters\00\Atk.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\00\Idle.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 
-namespace MainDFF.Classes.Exploration
+namespace MainDFF.Classes
 {
     public class SpriteAnimation
     {

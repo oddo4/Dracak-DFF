@@ -7,8 +7,9 @@ using System.Windows.Input;
 
 namespace MainDFF.Classes.ControlActions.MenuActions
 {
-    class BattlePageSkillMenu : AMenuSelectAction
+    class BattlePageSubMenuAction : AMenuSelectAction
     {
+        public int CursorRow = 0;
         public override int ConfirmSelection()
         {
             switch (CurrentIndex)
@@ -30,8 +31,10 @@ namespace MainDFF.Classes.ControlActions.MenuActions
             switch (key)
             {
                 case Key.Up:
+                    CursorRow--;
                     return MoveCursor(0, max);
                 case Key.Down:
+                    CursorRow++;
                     return MoveCursor(1, max);
                 case Key.Enter:
                     return ConfirmSelection();

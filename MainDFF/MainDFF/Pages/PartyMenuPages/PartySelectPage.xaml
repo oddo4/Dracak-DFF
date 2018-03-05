@@ -37,7 +37,7 @@
                     <RowDefinition Height="15"/>
                 </Grid.RowDefinitions>
                 <Canvas Grid.Row="0" Grid.RowSpan="3" Height="210" Width="97" ClipToBounds="True">
-                    <Image Source="/Resources/CharacterPanels/Panel15.png" Height="210" Canvas.Top="0" Canvas.Left="0"/>
+                    <Image Source="/Resources/CharacterPanels/15.png" Height="210" Canvas.Top="0" Canvas.Left="0"/>
                 </Canvas>
                 <TextBlock Style="{StaticResource PartyMemberName}" Grid.Row="1">
                     Noctis
@@ -53,7 +53,7 @@
                     <RowDefinition Height="15"/>
                 </Grid.RowDefinitions>
                 <Canvas Grid.Row="0" Grid.RowSpan="3" Height="210" Width="97" ClipToBounds="True">
-                    <Image Source="/Resources/CharacterPanels/Panel15.png" Height="210" Canvas.Top="0" Canvas.Left="0"/>
+                    <Image Source="/Resources/CharacterPanels/15.png" Height="210" Canvas.Top="0" Canvas.Left="0"/>
                 </Canvas>
                 <TextBlock Style="{StaticResource PartyMemberName}" Grid.Row="1">
                     Noctis
@@ -69,7 +69,7 @@
                     <RowDefinition Height="15"/>
                 </Grid.RowDefinitions>
                 <Canvas Grid.Row="0" Grid.RowSpan="3" Height="210" Width="97" ClipToBounds="True">
-                    <Image Source="/Resources/CharacterPanels/Panel15.png" Height="210" Canvas.Top="0" Canvas.Left="0"/>
+                    <Image Source="/Resources/CharacterPanels/15.png" Height="210" Canvas.Top="0" Canvas.Left="0"/>
                 </Canvas>
                 <TextBlock Style="{StaticResource PartyMemberName}" Grid.Row="1">
                     Noctis

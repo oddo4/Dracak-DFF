@@ -40,6 +40,7 @@ namespace MainDFF.Classes.ControlActions.MenuActions
                 case 2:
                     return -2;
                 case 3:
+                    App.fileHelper.SaveData(App.dataFileLists);
                     return -2;
                 case 4:
                     return -4;

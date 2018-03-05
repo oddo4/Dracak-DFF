@@ -57,12 +57,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\ASpriteAnimation.cs" />
+    <Compile Include="Classes\Battle\CharacterAnimation.cs" />
+    <Compile Include="Classes\Battle\CharacterClass\ClassAssassin.cs" />
+    <Compile Include="Classes\Battle\CharacterClass\ClassMarksman.cs" />
+    <Compile Include="Classes\Battle\CharacterClass\ClassSpecialist.cs" />
     <Compile Include="Classes\Battle\CharactersLists.cs" />
     <Compile Include="Classes\Battle\CharacterStatus.cs" />
+    <Compile Include="Classes\Battle\EnemyCharacter.cs" />
     <Compile Include="Classes\Battle\SetCharacterOnField.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\BattlePageMenuAction.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\BattlePageSubMenuAction.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\BattlePageTargetMenuAction.cs" />
+    <Compile Include="Classes\FileHelper\DataFileLists.cs" />
     <Compile Include="Classes\FileHelper\FileHelper.cs" />
     <Compile Include="Pages\BattlePage.xaml.cs">
       <DependentUpon>BattlePage.xaml</DependentUpon>
@@ -110,7 +117,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Classes\SpriteAnimation.cs" />
+    <Compile Include="Classes\ExploreAnimation.cs" />
     <Compile Include="Classes\ControlActions\MoveActions\AMoveAction.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\PartyMenuAction.cs" />
     <Compile Include="Pages\PartyMenuPage.xaml.cs">
@@ -130,7 +137,6 @@
     </Compile>
     <Compile Include="Classes\AttackBehaviors\BasicAttackBehavior.cs" />
     <Compile Include="Classes\Battle\ACharacter.cs" />
-    <Compile Include="Classes\Battle\CharacterDescription.cs" />
     <Compile Include="Classes\Battle\CharacterStats.cs" />
     <Compile Include="Classes\Battle\ACharacterClass.cs" />
     <Compile Include="Classes\Battle\CharacterClass\ClassVanguard.cs" />
@@ -185,7 +191,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Alert.png" />
-    <Resource Include="Resources\CharacterPanels\Panel15.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\07\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\07\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\15\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\15\Idle.png" />
     <Resource Include="Resources\cursor.png" />
     <Resource Include="Resources\MainMenuBG.png" />
   </ItemGroup>
@@ -193,7 +202,7 @@
     <Resource Include="Resources\CharacterSprites\Exploration\HeroWalk.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataFiles\" />
+    <Resource Include="Resources\CharacterPanels\15.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\CharacterSprites\Exploration\EnemyWalk.png" />
@@ -202,12 +211,37 @@
     <Resource Include="Resources\PanelShadow.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\CharacterSprites\Battle\15\Icon.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\15\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\00\Idle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\CharacterSprites\Monsters\00\Atk.png" />
-    <Resource Include="Resources\CharacterSprites\Monsters\00\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\00\Attack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\CharacterSprites\Battle\00\" />
+    <Folder Include="Resources\CharacterSprites\Battle\01\" />
+    <Folder Include="Resources\CharacterSprites\Battle\02\" />
+    <Folder Include="Resources\CharacterSprites\Battle\03\" />
+    <Folder Include="Resources\CharacterSprites\Battle\04\" />
+    <Folder Include="Resources\CharacterSprites\Battle\05\" />
+    <Folder Include="Resources\CharacterSprites\Battle\06\" />
+    <Folder Include="Resources\CharacterSprites\Battle\08\" />
+    <Folder Include="Resources\CharacterSprites\Battle\09\" />
+    <Folder Include="Resources\CharacterSprites\Battle\11\" />
+    <Folder Include="Resources\CharacterSprites\Battle\12\" />
+    <Folder Include="Resources\CharacterSprites\Battle\13\" />
+    <Folder Include="Resources\CharacterSprites\Battle\14\" />
+    <Folder Include="Resources\CharacterSprites\Battle\16\" />
+    <Folder Include="Resources\CharacterSprites\Battle\17\" />
+    <Folder Include="Resources\CharacterSprites\Battle\18\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CharacterSprites\Battle\10\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CharacterSprites\Battle\10\Idle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CharacterSprites\Monsters\Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

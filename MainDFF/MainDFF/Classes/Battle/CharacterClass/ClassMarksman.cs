@@ -1,5 +1,4 @@
-﻿using MainDFF.Classes.Battle;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MainDFF.Classes.Battle.CharacterClass
 {
-    class ClassVanguard : ACharacterClass
+    public class ClassMarksman : ACharacterClass
     {
         public override void SetStats(CharacterStats stats, Random rand)
         {

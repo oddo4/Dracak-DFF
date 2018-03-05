@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MainDFF.Classes.Battle
 {
-    public class CharacterDescription
+    public class EnemyCharacter : ACharacter
     {
-        public string Name { get; set; }
     }
 }

@@ -8,11 +8,12 @@ namespace MainDFF.Classes.Battle
 {
     public abstract class ACharacter
     {
-        public int FileID { get; set; }
-        public CharacterDescription CharacterDescription { get; set; }
+        public string CharacterID { get; set; }
+        public int ClassID { get; set; }
+        public string Name { get; set; }
         public CharacterStats CharacterStats { get; set; }
         public CharacterStatus CharacterStatus { get; set; }
-        public SpriteAnimation CharacterAnimation { get; set; }
+        public List<CharacterAnimation> CharacterAnimationList = new List<CharacterAnimation>();
         public IAttackBehavior AttackBehavior = new BasicAttackBehavior();
     }
 }

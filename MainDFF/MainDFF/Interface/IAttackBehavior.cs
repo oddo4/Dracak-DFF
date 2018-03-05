@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MainDFF.Classes.Battle;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace MainDFF
 {
     public interface IAttackBehavior
     {
-        void Attack();
+        int Attack(ACharacter attacker, ACharacter defender);
     }
 }

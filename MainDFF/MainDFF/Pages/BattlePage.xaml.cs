@@ -1,5 +1,6 @@
 ﻿using MainDFF.Classes.Battle;
 using MainDFF.Classes.ControlActions.MenuActions;
+using MainDFF.Classes.FileHelper;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace MainDFF.Pages
 {
@@ -23,16 +25,33 @@ namespace MainDFF.Pages
     /// </summary>
     public partial class BattlePage : Page
     {
-        AMenuSelectAction menuAction = new BattlePageMenuAction();
+        AMenuSelectAction menuAction = null;
         AMenuSelectAction lastAction;
         SetCharacterOnField setOnField = new SetCharacterOnField();
-        CharactersLists characterLists = new CharactersLists();
+        CharactersLists charactersLists = new CharactersLists();
+        DispatcherTimer BattleTimer = new DispatcherTimer();
         public BattlePage()
         {
             InitializeComponent();
-            characterLists.PlayerList.Add(new PlayerCharacter() { FileID = 15 });
-            setOnField.SetPlayerOnField(characterLists.PlayerList, PlayerField);
-            //SkillMenu.SelectedIndex = 0;
+            charactersLists.PlayerList = App.dataFileLists.AssemblePartyCharacter();
+            EnemyCharacter e1 = new EnemyCharacter();
+            e1.CharacterStats = new CharacterStats(100, 10, 0, 2, 3, 2, 2, 4, 1, 1, 1, 1);
+            e1.CharacterStatus = new CharacterStatus(e1.CharacterStats);
+            EnemyCharacter e2 = new EnemyCharacter();
+            e2.CharacterStats = new CharacterStats(120, 10, 0, 2, 1, 2, 2, 2, 1, 1, 1, 1);
+            e2.CharacterStatus = new CharacterStatus(e2.CharacterStats);
+            charactersLists.EnemyList.Add(e1);
+            charactersLists.EnemyList.Add(e2);
+
+            charactersLists.CreateOrder();
+            setOnField.SetPlayerOnField(charactersLists.PlayerList, PlayerField);
+            setOnField.SetCharacterOrder(charactersLists, CharacterOrder); 
+            ShowHP();
+
+            BattleTimer = new DispatcherTimer();
+            BattleTimer.Interval = new TimeSpan(0, 0, 1);
+            BattleTimer.Tick += (sender, args) => { CheckTurn(); };
+            BattleTimer.Start();
         }
         private void MenuKey_Loaded(object sender, EventArgs e)
         {
@@ -41,19 +60,22 @@ namespace MainDFF.Pages
 
         private void MenuKeyDown(object sender, KeyEventArgs e)
         {
-            var max = SetMax(e.Key);
-            var selected = menuAction.GetDirection(e.Key, max);
-            if (selected > -1)
+            if (menuAction != null)
             {
-                MenuSelect(selected, e.Key);
-            }
-            else if (selected == -1)
-            {
-                Debug.WriteLine("E");
-            }
-            else if (selected < -1)
-            {
-                MenuConfirm(selected);
+                var max = SetMax(e.Key);
+                var selected = menuAction.GetDirection(e.Key, max);
+                if (selected > -1)
+                {
+                    MenuSelect(selected, e.Key);
+                }
+                else if (selected == -1)
+                {
+                    Debug.WriteLine("E");
+                }
+                else if (selected < -1)
+                {
+                    MenuConfirm(selected);
+                }
             }
         }
         private void MenuSelect(int selected, Key key)
@@ -149,8 +171,88 @@ namespace MainDFF.Pages
             }
             else if (menuAction is BattlePageTargetMenuAction)
             {
-
+                var player = charactersLists.CharacterOrder.First();
+                string cursor = Grid.GetRow(EnemyMenuCursor).ToString() + Grid.GetColumn(EnemyMenuCursor).ToString();
+                if (CheckTarget())
+                {
+                    var enemy = charactersLists.EnemyList[TargetTranslate(cursor)];
+                    player.AttackBehavior.Attack(player, enemy);
+                    ResetTurn();
+                    ShowHP();
+                }
             }
+        }
+        private void CheckTurn()
+        {
+            if(charactersLists.CharacterOrder.First() is PlayerCharacter)
+            {
+                PlayerTurn();
+            }
+            else
+            {
+                EnemyTurn();
+            }
+        }
+        private bool CheckTarget()
+        {
+            var children = EnemyMenu.Children;
+            for (int i = 2; i < EnemyMenu.Children.Count; i++)
+            {
+                if (Grid.GetRow((StackPanel)children[i]) == Grid.GetRow(EnemyMenuCursor) && Grid.GetColumn((StackPanel)children[i])-1 == Grid.GetColumn(EnemyMenuCursor) && ((TextBlock)(((StackPanel)children[i]).Children[1])).Text != "")
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        private int TargetTranslate(string cursor)
+        {
+            switch (cursor)
+            {
+                case "00":
+                    return 0;
+                case "10":
+                    return 1;
+                case "20":
+                    return 2;
+                case "02":
+                    return 3;
+                case "12":
+                    return 4;
+                case "22":
+                    return 5;
+            }
+            return -1;
+        }
+        private void ShowHP()
+        {
+            ((TextBlock)(((Grid)(((Canvas)(MonsterField.Children[0])).Children[1])).Children[0])).Text = charactersLists.EnemyList[0].CharacterStatus.CurrentHP.ToString();
+            ((TextBlock)(((Grid)(((Canvas)(MonsterField.Children[1])).Children[1])).Children[0])).Text = charactersLists.EnemyList[1].CharacterStatus.CurrentHP.ToString();
+        }
+        private void PlayerTurn()
+        {
+            BattleMenuCursor.Visibility = Visibility.Visible;
+
+            menuAction = new BattlePageMenuAction();
+            BattleTimer.Stop();
+        }
+        private void EnemyTurn()
+        {
+
+        }
+        private void ResetTurn()
+        {
+            BattleMenuCursor.Visibility = Visibility.Hidden;
+            PlayerMenuCursor.Visibility = Visibility.Hidden;
+            EnemyMenuCursor.Visibility = Visibility.Hidden;
+
+            menuAction = null;
+            ResetOrder();
+            BattleTimer.Start();
+        }
+        private void ResetOrder()
+        {
+            charactersLists.ReOrder(CharacterOrder);
         }
         private void CheckLimitBreak()
         {

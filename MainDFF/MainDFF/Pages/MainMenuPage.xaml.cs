@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MainDFF.Classes.ControlActions.MenuActions;
+using MainDFF.Classes.FileHelper;
 using MainDFF.Pages;
 
 namespace MainDFF.Pages

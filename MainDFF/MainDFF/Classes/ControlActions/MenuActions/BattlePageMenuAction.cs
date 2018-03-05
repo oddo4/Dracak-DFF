@@ -11,6 +11,7 @@ namespace MainDFF.Classes.ControlActions.MenuActions
     {
         public override int ConfirmSelection()
         {
+
             return -2;
         }
 

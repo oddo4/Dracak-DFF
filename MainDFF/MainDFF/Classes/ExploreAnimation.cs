@@ -10,9 +10,8 @@ using System.Windows.Threading;
 
 namespace MainDFF.Classes
 {
-    public class SpriteAnimation
+    public class ExploreAnimation : ASpriteAnimation
     {
-        public Point SpritePos = new Point();
         public void CreateSprite(Key direction, Image SpriteImage)
         {
             DispatcherTimer SpriteTimer = new DispatcherTimer();

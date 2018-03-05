@@ -199,6 +199,11 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
+        <Style x:Key="PlayerCanvas" TargetType="Canvas">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+        </Style>
         <Style x:Key="SubMenu" TargetType="ListBox">
             <Setter Property="Width" Value="40"/>
             <Setter Property="Height" Value="60"/>

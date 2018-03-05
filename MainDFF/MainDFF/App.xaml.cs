@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MainDFF.Classes.Battle;
+using MainDFF.Classes.FileHelper;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -14,5 +16,7 @@ namespace MainDFF
     public partial class App : Application
     {
         static public Window window;
+        static public DataFileLists dataFileLists = new DataFileLists();
+        static public FileHelper fileHelper = new FileHelper(dataFileLists);
     }
 }

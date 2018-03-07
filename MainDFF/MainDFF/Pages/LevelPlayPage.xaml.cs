@@ -34,9 +34,11 @@ namespace MainDFF.Pages
         MapData mapData = new MapData();
         ConflictChecker conflictChecker = new ConflictChecker();
         int time = 0;
-        public LevelPlayPage()
+        string enemyElement;
+        public LevelPlayPage(int levelID)
         {
             InitializeComponent();
+            enemyElement = App.fileHelper.LoadEnemyElement(levelID);
             mapData.SetPlayerOnMapData(moveAction);
             CreateTimer();
             CreateEnemy(1);
@@ -89,13 +91,13 @@ namespace MainDFF.Pages
             Random rand = new Random();
             for (int i = 0; i < Count; i++)
             {
-                Image image = new Image() { Height = 232, Width = 232, Margin = new Thickness(0, 0, 0, 29) };
+                Image image = new Image() { Height = 232, Width = 232};
                 image.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/CharacterSprites/Exploration/EnemyWalk.png"));
                 Canvas.SetLeft(image, 0);
                 Canvas.SetTop(image, 0);
-                Canvas canvas = new Canvas() { Height = 58, Width = 58, ClipToBounds = true };
-                Canvas.SetLeft(canvas, 131);
-                Canvas.SetTop(canvas, 77);
+                Canvas canvas = new Canvas() { Height = 58, Width = 58, ClipToBounds = true, Margin = new Thickness(0, -23, 0, 0) };
+                Canvas.SetLeft(canvas, 291);
+                Canvas.SetTop(canvas, 211);
 
                 canvas.Children.Add(image);
                 Canvas.SetZIndex(canvas, 1);
@@ -152,7 +154,7 @@ namespace MainDFF.Pages
         {
             if (conflictChecker.Conflict(character, mapData.ListMap))
             {
-                NavigateToNextPage(new BattlePage());
+                NavigateToNextPage(new BattlePage(enemyElement));
                 var index = enemyList.FindIndex(x => x.Pos == character.Pos);
                 MapCanvas.Children.RemoveAt(index + 1);
                 enemyList.RemoveAt(index);

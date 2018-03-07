@@ -13,7 +13,7 @@ namespace MainDFF.Classes.ControlActions.MoveActions
 {
     public abstract class AMoveAction
     {
-        public Point BegPos = new Point(131, 77);
+        public Point BegPos = new Point(291, 211);
         public Point Pos = new Point();
         public Point LastPos = new Point();
         public AStoryboardAnimation StoryboardAnimation;

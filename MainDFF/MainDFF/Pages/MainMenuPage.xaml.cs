@@ -73,7 +73,7 @@ namespace MainDFF.Pages
         {
             ((Grid)LowerMenu.Children[menuAction.CurrentIndex]).Margin = new Thickness(0, 0, 0, 0);
             ((Rectangle)((Grid)LowerMenu.Children[menuAction.CurrentIndex]).Children[0]).Stroke = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF535969"));
-            ((Grid)LowerMenu.Children[selected]).Margin = new Thickness(0, -2, 0, 2);
+            ((Grid)LowerMenu.Children[selected]).Margin = new Thickness(0, -4, 0, 4);
             ((Rectangle)((Grid)LowerMenu.Children[selected]).Children[0]).Stroke = Brushes.WhiteSmoke;
 
             menuAction.CurrentIndex = selected;

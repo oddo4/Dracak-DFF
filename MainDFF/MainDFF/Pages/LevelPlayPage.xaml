@@ -5,19 +5,19 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MainDFF.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="240" d:DesignWidth="320"
+      d:DesignHeight="480" d:DesignWidth="640"
       Title="LevelPlayPage"
       Loaded="MenuKey_Loaded">
     <Grid Background="White">
-        <Canvas x:Name="MainCamera" Height="240" Width="320" ClipToBounds="True">
+        <Canvas x:Name="MainCamera" Height="480" Width="640" ClipToBounds="True">
             <TextBlock x:Name="test" Text="0" Panel.ZIndex="100"/>
             <Label x:Name="testMap" Content="0" Canvas.Right="0" Panel.ZIndex="100" FontSize="6">
                 <Label.Background>
                     <SolidColorBrush Color="WhiteSmoke" Opacity="0.75" />
                 </Label.Background>
             </Label>
-            <Canvas x:Name="MapCanvas" Height="240" Width="320" Canvas.Top="0" Canvas.Left="0">
-                <Grid x:Name="MapGrid" Canvas.Top="115" Canvas.Left="147" Background="LawnGreen" ShowGridLines="True">
+            <Canvas x:Name="MapCanvas" Height="480" Width="640" Canvas.Top="0" Canvas.Left="0">
+                <Grid x:Name="MapGrid" Canvas.Top="227" Canvas.Left="307" Background="LawnGreen" ShowGridLines="True">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -56,7 +56,7 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
             </Canvas>
-            <Canvas x:Name="PlayerCanvas" Height="58" Width="58" Canvas.Top="77" Canvas.Left="131" Canvas.ZIndex="0" ClipToBounds="True" Margin="0,0,0,29">
+            <Canvas x:Name="PlayerCanvas" Height="58" Width="58" Canvas.Top="211" Canvas.Left="291" Canvas.ZIndex="0" ClipToBounds="True" Margin="0,-23,0,0">
                 <Image x:Name="PlayerImage" Source="/Resources/CharacterSprites/Exploration/HeroWalk.png" Height="232" Width="232" Canvas.Top="0" Canvas.Left="0"/>
             </Canvas>
         </Canvas>

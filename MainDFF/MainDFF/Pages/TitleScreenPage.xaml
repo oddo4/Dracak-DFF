@@ -5,14 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MainDFF.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="240" d:DesignWidth="320"
+      d:DesignHeight="480" d:DesignWidth="640"
       Title="TitleScreenPage"
       Loaded="MenuKey_Loaded">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/Resources/MainMenuBG.png" Stretch="UniformToFill"/>
         </Grid.Background>
-        <Grid x:Name="gridMenu" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15,15,20,15">
+        <Grid x:Name="gridMenu" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="30,30,40,30">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="MenuCursor" Source="/Resources/cursor.png" Height="14" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0"/>
+            <Image x:Name="MenuCursor" Source="/Resources/cursor.png" Height="30" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0"/>
             <TextBlock Style="{StaticResource MenuSelect}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0">
                 New Game
             </TextBlock>

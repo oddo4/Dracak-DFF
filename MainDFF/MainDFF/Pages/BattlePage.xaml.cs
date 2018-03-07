@@ -30,21 +30,17 @@ namespace MainDFF.Pages
         SetCharacterOnField setOnField = new SetCharacterOnField();
         CharactersLists charactersLists = new CharactersLists();
         DispatcherTimer BattleTimer = new DispatcherTimer();
-        public BattlePage()
+        public BattlePage(string enemyElement)
         {
             InitializeComponent();
+            App.fileHelper.LoadData();
+            App.fileHelper.LoadEnemyData(enemyElement);
             charactersLists.PlayerList = App.dataFileLists.AssemblePartyCharacter();
-            EnemyCharacter e1 = new EnemyCharacter();
-            e1.CharacterStats = new CharacterStats(100, 10, 0, 2, 3, 2, 2, 4, 1, 1, 1, 1);
-            e1.CharacterStatus = new CharacterStatus(e1.CharacterStats);
-            EnemyCharacter e2 = new EnemyCharacter();
-            e2.CharacterStats = new CharacterStats(120, 10, 0, 2, 1, 2, 2, 2, 1, 1, 1, 1);
-            e2.CharacterStatus = new CharacterStatus(e2.CharacterStats);
-            charactersLists.EnemyList.Add(e1);
-            charactersLists.EnemyList.Add(e2);
-
+            charactersLists.EnemyList = App.dataFileLists.AssembleEnemyCharacter();
             charactersLists.CreateOrder();
-            setOnField.SetPlayerOnField(charactersLists.PlayerList, PlayerField);
+            charactersLists.PlayerList[0].CharacterStatus.CurrentHP -= 20;
+            setOnField.SetPlayerOnField(charactersLists.PlayerList, PlayerField, PlayerMenu);
+            setOnField.SetEnemyOnField(charactersLists.EnemyList, MonsterField, EnemyMenu);
             setOnField.SetCharacterOrder(charactersLists, CharacterOrder); 
             ShowHP();
 
@@ -226,8 +222,14 @@ namespace MainDFF.Pages
         }
         private void ShowHP()
         {
-            ((TextBlock)(((Grid)(((Canvas)(MonsterField.Children[0])).Children[1])).Children[0])).Text = charactersLists.EnemyList[0].CharacterStatus.CurrentHP.ToString();
-            ((TextBlock)(((Grid)(((Canvas)(MonsterField.Children[1])).Children[1])).Children[0])).Text = charactersLists.EnemyList[1].CharacterStatus.CurrentHP.ToString();
+            for (int i = 0; i < charactersLists.EnemyList.Count; i++)
+            {
+                var enemy = charactersLists.EnemyList[i];
+                var canvas = (Canvas)MonsterField.Children[i];
+                var grid = (Grid)canvas.Children[1];
+                var txtBlk = (TextBlock)grid.Children[0];
+                txtBlk.Text = enemy.CharacterStatus.CurrentHP.ToString();
+            }
         }
         private void PlayerTurn()
         {

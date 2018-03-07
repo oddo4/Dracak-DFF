@@ -8,8 +8,8 @@
         <Style x:Key="MenuSelect" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="10" />
-            <Setter Property="Padding" Value="2" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Padding" Value="4" />
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
         </Style>
@@ -18,33 +18,33 @@
         <Style x:Key="LevelMenuInfo" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="8" />
+            <Setter Property="FontSize" Value="16" />
             <Setter Property="Foreground" Value="WhiteSmoke"/>
-            <Setter Property="Padding" Value="5,0,0,0" />
+            <Setter Property="Padding" Value="10,0,0,0" />
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
         </Style>
         <Style x:Key="LevelMenuSelect" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Bottom" />
-            <Setter Property="FontSize" Value="8" />
+            <Setter Property="FontSize" Value="16" />
             <Setter Property="Foreground" Value="WhiteSmoke"/>
-            <Setter Property="Padding" Value="5,0,5,2" />
+            <Setter Property="Padding" Value="10,0,10,4" />
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
         </Style>
         <Style x:Key="LevelMenuIcon" TargetType="Image">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Top" />
-            <Setter Property="Margin" Value="0,4,0,0" />
-            <Setter Property="Height" Value="25" />
+            <Setter Property="Margin" Value="0,8,0,0" />
+            <Setter Property="Height" Value="50" />
         </Style>
         <!-- TitleScreenPage END -->
         <!-- PartySelectPage START -->
         <Style x:Key="PartyMemberName" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="40"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
@@ -52,7 +52,7 @@
         <Style x:Key="PartyMemberClass" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="FontSize" Value="8"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="FontStyle" Value="Italic"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
@@ -66,16 +66,16 @@
         <Style x:Key="PartyMenuSelect" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontSize" Value="20" />
             <Setter Property="Foreground" Value="WhiteSmoke"/>
-            <Setter Property="Padding" Value="2" />
+            <Setter Property="Padding" Value="4" />
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
         </Style>
         <Style x:Key="PartyMenuMemberNameSmall" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize" Value="32"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
@@ -83,67 +83,73 @@
         <Style x:Key="PartyMenuHp" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="8"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
         </Style>
         <Style x:Key="HpBar" TargetType="ProgressBar">
             <Setter Property="Foreground" Value="ForestGreen"/>
-            <Setter Property="Height" Value="1"/>
+            <Setter Property="Height" Value="2"/>
             <Setter Property="Maximum" Value="100"/>
             <Setter Property="Value" Value="100"/>
         </Style>
         <Style x:Key="PartyMenuMp" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="6"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
         </Style>
         <Style x:Key="MpBar" TargetType="ProgressBar">
             <Setter Property="Foreground" Value="Blue"/>
-            <Setter Property="Height" Value="1"/>
+            <Setter Property="Height" Value="2"/>
             <Setter Property="Maximum" Value="100"/>
             <Setter Property="Value" Value="100"/>
         </Style>
         <Style x:Key="PartyMenuSp" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="6"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
         </Style>
         <Style x:Key="SpBar" TargetType="ProgressBar">
             <Setter Property="Foreground" Value="OrangeRed"/>
-            <Setter Property="Height" Value="1"/>
+            <Setter Property="Height" Value="2"/>
             <Setter Property="Maximum" Value="100"/>
             <Setter Property="Value" Value="100"/>
         </Style>
         <Style x:Key="GridPartyMembers" TargetType="Grid">
-            <Setter Property="Width" Value="203"/>
-            <Setter Property="Height" Value="141"/>
+            <Setter Property="Width" Value="438"/>
+            <Setter Property="Height" Value="340"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
         <Style x:Key="PanelCanvas" TargetType="Canvas">
-            <Setter Property="Width" Value="65"/>
-            <Setter Property="Height" Value="141"/>
+            <Setter Property="Width" Value="146"/>
+            <Setter Property="Height" Value="340"/>
             <Setter Property="ClipToBounds" Value="True"/>
         </Style>
         <Style x:Key="PanelImage" TargetType="Image">
-            <Setter Property="Height" Value="141"/>
+            <Setter Property="Height" Value="340"/>
+        </Style>
+        <Style x:Key="PanelBevel" TargetType="Image">
+            <Setter Property="Width" Value="146"/>
+            <Setter Property="Height" Value="340"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style x:Key="PanelShadow" TargetType="Image">
-            <Setter Property="Width" Value="65"/>
-            <Setter Property="Height" Value="141"/>
+            <Setter Property="Width" Value="146"/>
+            <Setter Property="Height" Value="340 "/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
         </Style>
         <!-- PartyMenuPage END -->
         <!-- BattlePage START -->
         <Style x:Key="BattleMenuSelect" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="6" />
-            <Setter Property="Padding" Value="1" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="2" />
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
@@ -151,9 +157,9 @@
         <Style x:Key="SubMenuSelect" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="6" />
-            <Setter Property="Padding" Value="1" />
-            <Setter Property="Height" Value="11" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="Height" Value="22" />
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
@@ -161,8 +167,8 @@
         <Style x:Key="PlayerName" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="6" />
-            <Setter Property="Padding" Value="1" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="2" />
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
@@ -170,15 +176,15 @@
         <Style x:Key="PlayerStatsName" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="6"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
         </Style>
         <Style x:Key="EnemyName" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="6" />
-            <Setter Property="Padding" Value="1" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="Padding" Value="2" />
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
@@ -186,14 +192,14 @@
         <Style x:Key="EnemyIdName" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="8"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
         </Style>
         <Style x:Key="CharacterOrder" TargetType="ListBox">
-            <Setter Property="Width" Value="30"/>
-            <Setter Property="Height" Value="80"/>
-            <Setter Property="FontSize" Value="6"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="160"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
             <Setter Property="Background" Value="Transparent"/>
@@ -204,18 +210,25 @@
             <Setter Property="VerticalAlignment" Value="Bottom"/>
             <Setter Property="ClipToBounds" Value="True"/>
         </Style>
+        <Style x:Key="EnemyCanvas" TargetType="Canvas">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+        </Style>
         <Style x:Key="SubMenu" TargetType="ListBox">
-            <Setter Property="Width" Value="40"/>
-            <Setter Property="Height" Value="60"/>
-            <Setter Property="FontSize" Value="6"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="120"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
             <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
         <Style x:Key="IconGrid" TargetType="Grid">
-            <Setter Property="Width" Value="26"/>
-            <Setter Property="Height" Value="14"/>
+            <Setter Property="Width" Value="52"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
         <Style TargetType="ListBoxItem">
             <Setter Property="Padding" Value="0"/>
@@ -230,7 +243,7 @@
         <Style x:Key="DamageInfo" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontSize" Value="32" />
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
             <Setter Property="Effect">
@@ -239,6 +252,7 @@
                     </DropShadowEffect>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Visibility" Value="Hidden"/>
         </Style>
         <!-- BattlePage END -->
         <!-- GeneralStyles START -->
@@ -266,9 +280,9 @@
                 </Setter.Value>
             </Setter>
             <Setter Property="Stroke" Value="#FF535969" />
-            <Setter Property="StrokeThickness" Value="1.5" />
-            <Setter Property="RadiusX" Value="2" />
-            <Setter Property="RadiusY" Value="2" />
+            <Setter Property="StrokeThickness" Value="3" />
+            <Setter Property="RadiusX" Value="4" />
+            <Setter Property="RadiusY" Value="4" />
         </Style>
         <Style x:Key="IconRectangle" TargetType="Rectangle">
             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -291,9 +305,9 @@
                 </Setter.Value>
             </Setter>
             <Setter Property="Stroke" Value="#FF535969" />
-            <Setter Property="StrokeThickness" Value="0.5" />
-            <Setter Property="RadiusX" Value="2" />
-            <Setter Property="RadiusY" Value="2" />
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="RadiusX" Value="4" />
+            <Setter Property="RadiusY" Value="4" />
         </Style>
         <!-- GeneralStyles END -->
     </Application.Resources>

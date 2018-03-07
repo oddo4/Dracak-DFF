@@ -14,7 +14,7 @@
         Cursor="None"
         IsHitTestVisible="False">
     <Viewbox>
-        <Grid Width="320" Height="240">
+        <Grid Width="640" Height="480">
             <Frame x:Name="MainFrame" Source="Pages/TitleScreenPage.xaml" NavigationUIVisibility="Hidden"/>
         </Grid>
     </Viewbox>

@@ -8,6 +8,10 @@ namespace MainDFF.Classes.Battle.CharacterClass
 {
     public class ClassAssassin : ACharacterClass
     {
+        public ClassAssassin()
+        {
+            Name = "Assassin";
+        }
         public override void SetStats(CharacterStats stats, Random rand)
         {
             stats.HP += rand.Next(100, 151);

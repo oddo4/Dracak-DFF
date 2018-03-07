@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MainDFF
+namespace MainDFF.Interface
 {
     public interface IAttackBehavior
     {
+        string Name { get; set; }
         int Attack(ACharacter attacker, ACharacter defender);
     }
 }

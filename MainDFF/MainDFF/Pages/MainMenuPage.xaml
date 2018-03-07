@@ -5,31 +5,31 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MainDFF.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="240" d:DesignWidth="320"
+      d:DesignHeight="480" d:DesignWidth="640"
       Title="MainMenuPage"
       Loaded="MenuKey_Loaded">
     <Grid Background="Black">
         <Grid.RowDefinitions>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="80"/> 
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.RowSpan="4" Grid.ColumnSpan="8" Background="LawnGreen">
 
         </Grid>
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8" Margin="0,0,0,0">
-            <Rectangle Style="{StaticResource MenuRectangle}"  Height="15" Width="320"/>
+            <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Style="{StaticResource LevelMenuInfo}" Text="Help" Margin="0,0,0,0"/>
                 <TextBlock x:Name="txtBlkInformation" Style="{StaticResource LevelMenuInfo}" Text="Information" Margin="0,0,0,0"/>
@@ -37,32 +37,32 @@
         </Grid>
         <StackPanel x:Name="LowerMenu" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5" Orientation="Horizontal">
             <Grid Margin="0,0,0,0">
-                <Rectangle Style="{StaticResource MenuRectangle}" Height="40" Width="40"/>
+                <Rectangle Style="{StaticResource MenuRectangle}" Height="80" Width="80"/>
                 <Image Style="{StaticResource LevelMenuIcon}" Source="/Resources/Alert.png"/>
                 <TextBlock Style="{StaticResource LevelMenuSelect}" Text="Quests"/>
             </Grid>
             <Grid Margin="0,0,0,0">
-                <Rectangle Style="{StaticResource MenuRectangle}" Height="40" Width="40"/>
+                <Rectangle Style="{StaticResource MenuRectangle}" Height="80" Width="80"/>
                 <TextBlock Style="{StaticResource LevelMenuSelect}" Text="Party"/>
             </Grid>
             <Grid Margin="0,0,0,0">
-                <Rectangle Style="{StaticResource MenuRectangle}" Height="40" Width="40"/>
+                <Rectangle Style="{StaticResource MenuRectangle}" Height="80" Width="80"/>
                 <TextBlock Style="{StaticResource LevelMenuSelect}" Text="Shop"/>
             </Grid>
             <Grid Margin="0,0,0,0">
-                <Rectangle Style="{StaticResource MenuRectangle}" Height="40" Width="40"/>
+                <Rectangle Style="{StaticResource MenuRectangle}" Height="80" Width="80"/>
                 <TextBlock Style="{StaticResource LevelMenuSelect}" Text="Save"/>
             </Grid>
             <Grid Margin="0,0,0,0">
-                <Rectangle Style="{StaticResource MenuRectangle}" Height="40" Width="40"/>
+                <Rectangle Style="{StaticResource MenuRectangle}" Height="80" Width="80"/>
                 <TextBlock Style="{StaticResource LevelMenuSelect}" Text="End"/>
             </Grid>
         </StackPanel>
         <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="8" Margin="0,0,0,0">
-            <Rectangle Style="{StaticResource MenuRectangle}"  Height="15" Width="320"/>
+            <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="ENTER Confirm" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0" FontSize="6"/>
-                <TextBlock Style="{StaticResource LevelMenuInfo}"  Text="BACKSPACE Back" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0" FontSize="6"/>
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="ENTER Confirm" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,0" FontSize="12"/>
+                <TextBlock Style="{StaticResource LevelMenuInfo}"  Text="BACKSPACE Back" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,0" FontSize="12"/>
             </StackPanel>
         </Grid>
         

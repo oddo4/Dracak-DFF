@@ -8,6 +8,10 @@ namespace MainDFF.Classes.Battle.CharacterClass
 {
     public class ClassSpecialist : ACharacterClass
     {
+        public ClassSpecialist()
+        {
+            Name = "Specialist";
+        }
         public override void SetStats(CharacterStats stats, Random rand)
         {
             stats.HP += rand.Next(100, 151);

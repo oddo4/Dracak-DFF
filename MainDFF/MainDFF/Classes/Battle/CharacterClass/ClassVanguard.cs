@@ -9,6 +9,10 @@ namespace MainDFF.Classes.Battle.CharacterClass
 {
     class ClassVanguard : ACharacterClass
     {
+        public ClassVanguard()
+        {
+            Name = "Vanguard";
+        }
         public override void SetStats(CharacterStats stats, Random rand)
         {
             stats.HP += rand.Next(100, 151);

@@ -48,6 +48,8 @@ namespace MainDFF.Classes.ControlActions.MenuActions
                     NavigateToPage = new MainMenuPage();
                     return -2;
                 case 1:
+                    App.fileHelper.LoadData();
+                    NavigateToPage = new MainMenuPage();
                     return -2;
                 case 2:
                     return -2;

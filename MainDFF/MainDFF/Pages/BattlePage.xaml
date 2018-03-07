@@ -5,23 +5,23 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MainDFF.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="240" d:DesignWidth="320"
+      d:DesignHeight="480" d:DesignWidth="640"
       Title="BattlePage"
       Loaded="MenuKey_Loaded">
 
     <Grid Background="SpringGreen">
         <Grid.RowDefinitions>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="120"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="110"/>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="320"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8" Margin="0,0,0,0">
-            <Rectangle Style="{StaticResource MenuRectangle}"  Height="15" Width="320"/>
+            <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Style="{StaticResource LevelMenuInfo}" Text="Help" Margin="0,0,0,0"/>
                 <TextBlock x:Name="txtBlkInformation" Style="{StaticResource LevelMenuInfo}" Text="Information" Margin="0,0,0,0"/>
@@ -29,50 +29,28 @@
         </Grid>
         <Grid Grid.Row="1" Grid.ColumnSpan="3">
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
+                <RowDefinition Height="70"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="60"/>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="MonsterField" Grid.Row="1" Grid.Column="0" Background="Red">
+            <Grid x:Name="MonsterField" Grid.Row="1" Grid.Column="1" Background="Red">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="53*"/>
-                    <ColumnDefinition Width="11*"/>
-                    <ColumnDefinition Width="65*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Canvas Grid.Row="0" Grid.Column="0" Width="66" Height="69" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Margin="-1,-26,64.6,0.2">
-                    <Image Source="/Resources/CharacterSprites/Monsters/00/Idle.png" Canvas.Top="0" Canvas.Left="-0"/>
-                    <Grid Width="{Binding Parent.ActualWidth, RelativeSource={RelativeSource Self}}" Height="{Binding Parent.ActualHeight, RelativeSource={RelativeSource Self}}">
-                        <TextBlock Style="{StaticResource DamageInfo}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,5,0">
-                        HP
-                        </TextBlock>
-                        <TextBlock Style="{StaticResource DamageInfo}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
-                        DMG
-                        </TextBlock>
-                    </Grid>
-                </Canvas>
-                <Canvas Grid.Row="1" Grid.Column="0" Width="66" Height="69" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Margin="-1,-26,64.6,0.2">
-                    <Image Source="/Resources/CharacterSprites/Monsters/00/Idle.png" Canvas.Top="0" Canvas.Left="-0"/>
-                    <Grid Width="{Binding Parent.ActualWidth, RelativeSource={RelativeSource Self}}" Height="{Binding Parent.ActualHeight, RelativeSource={RelativeSource Self}}">
-                        <TextBlock Style="{StaticResource DamageInfo}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,5,0">
-                        HP
-                        </TextBlock>
-                        <TextBlock Style="{StaticResource DamageInfo}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,5,0">
-                        DMG
-                        </TextBlock>
-                    </Grid>
-                </Canvas>
             </Grid>
-            <Grid x:Name="PlayerField" Grid.Row="1" Grid.Column="2" Background="Blue">
+            <Grid x:Name="PlayerField" Grid.Row="1" Grid.Column="3" Background="Blue">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -96,11 +74,11 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MenuRectangle}" Height="80" Width="30"/>
+            <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MenuRectangle}" Height="160" Width="60"/>
             <ListBox x:Name="CharacterOrder" Style="{StaticResource CharacterOrder}">
-                <!--<ListBoxItem>
+                <!--<ListBoxItem HorizontalAlignment="Center" Margin="1,0,0,0">
                     <Grid Style="{StaticResource IconGrid}">
-                        <Rectangle Style="{StaticResource IconRectangle}" Height="14" Width="26"/>
+                        <Rectangle Style="{StaticResource IconRectangle}" Height="28" Width="52"/>
                         <Image Source="/Resources/CharacterSprites/Battle/15/Icon.png"/>
                     </Grid>
                 </ListBoxItem>-->
@@ -113,71 +91,71 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Rectangle Grid.RowSpan="3" Grid.ColumnSpan="4" Style="{StaticResource MenuRectangle}" Height="60" Width="110"/>
+            <Rectangle Grid.RowSpan="3" Grid.ColumnSpan="4" Style="{StaticResource MenuRectangle}" Height="120" Width="220"/>
             <Image x:Name="EnemyMenuCursor" Source="/Resources/cursor.png" Height="10" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
-            <StackPanel x:Name="EnemyA" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="5,0">
+            <StackPanel x:Name="EnemyA" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
                 <TextBlock Style="{StaticResource EnemyIdName}">
                     A
                 </TextBlock>
                 <TextBlock Style="{StaticResource EnemyName}" Margin="3,0">
-                    Monster
+
                 </TextBlock>
             </StackPanel>
-            <StackPanel x:Name="EnemyB" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="5,0">
+            <StackPanel x:Name="EnemyB" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
                 <TextBlock Style="{StaticResource EnemyIdName}">
                     B
                 </TextBlock>
                 <TextBlock Style="{StaticResource EnemyName}" Margin="3,0">
-                    Monster
+
                 </TextBlock>
             </StackPanel>
-            <StackPanel x:Name="EnemyC" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="5,0">
+            <StackPanel x:Name="EnemyC" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
                 <TextBlock Style="{StaticResource EnemyIdName}">
                     C
                 </TextBlock>
                 <TextBlock Style="{StaticResource EnemyName}" Margin="3,0">
-                    
+
                 </TextBlock>
             </StackPanel>
-            <StackPanel x:Name="EnemyD" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Margin="5,0">
+            <StackPanel x:Name="EnemyD" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" Margin="10,0">
                 <TextBlock Style="{StaticResource EnemyIdName}">
                     D
                 </TextBlock>
                 <TextBlock Style="{StaticResource EnemyName}" Margin="3,0">
-                    
+
                 </TextBlock>
             </StackPanel>
-            <StackPanel x:Name="EnemyE" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Margin="5,0">
+            <StackPanel x:Name="EnemyE" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Margin="10,0">
                 <TextBlock Style="{StaticResource EnemyIdName}">
                     E
                 </TextBlock>
                 <TextBlock Style="{StaticResource EnemyName}" Margin="3,0">
-                    
+
                 </TextBlock>
             </StackPanel>
-            <StackPanel x:Name="EnemyF" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Margin="5,0">
+            <StackPanel x:Name="EnemyF" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Margin="10,0">
                 <TextBlock Style="{StaticResource EnemyIdName}">
                     F
                 </TextBlock>
                 <TextBlock Style="{StaticResource EnemyName}" Margin="3,0">
-                    
+
                 </TextBlock>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="1" Margin="0,0,0,0">
-            <Rectangle Style="{StaticResource MenuRectangle}" Height="60" Width="50"/>
+            <Rectangle Style="{StaticResource MenuRectangle}" Height="120" Width="100"/>
             <Grid x:Name="BattleMenu">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="20"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -205,11 +183,11 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Grid.RowSpan="5" Grid.ColumnSpan="2" Style="{StaticResource MenuRectangle}" Height="60" Width="50"/>
-                <Grid Grid.Column="0" Margin="0,2">
+                <Rectangle Grid.RowSpan="5" Grid.ColumnSpan="2" Style="{StaticResource MenuRectangle}" Height="120" Width="100"/>
+                <Grid Grid.Column="0" Margin="0,4">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
@@ -217,7 +195,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Image x:Name="SubMenuCursor" Source="/Resources/cursor.png" Height="10" HorizontalAlignment="Right" Grid.Row="0"/>
+                    <Image x:Name="SubMenuCursor" Source="/Resources/cursor.png" Height="20" HorizontalAlignment="Right" Grid.Row="0"/>
                 </Grid>
                 <ListBox x:Name="SubMenu" Grid.RowSpan="9" Grid.Column="1" Style="{StaticResource SubMenu}">
                     <!--<ListBoxItem>
@@ -264,7 +242,7 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="2" Margin="0,0,0,0">
-            <Rectangle Style="{StaticResource MenuRectangle}" Height="60" Width="160"/>
+            <Rectangle Style="{StaticResource MenuRectangle}" Height="120" Width="320"/>
             <Grid x:Name="PlayerMenu" Margin="0,0,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -275,31 +253,31 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Image x:Name="PlayerMenuCursor" Source="/Resources/cursor.png" Height="10" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
+                <Image x:Name="PlayerMenuCursor" Source="/Resources/cursor.png" Height="20" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
                 <Grid Grid.Row="0" Grid.Column="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"/>
                         <ColumnDefinition Width="60"/>
-                        <ColumnDefinition Width="26"/>
-                        <ColumnDefinition Width="26"/>
-                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="52"/>
+                        <ColumnDefinition Width="52"/>
+                        <ColumnDefinition Width="10"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{StaticResource PlayerName}">
                         Name
                     </TextBlock>
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="2,0">
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="4,0">
                         <TextBlock Style="{StaticResource PlayerStatsName}">
                             HP
                         </TextBlock>
                         <ProgressBar Style="{StaticResource HpBar}"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="2" VerticalAlignment="Center"  Margin="2,0">
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center"  Margin="4,0">
                         <TextBlock Style="{StaticResource PlayerStatsName}">
                             MP
                         </TextBlock>
                         <ProgressBar Style="{StaticResource MpBar}"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="3" VerticalAlignment="Center"  Margin="2,0">
+                    <StackPanel Grid.Column="3" VerticalAlignment="Center"  Margin="4,0">
                         <TextBlock Style="{StaticResource PlayerStatsName}">
                             SP
                         </TextBlock>
@@ -308,28 +286,28 @@
                 </Grid>
                 <Grid Grid.Row="1" Grid.Column="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"/>
                         <ColumnDefinition Width="60"/>
-                        <ColumnDefinition Width="26"/>
-                        <ColumnDefinition Width="26"/>
-                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="52"/>
+                        <ColumnDefinition Width="52"/>
+                        <ColumnDefinition Width="10"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{StaticResource PlayerName}">
                         Name
                     </TextBlock>
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="2,0">
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="4,0">
                         <TextBlock Style="{StaticResource PlayerStatsName}">
                             HP
                         </TextBlock>
                         <ProgressBar Style="{StaticResource HpBar}"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="2" VerticalAlignment="Center"  Margin="2,0">
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center"  Margin="4,0">
                         <TextBlock Style="{StaticResource PlayerStatsName}">
                             MP
                         </TextBlock>
                         <ProgressBar Style="{StaticResource MpBar}"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="3" VerticalAlignment="Center"  Margin="2,0">
+                    <StackPanel Grid.Column="3" VerticalAlignment="Center"  Margin="4,0">
                         <TextBlock Style="{StaticResource PlayerStatsName}">
                             SP
                         </TextBlock>
@@ -338,28 +316,28 @@
                 </Grid>
                 <Grid Grid.Row="2" Grid.Column="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="30"/>
                         <ColumnDefinition Width="60"/>
-                        <ColumnDefinition Width="26"/>
-                        <ColumnDefinition Width="26"/>
-                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="52"/>
+                        <ColumnDefinition Width="52"/>
+                        <ColumnDefinition Width="10"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Style="{StaticResource PlayerName}">
                         Name
                     </TextBlock>
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="2,0">
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="4,0">
                         <TextBlock Style="{StaticResource PlayerStatsName}">
                             HP
                         </TextBlock>
                         <ProgressBar Style="{StaticResource HpBar}"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="2" VerticalAlignment="Center"  Margin="2,0">
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center"  Margin="4,0">
                         <TextBlock Style="{StaticResource PlayerStatsName}">
                             MP
                         </TextBlock>
                         <ProgressBar Style="{StaticResource MpBar}"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="3" VerticalAlignment="Center"  Margin="2,0">
+                    <StackPanel Grid.Column="3" VerticalAlignment="Center"  Margin="4,0">
                         <TextBlock Style="{StaticResource PlayerStatsName}">
                             SP
                         </TextBlock>

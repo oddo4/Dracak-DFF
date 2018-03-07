@@ -8,7 +8,7 @@ namespace MainDFF.Classes.Battle
 {
     public abstract class ACharacterClass
     {
-        public string ClassName { get; set; }
+        public string Name { get; set; }
         public abstract void SetStats(CharacterStats stats, Random rand);
         public abstract void UpgradeStats(CharacterStats stats, Random rand);
     }

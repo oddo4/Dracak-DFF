@@ -9,38 +9,18 @@ namespace MainDFF.Classes.FileHelper
 {
     public class DataFileLists
     {
-        public List<string> playerIDList = new List<string>();
-        public List<string> playerCurrentPartyIDList = new List<string>();
-        public List<string> playerClassIDList = new List<string>();
-        public List<string> playerNameList = new List<string>();
-        public CharacterStats playerBasicStats { get; set; }
-        List<List<CharacterAnimation>> playerCharAnimList = new List<List<CharacterAnimation>>();
-        public List<string> playerClassNameList = new List<string>();
-        public List<CharacterStats> playerCurrentStats = new List<CharacterStats>();
+        public List<string> playerCurrentPartyIDList = new List<string>() { "15", "07", "10" };
+        public List<PlayerCharacter> playerBasicData = new List<PlayerCharacter>();
+        public List<CharacterStats> playerLoadedStats { get; set; }
 
-        public List<int> enemyIDList = new List<int>();
-
-        public void GetBasicFiles(List<string> idList, List<string> classIdList, List<string> nameList, List<CharacterStats> statsList, List<List<CharacterAnimation>> charAnimList, List<string> classNameList)
+        public List<EnemyCharacter> enemyBasicData = new List<EnemyCharacter>();
+        public void SetBasicPlayerFiles(List<PlayerCharacter> playerList)
         {
-            playerIDList = idList;
-            playerClassIDList = classIdList;
-            playerNameList = nameList;
-            playerBasicStats = statsList[0];
-            playerClassNameList = classNameList;
-            playerCharAnimList = charAnimList;
-            CreateCurrentStats();
+            playerBasicData = playerList;
         }
-        public void CreateCurrentStats()
+        public void SetBasicEnemyFiles(List<EnemyCharacter> enemyList)
         {
-            List<string> list = new List<string>() { "15", "10", "07" };
-            for (int j = 0; j < list.Count; j++)
-            {
-                playerCurrentPartyIDList.Add(list[j]);
-            }
-            for (int i = 0; i < playerClassIDList.Count; i++)
-            {
-                playerCurrentStats.Add(playerBasicStats);
-            }
+            enemyBasicData = enemyList;
         }
         public List<PlayerCharacter> AssemblePartyCharacter()
         {
@@ -48,16 +28,25 @@ namespace MainDFF.Classes.FileHelper
 
             for (int i = 0; i < playerCurrentPartyIDList.Count; i++)
             {
-                var playerID = int.Parse(playerCurrentPartyIDList[i]);
-                PlayerCharacter p = new PlayerCharacter();
-                p.CharacterID = playerCurrentPartyIDList[i];
-                p.ClassID = int.Parse(playerClassIDList[playerID]);
-                p.CharacterClass = p.SetClass();
-                p.Name = playerNameList[playerID];
-                p.CharacterStats = playerCurrentStats[playerID];
-                p.CharacterAnimationList = playerCharAnimList[playerID];
-                p.CharacterClass.ClassName = playerClassNameList[p.ClassID];
-                list.Add(p);
+                var id = int.Parse("00"); //playerCurrentPartyIDList[i]
+                var player = playerBasicData[id];
+                player.CharacterStats = playerLoadedStats[id];
+                player.CharacterStatus = new CharacterStatus(player.CharacterStats);
+                list.Add(player);
+            }
+
+            return list;
+        }
+        public List<EnemyCharacter> AssembleEnemyCharacter()
+        {
+            List<EnemyCharacter> list = new List<EnemyCharacter>();
+            Random rand = new Random();
+            for (int i = 0; i < 3; i++)
+            {
+                var enemy = enemyBasicData[0];
+                enemy.CharacterStatus = new CharacterStatus(enemy.CharacterStats);
+
+                list.Add(enemy);
             }
 
             return list;

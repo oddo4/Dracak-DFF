@@ -15,7 +15,7 @@ namespace MainDFF.Classes.ControlActions.MenuActions
             switch (CurrentIndex)
             {
                 case 0:
-                    NavigateToPage = new LevelPlayPage();
+                    NavigateToPage = new LevelPlayPage(CurrentIndex);
                     return -2;
                 case 1:
                     return -2;

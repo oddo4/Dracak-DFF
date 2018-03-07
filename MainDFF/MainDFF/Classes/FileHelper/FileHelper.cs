@@ -1,4 +1,7 @@
 ﻿using MainDFF.Classes.Battle;
+using MainDFF.Classes.Battle.AttackBehaviors;
+using MainDFF.Classes.Battle.CharacterClass;
+using MainDFF.Interface;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,18 +16,12 @@ namespace MainDFF.Classes.FileHelper
 {
     public class FileHelper
     {
-        private string DataFilesPath = AppDomain.CurrentDomain.BaseDirectory + "/DataFiles/";
-        private string SaveDataPath = AppDomain.CurrentDomain.BaseDirectory + "/SaveData/";
+        public string DataFilesPath = AppDomain.CurrentDomain.BaseDirectory + "/DataFiles/";
+        public string SaveDataPath = AppDomain.CurrentDomain.BaseDirectory + "/SaveData/";
         public int SaveSlot = 0;
-        public FileHelper(DataFileLists dataFileLists)
+        public FileHelper()
         {
-            dataFileLists.GetBasicFiles(
-                ReadStringFile(DataFilesPath, "PlayerID"), 
-                ReadStringFile(DataFilesPath, "PlayerClass"), 
-                ReadStringFile(DataFilesPath, "PlayerName"), 
-                ReadCharacterStatsFile(DataFilesPath, "PlayerBasicStats"), 
-                ReadCharacterAnimationFile(DataFilesPath, "PlayerSprite"), 
-                ReadStringFile(DataFilesPath, "ClassNames"));
+            App.dataFileLists.SetBasicPlayerFiles(ReadPlayerFile(DataFilesPath, "PlayerBasicData"));
             if (!Directory.Exists(SaveDataPath))
             {
                 for (int i = 0; i < 3; i++)
@@ -33,18 +30,40 @@ namespace MainDFF.Classes.FileHelper
                 }
             }
         }
-        public void LoadData(DataFileLists dataFileLists)
+        public string LoadEnemyElement(int id)
         {
-            dataFileLists.playerCurrentPartyIDList = ReadStringFile(SaveDataPath + SaveSlot, "PlayerPartyID");
-            dataFileLists.playerCurrentStats = ReadCharacterStatsFile(SaveDataPath + SaveSlot, "PlayerStats");
+            var result = ReadStringFile(DataFilesPath, "EnemyElementID");
+            return result[id];
         }
-        public void SaveData(DataFileLists dataFileLists)
+        public void LoadEnemyData(string dirID)
         {
-            var partyID = dataFileLists.playerCurrentPartyIDList;
-            var currentStats = dataFileLists.playerCurrentStats;
+            App.dataFileLists.SetBasicEnemyFiles(ReadEnemyFile(DataFilesPath + "/EnemyFiles/" + dirID + "/", "EnemyData"));
+        }
+        public bool LoadData()
+        {
+            var partyID = ReadStringFile(SaveDataPath + "/" + SaveSlot + "/", "SavedPartyID");
+            var stats = ReadCharacterStatsFile(SaveDataPath + "/" + SaveSlot + "/", "SavedStats");
+            if (partyID != null || stats != null)
+            {
+                App.dataFileLists.playerCurrentPartyIDList = partyID;
+                App.dataFileLists.playerLoadedStats = stats;
 
-            WriteStringFile(partyID, SaveDataPath + SaveSlot, "PlayerPartyID");
-            WriteCharacterStatsFile(currentStats, SaveDataPath + SaveSlot, "PlayerStats");
+                return true;
+            }
+            return false;
+        }
+        public bool SaveData()
+        {
+            var partyID = App.dataFileLists.playerCurrentPartyIDList;
+            var stats = App.dataFileLists.playerLoadedStats;
+
+            if (WriteStringFile(partyID, SaveDataPath + "/" + SaveSlot + "/", "SavedPartyID") 
+                &&
+                WriteCharacterStatsFile(stats, SaveDataPath + "/" + SaveSlot + "/", "SavedStats"))
+            {
+                return true;
+            }
+            return false;
         }
         /*public bool WritePlayerFile(string FileName)
         {
@@ -107,25 +126,20 @@ namespace MainDFF.Classes.FileHelper
             }
             return null;
         }
-        public List<CharacterStats> WriteCharacterStatsFile(List<CharacterStats> list, string Path, string FileName)
+        public bool WriteCharacterStatsFile(List<CharacterStats> list, string Path, string FileName)
         {
             try
             {
-                string fileString = File.ReadAllText(Path + FileName + ".json");
-                var result = JsonConvert.DeserializeObject<List<CharacterStats>>(fileString);
+                string json = JsonConvert.SerializeObject(list);
+                File.WriteAllText(Path + FileName + ".json", json);
 
-                foreach (CharacterStats data in result)
-                {
-                    list.Add(data);
-                }
-
-                return list;
+                return true;
             }
             catch
             {
-                Debug.WriteLine("Could not read CharacterStats file '" + FileName + "' !");
+                Debug.WriteLine("Could not write CharacterStats file '" + FileName + "' !");
             }
-            return null;
+            return false;
         }
         public List<CharacterStats> ReadCharacterStatsFile(string Path, string FileName)
         {
@@ -148,17 +162,47 @@ namespace MainDFF.Classes.FileHelper
             }
             return null;
         }
-
-        public List<List<CharacterAnimation>> ReadCharacterAnimationFile(string Path, string FileName)
+        public bool WriteFile(string FileName)
         {
-            List<List<CharacterAnimation>> list = new List<List<CharacterAnimation>>();
+            List<EnemyCharacter> list = new List<EnemyCharacter>();
 
+            EnemyCharacter c = new EnemyCharacter() { CharacterID = "00" };
+            c.Name = "Rain";
+            c.CharacterStats = new CharacterStats(300, 50, 0, 5, 5, 5, 5, 5, 1, 1, 1, 1);
+            c.CharacterAnimationList.Add(new CharacterAnimation());
+            c.BehaviorList.Add(new BasicAttackBehavior("Basic Attack"));
+
+            list.Add(c);
+            list.Add(c);
+            try
+            {
+                string json = JsonConvert.SerializeObject(list, Formatting.Indented, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                });
+                File.WriteAllText(DataFilesPath + "/EnemyFiles/00/" + FileName + ".json", json);
+
+                return true;
+            }
+            catch
+            {
+                Debug.WriteLine("Could not write player file!");
+            }
+
+            return false;
+        }
+        public List<EnemyCharacter> ReadEnemyFile(string Path, string FileName)
+        {
+            List<EnemyCharacter> list = new List<EnemyCharacter>();
             try
             {
                 string fileString = File.ReadAllText(Path + FileName + ".json");
-                var result = JsonConvert.DeserializeObject<List<List<CharacterAnimation>>>(fileString);
+                var result = JsonConvert.DeserializeObject<List<EnemyCharacter>>(fileString, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                });
 
-                foreach (List<CharacterAnimation> data in result)
+                foreach (EnemyCharacter data in result)
                 {
                     list.Add(data);
                 }
@@ -167,7 +211,79 @@ namespace MainDFF.Classes.FileHelper
             }
             catch
             {
-                Debug.WriteLine("Could not read CharacterAnimation file '" + FileName + "' !");
+                Debug.WriteLine("Could not read file '" + FileName + "' !");
+            }
+            return null;
+        }
+        public List<PlayerCharacter> ReadPlayerFile(string Path, string FileName)
+        {
+            List<PlayerCharacter> list = new List<PlayerCharacter>();
+            try
+            {
+                string fileString = File.ReadAllText(Path + FileName + ".json");
+                var result = JsonConvert.DeserializeObject<List<PlayerCharacter>>(fileString, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                });
+
+                foreach (PlayerCharacter data in result)
+                {
+                    list.Add(data);
+                }
+
+                return list;
+            }
+            catch
+            {
+                Debug.WriteLine("Could not read Behavior file '" + FileName + "' !");
+            }
+            return null;
+        }
+        public bool WriteBehaviorFile(string FileName)
+        {
+            List<IAttackBehavior> list = new List<IAttackBehavior>();
+
+            list.Add(new BasicAttackBehavior("Basic Attack"));
+            list.Add(new BasicAttackBehavior("Strong Attack"));
+
+            try
+            {
+                string json = JsonConvert.SerializeObject(list, Formatting.Indented, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                });
+                File.WriteAllText(DataFilesPath + FileName + ".json", json);
+
+                return true;
+            }
+            catch
+            {
+                Debug.WriteLine("Could not write player file!");
+            }
+
+            return false;
+        }
+        public List<IAttackBehavior> ReadBehaviorFile(string Path, string FileName)
+        {
+            List<IAttackBehavior> list = new List<IAttackBehavior>();
+            try
+            {
+                string fileString = File.ReadAllText(Path + FileName + ".json");
+                var result = JsonConvert.DeserializeObject<List<IAttackBehavior>>(fileString, new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.Auto
+                });
+
+                foreach (IAttackBehavior data in result)
+                {
+                    list.Add(data);
+                }
+
+                return list;
+            }
+            catch
+            {
+                Debug.WriteLine("Could not read Behavior file '" + FileName + "' !");
             }
             return null;
         }

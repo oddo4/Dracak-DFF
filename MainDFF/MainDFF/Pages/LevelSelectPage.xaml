@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MainDFF.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="240" d:DesignWidth="320"
+      d:DesignHeight="480" d:DesignWidth="640"
       Title="LevelSelectPage"
       Loaded="MenuKey_Loaded">
     <Grid Background="White">

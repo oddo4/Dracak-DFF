@@ -1,4 +1,6 @@
-﻿using MainDFF.Classes.AttackBehaviors;
+﻿using MainDFF.Classes.Battle.AttackBehaviors;
+using MainDFF.Interface;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +11,13 @@ namespace MainDFF.Classes.Battle
     public abstract class ACharacter
     {
         public string CharacterID { get; set; }
-        public int ClassID { get; set; }
         public string Name { get; set; }
         public CharacterStats CharacterStats { get; set; }
+        [JsonIgnore]
         public CharacterStatus CharacterStatus { get; set; }
         public List<CharacterAnimation> CharacterAnimationList = new List<CharacterAnimation>();
-        public IAttackBehavior AttackBehavior = new BasicAttackBehavior();
+        public List<IAttackBehavior> BehaviorList = new List<IAttackBehavior>();
+        [JsonIgnore]
+        public IAttackBehavior AttackBehavior = new BasicAttackBehavior("Basic Attack");
     }
 }

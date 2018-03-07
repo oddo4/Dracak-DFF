@@ -17,6 +17,6 @@ namespace MainDFF
     {
         static public Window window;
         static public DataFileLists dataFileLists = new DataFileLists();
-        static public FileHelper fileHelper = new FileHelper(dataFileLists);
+        static public FileHelper fileHelper = new FileHelper();
     }
 }

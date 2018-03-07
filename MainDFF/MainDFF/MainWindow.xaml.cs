@@ -24,7 +24,7 @@ namespace MainDFF
         {
             InitializeComponent();
             App.window = GetWindow(this);
-            //Fullscreen();
+            Fullscreen();
         }
         private void Fullscreen()
         {

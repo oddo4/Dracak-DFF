@@ -16,7 +16,7 @@ namespace MainDFF.Classes.ControlActions.MoveActions
         public Point BegPos = new Point(291, 211);
         public Point Pos = new Point();
         public Point LastPos = new Point();
-        public AStoryboardAnimation StoryboardAnimation;
+        public AExploreStoryboardAnimation StoryboardAnimation;
         public ExploreAnimation SpriteAnimation = new ExploreAnimation();
         public Page NavigateToPage = null;
         public int MoveCharacter(int direction, int current, int max)

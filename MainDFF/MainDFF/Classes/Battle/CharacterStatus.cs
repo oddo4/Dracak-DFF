@@ -17,5 +17,20 @@ namespace MainDFF.Classes.Battle
             this.CurrentMP = stats.MP;
             this.CurrentSP = 0;
         }
+        public bool CheckHP(ACharacter character, List<ACharacter> characterOrder)
+        {
+            if (CurrentHP <= 0)
+            {
+                CurrentHP = 0;
+                CurrentSP = 0;
+                characterOrder.Remove(character);
+                return true;
+            }
+            return false;
+        }
+        public void AddSP(int damage)
+        {
+            CurrentSP += damage * 0.5;
+        }
     }
 }

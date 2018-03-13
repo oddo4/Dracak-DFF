@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 
 namespace MainDFF.Classes.Exploration.Storyboards
 {
-    public class PlayerStoryboardAnimation : AStoryboardAnimation
+    public class PlayerExploreStoryboardAnimation : AExploreStoryboardAnimation
     {
         public override void CreateStoryboard(Key direction, Canvas MapCanvas)
         {

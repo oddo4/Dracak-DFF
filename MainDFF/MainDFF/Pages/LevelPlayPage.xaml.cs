@@ -1,4 +1,5 @@
 ﻿using MainDFF.Classes;
+using MainDFF.Classes.Battle;
 using MainDFF.Classes.ControlActions.MoveActions;
 using MainDFF.Classes.Exploration;
 using MainDFF.Pages;
@@ -33,6 +34,7 @@ namespace MainDFF.Pages
         DispatcherTimer MainTimer = new DispatcherTimer();
         MapData mapData = new MapData();
         ConflictChecker conflictChecker = new ConflictChecker();
+        CharactersLists charactersLists = new CharactersLists();
         int time = 0;
         string enemyElement;
         public LevelPlayPage(int levelID)
@@ -41,7 +43,7 @@ namespace MainDFF.Pages
             enemyElement = App.fileHelper.LoadEnemyElement(levelID);
             mapData.SetPlayerOnMapData(moveAction);
             CreateTimer();
-            CreateEnemy(1);
+            CreateEnemy(4);
             setCharacter.SetEnemyOnMap(enemyList, MapCanvas);
             setCharacter.SetPlayerOnMap(moveAction, MapCanvas);
         }
@@ -70,7 +72,7 @@ namespace MainDFF.Pages
                 }
                 else if (selected < -1)
                 {
-                    NavigateToNextPage(moveAction.NavigateToPage);
+                    NavigateToPage(new PartyMenuPage(1));
                 }
             }
         }
@@ -89,6 +91,8 @@ namespace MainDFF.Pages
         private void CreateEnemy(int Count)
         {
             Random rand = new Random();
+            var offsetX = 0;
+            var offsetY = 0;
             for (int i = 0; i < Count; i++)
             {
                 Image image = new Image() { Height = 232, Width = 232};
@@ -103,12 +107,19 @@ namespace MainDFF.Pages
                 Canvas.SetZIndex(canvas, 1);
                 MapCanvas.Children.Add(canvas);
 
-                var X = rand.Next(3, 11);
-                var Y = rand.Next(3, 11);
+                var X = rand.Next(3 + offsetX, 6 + offsetX);
+                var Y = rand.Next(3 + offsetY, 6 + offsetY);
 
                 EnemyMoveAction newEnemyMove = new EnemyMoveAction(new Point(X, Y), rand);
                 mapData.SetEnemyOnMapData(newEnemyMove);
                 enemyList.Add(newEnemyMove);
+
+                offsetX += 5;
+                if (offsetX > 5)
+                {
+                    offsetX = 0;
+                    offsetY += 5;
+                }
             }
         }
         private void CreateTimer()
@@ -154,13 +165,13 @@ namespace MainDFF.Pages
         {
             if (conflictChecker.Conflict(character, mapData.ListMap))
             {
-                NavigateToNextPage(new BattlePage(enemyElement));
+                NavigateToPage(new BattlePage(enemyElement));
                 var index = enemyList.FindIndex(x => x.Pos == character.Pos);
                 MapCanvas.Children.RemoveAt(index + 1);
                 enemyList.RemoveAt(index);
             }
         }
-        private void NavigateToNextPage(Page page)
+        private void NavigateToPage(Page page)
         {
             if (page != null)
             {

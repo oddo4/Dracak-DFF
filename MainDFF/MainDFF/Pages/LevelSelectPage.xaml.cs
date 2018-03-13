@@ -30,14 +30,15 @@ namespace MainDFF.Pages
         private void MenuKey_Loaded(object sender, RoutedEventArgs e)
         {
             App.window.KeyDown += MenuKeyDown;
+            SetChapters();
         }
         private void MenuKeyDown(object sender, KeyEventArgs e)
         {
-            var max = 0;
+            var max = App.dataFileLists.CompletedChapters;
             var selected = menuAction.GetDirection(e.Key, max);
             if (selected > -1)
             {
-
+                MenuSelect(selected, max);
             }
             else if (selected == -1)
             {
@@ -45,22 +46,57 @@ namespace MainDFF.Pages
             }
             else
             {
-                switch (selected)
+                MenuConfirm(selected);
+            }
+        }
+        private void MenuSelect(int selected, int max)
+        {
+            for (int i = 0; i < max + 1; i++)
+            {
+                var chapterCanvas = (Canvas)LevelIcons.Children[i];
+                var image = (Image)chapterCanvas.Children[0];
+
+                if (i == selected)
                 {
-                    case -2:
-                        if (menuAction.NavigateToPage != null)
-                        {
-                            NavigationService.Navigate(menuAction.NavigateToPage);
-                            ResetEvent();
-                        }
-                        break;
-                    case -3:
-                        NavigationService.GoBack();
-                        ResetEvent();
-                        break;
-                    default:
-                        break;
+                    var left = Canvas.GetLeft(chapterCanvas);
+                    var top = Canvas.GetTop(chapterCanvas);
+
+                    Canvas.SetLeft(LevelSelectCursor, left);
+                    Canvas.SetTop(LevelSelectCursor, top);
+
+                    Canvas.SetLeft(image, 0);
                 }
+                else
+                {
+                    Canvas.SetLeft(image, -50);
+                }
+            }
+            
+            menuAction.CurrentIndex = selected;
+        }
+        private void MenuConfirm(int selected)
+        {
+            if(selected != -2)
+            {
+                NavigationService.GoBack();
+                ResetEvent();
+            }
+            else
+            {
+                if (menuAction.NavigateToPage != null)
+                {
+                    NavigationService.Navigate(menuAction.NavigateToPage);
+                    ResetEvent();
+                }
+            }
+            
+        }
+        private void SetChapters()
+        {
+            for (int i = 0; i < App.dataFileLists.CompletedChapters + 1; i++)
+            {
+                var chapterCanvas = (Canvas)LevelIcons.Children[i];
+                chapterCanvas.Visibility = Visibility.Visible;
             }
         }
         private void ResetEvent()

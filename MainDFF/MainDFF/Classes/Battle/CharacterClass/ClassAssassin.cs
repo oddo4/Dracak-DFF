@@ -14,12 +14,13 @@ namespace MainDFF.Classes.Battle.CharacterClass
         }
         public override void SetStats(CharacterStats stats, Random rand)
         {
-            stats.HP += rand.Next(100, 151);
-            stats.MP -= rand.Next(20, 31);
-            stats.ATK += rand.Next(2, 5);
-            stats.DEF += rand.Next(2, 5);
-            stats.MAGATK -= rand.Next(2, 5);
-            stats.SPD -= rand.Next(2, 5);
+            stats.HP += rand.Next(-20, 20);
+            stats.MP += rand.Next(-10, 11);
+            stats.ATK -= rand.Next(4, 8);
+            stats.DEF += rand.Next(-2, 3);
+            stats.MAGATK -= rand.Next(4, 8);
+            stats.MAGDEF += rand.Next(-2, 3);
+            stats.SPD += rand.Next(4, 11);
         }
 
         public override void UpgradeStats(CharacterStats stats, Random rand)

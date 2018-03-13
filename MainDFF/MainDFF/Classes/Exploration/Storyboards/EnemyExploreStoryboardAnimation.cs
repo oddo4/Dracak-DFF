@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 
 namespace MainDFF.Classes.Exploration.Storyboards
 {
-    class EnemyStoryboardAnimation : AStoryboardAnimation
+    class EnemyExploreStoryboardAnimation : AExploreStoryboardAnimation
     {
         public override void AddToStoryboard(DoubleAnimation Anim, Canvas Canvas, int Direction)
         {

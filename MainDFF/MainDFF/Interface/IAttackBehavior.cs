@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace MainDFF.Interface
 {
-    public interface IAttackBehavior
+    public interface IAttackBehavior : IBehavior
     {
-        string Name { get; set; }
-        int Attack(ACharacter attacker, ACharacter defender);
     }
 }

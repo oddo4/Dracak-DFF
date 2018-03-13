@@ -26,7 +26,7 @@ namespace MainDFF.Classes.FileHelper
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    Directory.CreateDirectory(SaveDataPath + SaveSlot);
+                    Directory.CreateDirectory(SaveDataPath + i);
                 }
             }
         }
@@ -43,10 +43,12 @@ namespace MainDFF.Classes.FileHelper
         {
             var partyID = ReadStringFile(SaveDataPath + "/" + SaveSlot + "/", "SavedPartyID");
             var stats = ReadCharacterStatsFile(SaveDataPath + "/" + SaveSlot + "/", "SavedStats");
+            var chapter = ReadStringFile(SaveDataPath + "/" + SaveSlot + "/", "SavedCurrentChapter").FirstOrDefault();
             if (partyID != null || stats != null)
             {
                 App.dataFileLists.playerCurrentPartyIDList = partyID;
                 App.dataFileLists.playerLoadedStats = stats;
+                App.dataFileLists.CompletedChapters = int.Parse(chapter);
 
                 return true;
             }
@@ -162,7 +164,7 @@ namespace MainDFF.Classes.FileHelper
             }
             return null;
         }
-        public bool WriteFile(string FileName)
+        /*public bool WriteFile(string FileName)
         {
             List<EnemyCharacter> list = new List<EnemyCharacter>();
 
@@ -190,7 +192,7 @@ namespace MainDFF.Classes.FileHelper
             }
 
             return false;
-        }
+        }*/
         public List<EnemyCharacter> ReadEnemyFile(string Path, string FileName)
         {
             List<EnemyCharacter> list = new List<EnemyCharacter>();

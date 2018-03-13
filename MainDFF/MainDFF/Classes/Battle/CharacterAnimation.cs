@@ -18,12 +18,18 @@ namespace MainDFF.Classes.Battle
         public int SpriteFramesCount { get; set; }
         [JsonIgnore]
         public int CurrentFrame = 0;
-        DispatcherTimer SpriteTimer;
-        public void CreateSprite(Image SpriteImage)
+        [JsonIgnore]
+        public bool Loop = true;
+        [JsonIgnore]
+        public DispatcherTimer SpriteTimer;
+        public void CreateSprite(Image SpriteImage, TimeSpan TimeSpan)
         {
-            SpriteTimer = new DispatcherTimer();
-            SpriteTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+            SpriteTimer = new DispatcherTimer(DispatcherPriority.Send);
+            SpriteTimer.Interval = TimeSpan;
             SpriteTimer.Tick += (sender, args) => { PlaySprite(SpriteImage, SpriteTimer); };
+
+            Canvas.SetLeft(SpriteImage, SpritePos.X);
+            Canvas.SetTop(SpriteImage, SpritePos.Y);
 
             StartSprite();
         }
@@ -34,39 +40,48 @@ namespace MainDFF.Classes.Battle
 
         public void PlaySprite(Image SpriteImage, DispatcherTimer SpriteTimer)
         {
-            if (CurrentFrame != SpriteFramesCount)
+            if (!Loop && CurrentFrame == SpriteFramesCount)
             {
-                var offsetX = SpriteImage.ActualWidth / SpriteRowCol.X;
-
-                SpritePos.X -= offsetX;
-
-                Canvas.SetLeft(SpriteImage, SpritePos.X);
-
-                if (SpritePos.X == -SpriteImage.ActualWidth && SpritePos.Y != -SpriteImage.ActualHeight)
+                StopSprite();
+            }
+            else
+            {
+                if (CurrentFrame != SpriteFramesCount)
                 {
-                    var offsetY = SpriteImage.ActualHeight / SpriteRowCol.Y;
+                    var offsetX = SpriteImage.ActualWidth / SpriteRowCol.X;
 
-                    SpritePos.X = 0;
-                    SpritePos.Y -= offsetY;
+                    SpritePos.X -= offsetX;
+
+                    Canvas.SetLeft(SpriteImage, SpritePos.X);
+
+                    if (SpritePos.X == -SpriteImage.ActualWidth && SpritePos.Y != -SpriteImage.ActualHeight)
+                    {
+                        var offsetY = SpriteImage.ActualHeight / SpriteRowCol.Y;
+
+                        SpritePos.X = 0;
+                        SpritePos.Y -= offsetY;
+
+                        Canvas.SetLeft(SpriteImage, SpritePos.X);
+                        Canvas.SetTop(SpriteImage, SpritePos.Y);
+                    }
+
+                    CurrentFrame++;
+                }
+                else
+                {
+                    SpritePos = new Point(0, 0);
+                    CurrentFrame = 0;
 
                     Canvas.SetLeft(SpriteImage, SpritePos.X);
                     Canvas.SetTop(SpriteImage, SpritePos.Y);
                 }
-
-                CurrentFrame++;
             }
-            else
-            {
-                SpritePos = new Point(0, 0);
-                CurrentFrame = 0;
-
-                Canvas.SetLeft(SpriteImage, SpritePos.X);
-                Canvas.SetTop(SpriteImage, SpritePos.Y);
-            }  
         }
 
         public void StopSprite()
         {
+            SpritePos = new Point(0, 0);
+            CurrentFrame = 0;
             SpriteTimer.Stop();
         }
     }

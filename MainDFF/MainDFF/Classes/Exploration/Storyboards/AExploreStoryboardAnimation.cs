@@ -10,7 +10,7 @@ using System.Windows.Media.Animation;
 
 namespace MainDFF.Classes.Exploration.Storyboards
 {
-    public abstract class AStoryboardAnimation
+    public abstract class AExploreStoryboardAnimation
     {
         public Storyboard MainStoryboard = new Storyboard();
         public bool AnimationComplete = true;

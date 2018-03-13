@@ -8,9 +8,62 @@
       d:DesignHeight="480" d:DesignWidth="640"
       Title="LevelSelectPage"
       Loaded="MenuKey_Loaded">
-    <Grid Background="White">
-        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">
-            Press ENTER to start Beta Level
-        </TextBlock>
+    <Grid Background="#FFF4F4F1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8" Margin="0,0,0,0">
+            <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="Help" Margin="0,0,0,0"/>
+                <TextBlock x:Name="txtBlkInformation" Style="{StaticResource LevelMenuInfo}" Text="Information" Margin="0,0,0,0"/>
+            </StackPanel>
+        </Grid>
+        <Image Grid.Row="1" Source="/Resources/WorldMap.jpg" Stretch="Uniform" Height="450"/>
+        <Canvas x:Name="LevelIcons" Grid.Row="1">
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="290" Canvas.Left="130">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/0.png" Canvas.Left="0"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="220" Canvas.Left="240">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/1.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="350" Canvas.Left="260">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/2.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="210" Canvas.Left="330">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/3.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="340" Canvas.Left="380">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/4.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="270" Canvas.Left="440">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/5.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="150" Canvas.Left="470">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/6.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="120" Canvas.Left="390">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/7.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="60" Canvas.Left="400">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/8.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="50" Canvas.Left="290">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/9.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Image x:Name="LevelSelectCursor" Source="/Resources/Cursor.png" Height="26" Canvas.Top="290" Canvas.Left="130"/>
+        </Canvas>
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="8" Margin="0,0,0,0">
+            <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="ENTER Confirm" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,0" FontSize="12"/>
+                <TextBlock Style="{StaticResource LevelMenuInfo}"  Text="BACKSPACE Back" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,0" FontSize="12"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

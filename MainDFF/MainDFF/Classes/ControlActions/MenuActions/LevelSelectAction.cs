@@ -12,31 +12,22 @@ namespace MainDFF.Classes.ControlActions.MenuActions
     {
         public override int ConfirmSelection()
         {
-            switch (CurrentIndex)
-            {
-                case 0:
-                    NavigateToPage = new LevelPlayPage(CurrentIndex);
-                    return -2;
-                case 1:
-                    return -2;
-                case 2:
-                    return -2;
-                default:
-                    return CurrentIndex;
-            }
-            return -1;
+
+            NavigateToPage = new LevelPlayPage(CurrentIndex);
+            return -2;
+
         }
 
-        public override int GetDirection(Key key, int max)
+        public override int GetDirection(Key key, int max, int min = 0)
         {
             switch (key)
             {
-                /*
+                case Key.Up:
                 case Key.Left:
-                    return MoveCursor(0, current, max);
+                    return MoveCursor(0, max, min);
+                case Key.Down:
                 case Key.Right:
-                    return MoveCursor(1, current, max);
-                */
+                    return MoveCursor(1, max, min);
                 case Key.Enter:
                     return ConfirmSelection();
                 case Key.Back:

@@ -26,14 +26,14 @@ namespace MainDFF.Classes.ControlActions.MenuActions
             return -1;
         }
 
-        public override int GetDirection(Key key, int max)
+        public override int GetDirection(Key key, int max, int min = 0)
         {
             switch (key)
             {
                 case Key.Left:
-                    return MoveCursor(0, max);
+                    return MoveCursor(0, max, min);
                 case Key.Right:
-                    return MoveCursor(1, max);
+                    return MoveCursor(1, max, min);
                 case Key.Enter:
                     return ConfirmSelection();
                 case Key.Back:

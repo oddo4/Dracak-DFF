@@ -12,12 +12,12 @@ namespace MainDFF.Classes.ControlActions.MenuActions
     {
         public Page NavigateToPage = null;
         public int CurrentIndex = 0;
-        public int MoveCursor(int direction, int max)
+        public virtual int MoveCursor(int direction, int max, int min)
         {
             switch (direction)
             {
                 case 0:
-                    if (CurrentIndex > 0)
+                    if (CurrentIndex > min)
                     {
                         return CurrentIndex - 1;
                     }
@@ -32,13 +32,13 @@ namespace MainDFF.Classes.ControlActions.MenuActions
                     }
                     else
                     {
-                        return 0;
+                        return min;
                     }
                 default:
                     return CurrentIndex;
             }
         }
-        public abstract int GetDirection(Key key, int max);
+        public abstract int GetDirection(Key key, int max, int min = 0);
         public abstract int ConfirmSelection();
     }
 }

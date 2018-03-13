@@ -15,7 +15,7 @@ namespace MainDFF.Classes.ControlActions.MoveActions
         public EnemyMoveSettings MoveSettings;
         public EnemyMoveAction(Point pos, Random rand)
         {
-            StoryboardAnimation = new EnemyStoryboardAnimation();
+            StoryboardAnimation = new EnemyExploreStoryboardAnimation();
             MoveSettings = new EnemyMoveSettings(rand);
             Pos = pos;
         }

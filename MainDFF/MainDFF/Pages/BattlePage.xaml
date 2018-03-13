@@ -12,6 +12,7 @@
     <Grid Background="SpringGreen">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="120"/>
         </Grid.RowDefinitions>
@@ -27,7 +28,11 @@
                 <TextBlock x:Name="txtBlkInformation" Style="{StaticResource LevelMenuInfo}" Text="Information" Margin="0,0,0,0"/>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="1" Grid.ColumnSpan="3">
+        <Grid x:Name="gridSkillName" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="8" Margin="0,0,0,0" Height="30" Width="520" Visibility="Hidden">
+            <Rectangle Style="{StaticResource MenuRectangle}" Height="30" Width="520"/>
+            <TextBlock x:Name="txtBlkSkillName" Style="{StaticResource LevelMenuInfo}" Text="Skill" TextAlignment="Center" Width="520" Margin="0,0,0,0"/>
+        </Grid>
+        <Grid Grid.Row="2" Grid.ColumnSpan="3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="*"/>
@@ -35,11 +40,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="60"/>
             </Grid.ColumnDefinitions>
-            <Grid x:Name="MonsterField" Grid.Row="1" Grid.Column="1" Background="Red">
+            <Grid x:Name="MonsterField" Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -50,7 +54,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
             </Grid>
-            <Grid x:Name="PlayerField" Grid.Row="1" Grid.Column="3" Background="Blue">
+            <Grid x:Name="PlayerField" Grid.Row="1" Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -60,8 +64,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <!--
-                <Canvas Grid.Row="0" Grid.Column="1" Width="57" Height="69" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <!--<Canvas Grid.Row="0" Grid.Column="1" Width="57" Height="69" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                     <Image Source="/Resources/CharacterSprites/Battle/15/Idle.png" Canvas.Top="0" Canvas.Left="0"/>
                 </Canvas>
                 <Canvas Grid.Row="1" Grid.Column="1" Width="57" Height="69" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Bottom">
@@ -73,7 +76,7 @@
                 -->
             </Grid>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top">
+        <Grid Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MenuRectangle}" Height="160" Width="60"/>
             <ListBox x:Name="CharacterOrder" Style="{StaticResource CharacterOrder}">
                 <!--<ListBoxItem HorizontalAlignment="Center" Margin="1,0,0,0">
@@ -84,7 +87,7 @@
                 </ListBoxItem>-->
             </ListBox>
         </Grid>
-        <Grid x:Name="EnemyMenu" Grid.Row="2" Grid.Column="0" Margin="0,0,0,0">
+        <Grid x:Name="EnemyMenu" Grid.Row="3" Grid.Column="0" Margin="0,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -97,7 +100,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Rectangle Grid.RowSpan="3" Grid.ColumnSpan="4" Style="{StaticResource MenuRectangle}" Height="120" Width="220"/>
-            <Image x:Name="EnemyMenuCursor" Source="/Resources/cursor.png" Height="10" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
+            <Image x:Name="EnemyMenuCursor" Source="/Resources/cursor.png" Height="20" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
             <StackPanel x:Name="EnemyA" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="10,0">
                 <TextBlock Style="{StaticResource EnemyIdName}">
                     A
@@ -147,7 +150,7 @@
                 </TextBlock>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="2" Grid.Column="1" Margin="0,0,0,0">
+        <Grid Grid.Row="3" Grid.Column="1" Margin="0,0,0,0">
             <Rectangle Style="{StaticResource MenuRectangle}" Height="120" Width="100"/>
             <Grid x:Name="BattleMenu">
                 <Grid.RowDefinitions>
@@ -161,7 +164,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Image x:Name="BattleMenuCursor" Source="/Resources/cursor.png" Height="10" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
+                <Image x:Name="BattleMenuCursor" Source="/Resources/cursor.png" Height="20" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
                 <TextBlock x:Name="BattleAttack" Style="{StaticResource BattleMenuSelect}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0">
                     Attack
                 </TextBlock>
@@ -178,7 +181,7 @@
                     Limit Break
                 </TextBlock>
             </Grid>
-            <Grid Grid.Row="2" Grid.Column="1" Margin="0,0,0,0" Visibility="Hidden">
+            <Grid x:Name="SubMenuGrid" Grid.Row="2" Grid.Column="1" Margin="0,0,0,0" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -197,7 +200,21 @@
                     </Grid.RowDefinitions>
                     <Image x:Name="SubMenuCursor" Source="/Resources/cursor.png" Height="20" HorizontalAlignment="Right" Grid.Row="0"/>
                 </Grid>
-                <ListBox x:Name="SubMenu" Grid.RowSpan="9" Grid.Column="1" Style="{StaticResource SubMenu}">
+                <ListBox x:Name="SubMenu" Grid.RowSpan="5" Grid.Column="1" Style="{StaticResource SubMenu}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock x:Name="SubMenuItemName" Style="{StaticResource SubMenuSelect}" Text="{Binding Name}"/>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsUsable}" Value="True">
+                                    <Setter TargetName="SubMenuItemName" Property="Foreground" Value="WhiteSmoke"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding IsUsable}" Value="False">
+                                    <Setter TargetName="SubMenuItemName" Property="Foreground" Value="Gray"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                     <!--<ListBoxItem>
                             <TextBlock Grid.Column="1" Style="{StaticResource SkillMenuSelect}">
                                 Fire 1
@@ -241,7 +258,7 @@
                 </ListBox>
             </Grid>
         </Grid>
-        <Grid Grid.Row="2" Grid.Column="2" Margin="0,0,0,0">
+        <Grid Grid.Row="3" Grid.Column="2" Margin="0,0,0,0">
             <Rectangle Style="{StaticResource MenuRectangle}" Height="120" Width="320"/>
             <Grid x:Name="PlayerMenu" Margin="0,0,0,0">
                 <Grid.RowDefinitions>
@@ -265,20 +282,30 @@
                     <TextBlock Grid.Column="0" Style="{StaticResource PlayerName}">
                         Name
                     </TextBlock>
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="4,0">
-                        <TextBlock Style="{StaticResource PlayerStatsName}">
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" MaxWidth="112">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource PlayerHpName}">
                             HP
-                        </TextBlock>
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource PlayerHpValue}">
+                            300
+                            </TextBlock>
+                        </StackPanel>
                         <ProgressBar Style="{StaticResource HpBar}"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="2" VerticalAlignment="Center"  Margin="4,0">
-                        <TextBlock Style="{StaticResource PlayerStatsName}">
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center" MaxWidth="44">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource PlayerMpName}">
                             MP
-                        </TextBlock>
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource PlayerMpValue}">
+                            100
+                            </TextBlock>
+                        </StackPanel>
                         <ProgressBar Style="{StaticResource MpBar}"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="3" VerticalAlignment="Center"  Margin="4,0">
-                        <TextBlock Style="{StaticResource PlayerStatsName}">
+                    <StackPanel Grid.Column="3" VerticalAlignment="Center" MaxWidth="44">
+                        <TextBlock Style="{StaticResource PlayerSpName}">
                             SP
                         </TextBlock>
                         <ProgressBar Style="{StaticResource SpBar}"/>
@@ -295,20 +322,30 @@
                     <TextBlock Grid.Column="0" Style="{StaticResource PlayerName}">
                         Name
                     </TextBlock>
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="4,0">
-                        <TextBlock Style="{StaticResource PlayerStatsName}">
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" MaxWidth="112">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource PlayerHpName}">
                             HP
-                        </TextBlock>
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource PlayerHpValue}">
+                            3000
+                            </TextBlock>
+                        </StackPanel>
                         <ProgressBar Style="{StaticResource HpBar}"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="2" VerticalAlignment="Center"  Margin="4,0">
-                        <TextBlock Style="{StaticResource PlayerStatsName}">
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center" MaxWidth="44">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource PlayerMpName}">
                             MP
-                        </TextBlock>
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource PlayerMpValue}">
+                            100
+                            </TextBlock>
+                        </StackPanel>
                         <ProgressBar Style="{StaticResource MpBar}"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="3" VerticalAlignment="Center"  Margin="4,0">
-                        <TextBlock Style="{StaticResource PlayerStatsName}">
+                    <StackPanel Grid.Column="3" VerticalAlignment="Center" MaxWidth="44">
+                        <TextBlock Style="{StaticResource PlayerSpName}">
                             SP
                         </TextBlock>
                         <ProgressBar Style="{StaticResource SpBar}"/>
@@ -325,20 +362,30 @@
                     <TextBlock Grid.Column="0" Style="{StaticResource PlayerName}">
                         Name
                     </TextBlock>
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="4,0">
-                        <TextBlock Style="{StaticResource PlayerStatsName}">
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" MaxWidth="112">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource PlayerHpName}">
                             HP
-                        </TextBlock>
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource PlayerHpValue}">
+                            3000
+                            </TextBlock>
+                        </StackPanel>
                         <ProgressBar Style="{StaticResource HpBar}"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="2" VerticalAlignment="Center"  Margin="4,0">
-                        <TextBlock Style="{StaticResource PlayerStatsName}">
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center" MaxWidth="44">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource PlayerMpName}">
                             MP
-                        </TextBlock>
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource PlayerMpValue}">
+                            100
+                            </TextBlock>
+                        </StackPanel>
                         <ProgressBar Style="{StaticResource MpBar}"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="3" VerticalAlignment="Center"  Margin="4,0">
-                        <TextBlock Style="{StaticResource PlayerStatsName}">
+                    <StackPanel Grid.Column="3" VerticalAlignment="Center" MaxWidth="44">
+                        <TextBlock Style="{StaticResource PlayerSpName}">
                             SP
                         </TextBlock>
                         <ProgressBar Style="{StaticResource SpBar}"/>

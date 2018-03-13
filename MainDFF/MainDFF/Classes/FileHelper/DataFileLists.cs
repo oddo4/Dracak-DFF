@@ -14,6 +14,9 @@ namespace MainDFF.Classes.FileHelper
         public List<CharacterStats> playerLoadedStats { get; set; }
 
         public List<EnemyCharacter> enemyBasicData = new List<EnemyCharacter>();
+        public List<string> enemyChapterElement = new List<string>();
+        public int MaxChapters = 9;
+        public int CompletedChapters = 0;
         public void SetBasicPlayerFiles(List<PlayerCharacter> playerList)
         {
             playerBasicData = playerList;
@@ -28,7 +31,7 @@ namespace MainDFF.Classes.FileHelper
 
             for (int i = 0; i < playerCurrentPartyIDList.Count; i++)
             {
-                var id = int.Parse("00"); //playerCurrentPartyIDList[i]
+                var id = int.Parse(playerCurrentPartyIDList[i]);
                 var player = playerBasicData[id];
                 player.CharacterStats = playerLoadedStats[id];
                 player.CharacterStatus = new CharacterStatus(player.CharacterStats);
@@ -41,15 +44,25 @@ namespace MainDFF.Classes.FileHelper
         {
             List<EnemyCharacter> list = new List<EnemyCharacter>();
             Random rand = new Random();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < rand.Next(1, 7); i++) //rand.Next(1,7)
             {
-                var enemy = enemyBasicData[0];
+                EnemyCharacter enemy = new EnemyCharacter(enemyBasicData[rand.Next(0, 2)]); //rand.Next(0, enemyBasicData.Count)
                 enemy.CharacterStatus = new CharacterStatus(enemy.CharacterStats);
 
                 list.Add(enemy);
             }
 
             return list;
+        }
+        public void CreateNewStats()
+        {
+            Random rand = new Random();
+            playerLoadedStats = new List<CharacterStats>();
+            foreach (PlayerCharacter p in playerBasicData)
+            {
+                p.CharacterClass.SetStats(p.CharacterStats, rand);
+                playerLoadedStats.Add(p.CharacterStats);
+            }
         }
     }
 }

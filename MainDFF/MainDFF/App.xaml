@@ -39,17 +39,33 @@
             <Setter Property="Margin" Value="0,8,0,0" />
             <Setter Property="Height" Value="50" />
         </Style>
-        <!-- TitleScreenPage END -->
+        <!-- MainMenuPage END -->
+        <!-- LevelSelectPage START -->
+        <Style x:Key="LevelIconCanvas" TargetType="Canvas">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="ClipToBounds" Value="True"/>
+            <Setter Property="Visibility" Value="Hidden"/>
+        </Style>
+        <Style x:Key="LevelIconImage" TargetType="Image">
+            <Setter Property="Width" Value="100"/>
+        </Style>
+        <!-- LevelSelectPage END -->
         <!-- PartySelectPage START -->
         <Style x:Key="PartyMemberName" TargetType="TextBlock">
+            <Setter Property="MaxWidth" Value="146"/>
+            <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="FontSize" Value="22"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
         <Style x:Key="PartyMemberClass" TargetType="TextBlock">
+            <Setter Property="MaxWidth" Value="146"/>
+            <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="FontSize" Value="16"/>
@@ -72,36 +88,62 @@
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
         </Style>
-        <Style x:Key="PartyMenuMemberNameSmall" TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="FontSize" Value="32"/>
+        <Style x:Key="PartyMenuHp" TargetType="TextBlock">
+            <Setter Property="Width" Value="63"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
-            <Setter Property="Typography.Capitals" Value="SmallCaps"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
         </Style>
-        <Style x:Key="PartyMenuHp" TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Style x:Key="PartyMenuHpValue" TargetType="TextBlock">
+            <Setter Property="Width" Value="63"/>
+            <Setter Property="TextAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
         </Style>
         <Style x:Key="HpBar" TargetType="ProgressBar">
-            <Setter Property="Foreground" Value="ForestGreen"/>
+            <Setter Property="Foreground" Value="#FF57BA57"/>
+            <Setter Property="BorderBrush" Value="#FF838383"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0.75" BlurRadius="0" RenderingBias="Performance" Color="#FF9A9A9A">
+                    </DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="10"/>
             <Setter Property="Height" Value="2"/>
             <Setter Property="Maximum" Value="100"/>
             <Setter Property="Value" Value="100"/>
         </Style>
         <Style x:Key="PartyMenuMp" TargetType="TextBlock">
-            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="26"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+        <Style x:Key="PartyMenuMpValue" TargetType="TextBlock">
+            <Setter Property="Width" Value="26"/>
+            <Setter Property="TextAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
         </Style>
         <Style x:Key="MpBar" TargetType="ProgressBar">
-            <Setter Property="Foreground" Value="Blue"/>
+            <Setter Property="Foreground" Value="#FF3C69EA"/>
+            <Setter Property="BorderBrush" Value="#FF838383"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0.75" BlurRadius="0" RenderingBias="Performance" Color="#FF9A9A9A">
+                    </DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="10"/>
             <Setter Property="Height" Value="2"/>
             <Setter Property="Maximum" Value="100"/>
             <Setter Property="Value" Value="100"/>
@@ -114,7 +156,15 @@
             <Setter Property="Foreground" Value="WhiteSmoke"/>
         </Style>
         <Style x:Key="SpBar" TargetType="ProgressBar">
-            <Setter Property="Foreground" Value="OrangeRed"/>
+            <Setter Property="Foreground" Value="#FFEBC54F"/>
+            <Setter Property="BorderBrush" Value="#FF838383"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0.75" BlurRadius="0" RenderingBias="Performance" Color="#FF9A9A9A">
+                    </DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="10"/>
             <Setter Property="Height" Value="2"/>
             <Setter Property="Maximum" Value="100"/>
             <Setter Property="Value" Value="100"/>
@@ -167,16 +217,49 @@
         <Style x:Key="PlayerName" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontSize" Value="11" />
             <Setter Property="Padding" Value="2" />
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
-        <Style x:Key="PlayerStatsName" TargetType="TextBlock">
+        <Style x:Key="PlayerHpName" TargetType="TextBlock">
+            <Setter Property="Width" Value="56"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+        <Style x:Key="PlayerHpValue" TargetType="TextBlock">
+            <Setter Property="Width" Value="56"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+        <Style x:Key="PlayerMpName" TargetType="TextBlock">
+            <Setter Property="Width" Value="21"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+        <Style x:Key="PlayerMpValue" TargetType="TextBlock">
+            <Setter Property="Width" Value="22"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+        <Style x:Key="PlayerSpName" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontSize" Value="10"/>
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
         </Style>
@@ -188,6 +271,7 @@
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Typography.Capitals" Value="SmallCaps"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
         <Style x:Key="EnemyIdName" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -240,10 +324,24 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="DamageInfo" TargetType="TextBlock">
+        <Style x:Key="EnemyDamageInfo" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="32" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="1" BlurRadius="3" RenderingBias="Performance">
+                    </DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Visibility" Value="Hidden"/>
+        </Style>
+        <Style x:Key="PlayerDamageInfo" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="20" />
             <Setter Property="FontWeight" Value="DemiBold"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
             <Setter Property="Effect">
@@ -255,6 +353,27 @@
             <Setter Property="Visibility" Value="Hidden"/>
         </Style>
         <!-- BattlePage END -->
+        <!-- BattleResultPage START -->
+        <Style x:Key="BattleResultBG" TargetType="Grid">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="-45" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF1E232C" Offset="0"/>
+                        <GradientStop Color="#FF454D63" Offset="0.635"/>
+                        <GradientStop Color="#FF282C38" Offset="0.973"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- BattleResultPage END -->
         <!-- GeneralStyles START -->
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="DarkSlateGray"/>

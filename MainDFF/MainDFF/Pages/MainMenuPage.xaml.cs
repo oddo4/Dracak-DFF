@@ -25,14 +25,24 @@ namespace MainDFF.Pages
     public partial class MainMenuPage : Page
     {
         MainMenuSelectAction menuAction = new MainMenuSelectAction();
-        public MainMenuPage()
+        bool newGame;
+        public MainMenuPage(bool NewGame = false)
         {
             InitializeComponent();
+            newGame = NewGame;
+
             ChangeMarginGrid(0);
         }
         private void MenuKey_Loaded(object sender, RoutedEventArgs e)
         {
             App.window.KeyDown += MenuKeyDown;
+            if (newGame)
+            {
+                NavigationService.RemoveBackEntry();
+                newGame = false;
+            }
+            App.dataFileLists.CreateNewStats();
+            App.charactersLists.PlayerList = App.dataFileLists.AssemblePartyCharacter();
         }
         private void MenuKeyDown(object sender, KeyEventArgs e)
         {

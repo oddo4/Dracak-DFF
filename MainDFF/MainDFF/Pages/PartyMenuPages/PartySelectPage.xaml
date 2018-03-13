@@ -5,39 +5,40 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MainDFF.Pages.PartyMenuPages"
       mc:Ignorable="d" 
-      d:DesignHeight="240" d:DesignWidth="320"
+      d:DesignHeight="480" d:DesignWidth="640"
       Title="PartySelectPage"
       Loaded="MenuKey_Loaded">
 
-    <Grid Background="White">
+    <Grid Background="DarkGray">
         <Grid.RowDefinitions>
-            <RowDefinition Height="15" />
+            <RowDefinition Height="30" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="15" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="30" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="15" />
+            <ColumnDefinition Width="30" />
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,0,0,0">
-            <Rectangle Style="{StaticResource MenuRectangle}"  Height="15" Width="320"/>
+            <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Style="{StaticResource LevelMenuInfo}" Text="Help" Margin="0,0,0,0"/>
                 <TextBlock Style="{StaticResource LevelMenuInfo}" Text="Information" Margin="0,0,0,0"/>
             </StackPanel>
         </Grid>
-        <StackPanel x:Name="PartyMembers" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Orientation="Horizontal">
-            <Grid Background="LightGray">
+        <StackPanel x:Name="PartyMembers" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid Margin="10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <Canvas Grid.Row="0" Grid.RowSpan="3" Height="210" Width="97" ClipToBounds="True">
-                    <Image Source="/Resources/CharacterPanels/15.png" Height="210" Canvas.Top="0" Canvas.Left="0"/>
+                <Canvas Style="{StaticResource PanelCanvas}" Grid.Row="0" Grid.RowSpan="4">
+                    <Image Style="{StaticResource PanelImage}" Source="/Resources/CharacterPanels/15.png" Canvas.Top="0" Canvas.Left="0"/>
+                    <Image Style="{StaticResource PanelShadow}" Source="/Resources/PanelShadow.png"/>
+                    <Image Style="{StaticResource PanelBevel}" Source="/Resources/PanelBevel.png"/>
                 </Canvas>
                 <TextBlock Style="{StaticResource PartyMemberName}" Grid.Row="1">
                     Noctis
@@ -46,14 +47,18 @@
                     Assassin
                 </TextBlock>
             </Grid>
-            <Grid Background="DarkGray">
+            <Grid Margin="10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="30"/>
+
                 </Grid.RowDefinitions>
-                <Canvas Grid.Row="0" Grid.RowSpan="3" Height="210" Width="97" ClipToBounds="True">
-                    <Image Source="/Resources/CharacterPanels/15.png" Height="210" Canvas.Top="0" Canvas.Left="0"/>
+                <Canvas Style="{StaticResource PanelCanvas}" Grid.Row="0" Grid.RowSpan="4">
+                    <Image Style="{StaticResource PanelImage}" Source="/Resources/CharacterPanels/15.png" Canvas.Top="0" Canvas.Left="-146"/>
+                    <Image Style="{StaticResource PanelShadow}" Source="/Resources/PanelShadow.png"/>
+                    <Image Style="{StaticResource PanelBevel}" Source="/Resources/PanelBevel.png"/>
                 </Canvas>
                 <TextBlock Style="{StaticResource PartyMemberName}" Grid.Row="1">
                     Noctis
@@ -62,14 +67,17 @@
                     Assassin
                 </TextBlock>
             </Grid>
-            <Grid Background="Gray">
+            <Grid Margin="10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <Canvas Grid.Row="0" Grid.RowSpan="3" Height="210" Width="97" ClipToBounds="True">
-                    <Image Source="/Resources/CharacterPanels/15.png" Height="210" Canvas.Top="0" Canvas.Left="0"/>
+                <Canvas Style="{StaticResource PanelCanvas}" Grid.Row="0" Grid.RowSpan="4">
+                    <Image Style="{StaticResource PanelImage}" Source="/Resources/CharacterPanels/15.png" Canvas.Top="0" Canvas.Left="-146"/>
+                    <Image Style="{StaticResource PanelShadow}" Source="/Resources/PanelShadow.png"/>
+                    <Image Style="{StaticResource PanelBevel}" Source="/Resources/PanelBevel.png"/>
                 </Canvas>
                 <TextBlock Style="{StaticResource PartyMemberName}" Grid.Row="1">
                     Noctis
@@ -79,9 +87,12 @@
                 </TextBlock>
             </Grid>
         </StackPanel>
-        <StackPanel Grid.Row="3" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock Text="ENTER Confirm" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0" FontSize="6"/>
-            <TextBlock Text="BACKSPACE Back" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0" FontSize="6"/>
-        </StackPanel>
+        <Grid Grid.Row="3" Grid.ColumnSpan="5">
+            <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="ENTER Confirm" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,0" FontSize="12"/>
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="BACKSPACE Back" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,0" FontSize="12"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

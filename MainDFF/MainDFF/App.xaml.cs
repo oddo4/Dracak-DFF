@@ -1,4 +1,5 @@
-﻿using MainDFF.Classes.Battle;
+﻿using MainDFF.Classes;
+using MainDFF.Classes.Battle;
 using MainDFF.Classes.FileHelper;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MainDFF
 {
@@ -18,5 +20,7 @@ namespace MainDFF
         static public Window window;
         static public DataFileLists dataFileLists = new DataFileLists();
         static public FileHelper fileHelper = new FileHelper();
+        static public CharactersLists charactersLists = new CharactersLists();
+        static public ResourcePaths resourcePaths = new ResourcePaths();
     }
 }

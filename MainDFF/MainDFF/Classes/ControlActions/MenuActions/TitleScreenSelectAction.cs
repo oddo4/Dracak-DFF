@@ -7,19 +7,20 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MainDFF.Pages;
+using MainDFF.Pages.PartyMenuPages;
 
 namespace MainDFF.Classes.ControlActions.MenuActions
 {
     public class TitleScreenSelectAction : AMenuSelectAction
     {
-        public override int GetDirection(Key key, int max)
+        public override int GetDirection(Key key, int max, int min = 0)
         {
             switch (key)
             {
                 case Key.Up:
-                    return MoveCursor(0, max);
+                    return MoveCursor(0, max, min);
                 case Key.Down:
-                    return MoveCursor(1, max);
+                    return MoveCursor(1, max, min);
                 /// <summary>
                 /// Window resolution change
                 /// </summary>
@@ -45,7 +46,7 @@ namespace MainDFF.Classes.ControlActions.MenuActions
             switch (CurrentIndex)
             {
                 case 0:
-                    NavigateToPage = new MainMenuPage();
+                    NavigateToPage = new PartySelectPage(true);
                     return -2;
                 case 1:
                     App.fileHelper.LoadData();

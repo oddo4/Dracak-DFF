@@ -1,4 +1,6 @@
-﻿using MainDFF.Classes.ControlActions.MenuActions;
+﻿using MainDFF.Classes.Battle;
+using MainDFF.Classes.ControlActions.MenuActions;
+using MainDFF.Classes.PartyMenu;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,27 +24,28 @@ namespace MainDFF.Pages
     /// </summary>
     public partial class PartyMenuPage : Page
     {
-        PartyMenuAction menuAction = new PartyMenuAction();
-        public PartyMenuPage()
+        AMenuSelectAction lastAction;
+        AMenuSelectAction menuAction = new PartyMenuAction();
+        SwitchCharacterImage switchImage = new SwitchCharacterImage();
+        int type;
+        public PartyMenuPage(int type = 0)
         {
             InitializeComponent();
+            this.type = type;
+            switchImage.LoadCharacters(PartyMembers, 1);
+            SetLastMenuItem();
         }
-        /*public PartyMenuPage()
-        {
-            InitializeComponent();
-        }*/
         private void MenuKey_Loaded(object sender, RoutedEventArgs e)
         {
             App.window.KeyDown += MenuKeyDown;
         }
         private void MenuKeyDown(object sender, KeyEventArgs e)
         {
-            menuAction.CurrentIndex = Grid.GetRow(MenuCursor);
-            var max = gridPartyMenu.Children.Count - 1;
+            var max = SetMax();
             var selected = menuAction.GetDirection(e.Key, max);
             if (selected > -1)
             {
-                Grid.SetRow(MenuCursor, selected);
+                MenuSelect(selected);
             }
             else if (selected == -1)
             {
@@ -50,19 +53,116 @@ namespace MainDFF.Pages
             }
             else
             {
-                switch (selected)
+                MenuConfirm(selected);
+            }
+            txtBlkInformation.Text = menuAction.CurrentIndex.ToString();
+        }
+
+        private int SetMax()
+        {
+            if (menuAction is PartyMenuAction)
+            {
+                return gridPartyMenu.Children.Count - 2;
+            }
+            else if (menuAction is PartySelectAction)
+            {
+                return PartyMembers.Children.Count - 1;
+            }
+
+            return -1;
+        }
+
+        private void MenuSelect(int selected)
+        {
+            if (menuAction is PartyMenuAction)
+            {
+                Grid.SetRow(MenuCursor, selected);
+                menuAction.CurrentIndex = selected;
+            }
+            else if(menuAction is PartySelectAction)
+            {
+                HighlightMember(selected);
+                menuAction.CurrentIndex = selected;
+            }
+            
+        }
+
+        private void MenuConfirm(int selected)
+        {
+            if (menuAction is PartyMenuAction)
+            {
+                if (selected != -2)
                 {
-                    case -2:
-                        break;
-                    case -3:
-                        NavigationService.GoBack();
+                    NavigationService.GoBack();
+                    ResetEvent();
+                }
+                else
+                {
+                    if (menuAction.CurrentIndex >= 0 && menuAction.CurrentIndex <= 2)
+                    {
+                        lastAction = menuAction;
+
+                        menuAction = new PartySelectAction();
+
+                        HighlightMember(menuAction.CurrentIndex);
+                    }
+                    else
+                    {
+                        NavigationService.Navigate(menuAction.NavigateToPage);
                         ResetEvent();
-                        break;
-                    default:
-                        break;
+                    }
+                }
+            }
+            else if (menuAction is PartySelectAction)
+            {
+                if (selected != -2)
+                {
+                    HighlightMember(0, true);
+                    menuAction = lastAction;
+                }
+                else
+                {
+
                 }
             }
         }
+        private void HighlightMember(int selected, bool all = false)
+        {
+            for (int i = 0; i < PartyMembers.Children.Count; i++)
+            {
+                var gridMember = (Grid)PartyMembers.Children[i];
+                var canvas = (Canvas)gridMember.Children[0];
+                var image = (Image)canvas.Children[0];
+
+                if (i == selected)
+                {
+                    Canvas.SetLeft(image, 0);
+                }
+                else
+                {
+                    Canvas.SetLeft(image, -146);
+                }
+                if (all)
+                {
+                    selected++;
+                }
+            }
+        }
+        private void SetLastMenuItem()
+        {
+            var lastItem = (TextBlock)gridPartyMenu.Children[gridPartyMenu.Children.Count - 1];
+
+            switch (type)
+            {
+                case 0:
+                    lastItem.Text = "Member";
+                    break;
+                case 1:
+                    lastItem.Text = "Abort";
+                    break;
+            }
+        }
+
         private void ResetEvent()
         {
             App.window.KeyDown -= MenuKeyDown;

@@ -14,7 +14,7 @@ namespace MainDFF.Classes.ControlActions.MoveActions
     {
         public PlayerMoveAction(Point pos)
         {
-            StoryboardAnimation = new PlayerStoryboardAnimation();
+            StoryboardAnimation = new PlayerExploreStoryboardAnimation();
             Pos = pos;
         }
         public override int GetDirection(Key key, int max)

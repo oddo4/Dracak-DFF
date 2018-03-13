@@ -14,7 +14,7 @@ namespace MainDFF.Classes
     {
         public void CreateSprite(Key direction, Image SpriteImage)
         {
-            DispatcherTimer SpriteTimer = new DispatcherTimer();
+            DispatcherTimer SpriteTimer = new DispatcherTimer(DispatcherPriority.Send);
             SpriteTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
             SpriteTimer.Tick += (sender, args) => { PlaySprite(SpriteImage, SpriteTimer); };
 

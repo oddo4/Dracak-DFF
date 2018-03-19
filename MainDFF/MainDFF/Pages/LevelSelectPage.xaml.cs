@@ -1,4 +1,5 @@
 ﻿using MainDFF.Classes.ControlActions.MenuActions;
+using MainDFF.Classes.Exploration;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -78,16 +79,15 @@ namespace MainDFF.Pages
         {
             if(selected != -2)
             {
-                NavigationService.GoBack();
+                App.MainFrame.NavigationService.GoBack();
                 ResetEvent();
             }
             else
             {
-                if (menuAction.NavigateToPage != null)
-                {
-                    NavigationService.Navigate(menuAction.NavigateToPage);
-                    ResetEvent();
-                }
+                Random rand = new Random();
+                App.levelList = new LevelList(rand, menuAction.CurrentIndex);
+                App.MainFrame.NavigationService.Navigate(new LevelPlayPage(menuAction.CurrentIndex, App.levelList.LevelsList[0]));
+                ResetEvent();
             }
             
         }

@@ -14,7 +14,7 @@ namespace MainDFF.Classes.Battle.CharacterClass
         }
         public override void SetStats(CharacterStats stats, Random rand)
         {
-            stats.HP += rand.Next(-20, 20);
+            stats.HP += rand.Next(-10, 11);
             stats.MP += rand.Next(-10, 11);
             stats.ATK -= rand.Next(4, 8);
             stats.DEF += rand.Next(-2, 3);
@@ -25,7 +25,14 @@ namespace MainDFF.Classes.Battle.CharacterClass
 
         public override void UpgradeStats(CharacterStats stats, Random rand)
         {
-            throw new NotImplementedException();
+            var lvl = (int)Math.Round(stats.LVL / 2.0);
+            stats.HP += (int)Math.Round((double)rand.Next(40, 61) * lvl);
+            stats.MP += (int)Math.Round((double)rand.Next(20, 36) * lvl);
+            stats.ATK += (int)Math.Round((double)rand.Next(4, 6) * lvl);
+            stats.DEF += (int)Math.Round((double)rand.Next(4, 8) * lvl);
+            stats.MAGATK += (int)Math.Round((double)rand.Next(4, 6) * lvl);
+            stats.MAGDEF += (int)Math.Round((double)rand.Next(4, 8) * lvl);
+            stats.SPD += (int)Math.Round((double)rand.Next(4, 11) * lvl);
         }
     }
 }

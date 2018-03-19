@@ -38,7 +38,7 @@ namespace MainDFF.Classes.ControlActions.MenuActions
                     NavigateToPage = new PartyMenuPage();
                     return -2;
                 case 2:
-                    return -2;
+                    return CurrentIndex;
                 case 3:
                     App.fileHelper.SaveData();
                     return -2;

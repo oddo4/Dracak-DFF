@@ -1,6 +1,7 @@
 ﻿using MainDFF.Classes.Battle;
 using MainDFF.Classes.ControlActions.MenuActions;
 using MainDFF.Classes.PartyMenu;
+using MainDFF.Pages.PartyMenuPages;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -55,6 +56,7 @@ namespace MainDFF.Pages
             {
                 MenuConfirm(selected);
             }
+
             txtBlkInformation.Text = menuAction.CurrentIndex.ToString();
         }
 
@@ -62,7 +64,7 @@ namespace MainDFF.Pages
         {
             if (menuAction is PartyMenuAction)
             {
-                return gridPartyMenu.Children.Count - 2;
+                return gridPartyMenu.Children.Count - 3;
             }
             else if (menuAction is PartySelectAction)
             {
@@ -84,7 +86,6 @@ namespace MainDFF.Pages
                 HighlightMember(selected);
                 menuAction.CurrentIndex = selected;
             }
-            
         }
 
         private void MenuConfirm(int selected)
@@ -93,7 +94,7 @@ namespace MainDFF.Pages
             {
                 if (selected != -2)
                 {
-                    NavigationService.GoBack();
+                    App.MainFrame.NavigationService.GoBack();
                     ResetEvent();
                 }
                 else
@@ -108,7 +109,20 @@ namespace MainDFF.Pages
                     }
                     else
                     {
-                        NavigationService.Navigate(menuAction.NavigateToPage);
+                        if (menuAction.CurrentIndex == gridPartyMenu.Children.Count - 3)
+                        {
+                            SetLastOption();
+                        }
+
+                        if (menuAction.NavigateToPage != null)
+                        {
+                            App.MainFrame.NavigationService.Navigate(menuAction.NavigateToPage);
+                        }
+                        else
+                        {
+                            App.MainFrame.NavigationService.GoBack();
+                        }
+                        
                         ResetEvent();
                     }
                 }
@@ -122,10 +136,32 @@ namespace MainDFF.Pages
                 }
                 else
                 {
+                    if (lastAction.NavigateToPage is PartyStatusPage)
+                    {
+                        lastAction.NavigateToPage = new PartyStatusPage(menuAction.CurrentIndex);
+                        App.MainFrame.NavigationService.Navigate(lastAction.NavigateToPage);
+                    }
 
+                    ResetEvent();
                 }
             }
         }
+
+        private void SetLastOption()
+        {
+            var lastOption = (TextBlock)gridPartyMenu.Children[menuAction.CurrentIndex + 2];
+
+            switch (lastOption.Text)
+            {
+                case "Member":
+                    menuAction.NavigateToPage = new PartySelectPage(false);
+                    break;
+                case "Abort":
+                    menuAction.NavigateToPage = App.MainMenu;
+                    break;
+            }
+        }
+
         private void HighlightMember(int selected, bool all = false)
         {
             for (int i = 0; i < PartyMembers.Children.Count; i++)
@@ -166,6 +202,7 @@ namespace MainDFF.Pages
         private void ResetEvent()
         {
             App.window.KeyDown -= MenuKeyDown;
+            HighlightMember(0, true);
             menuAction = new PartyMenuAction();
         }
     }

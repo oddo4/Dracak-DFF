@@ -29,6 +29,7 @@ namespace MainDFF.Pages
         public MainMenuPage(bool NewGame = false)
         {
             InitializeComponent();
+            App.MainMenu = this;
             newGame = NewGame;
 
             ChangeMarginGrid(0);
@@ -38,11 +39,12 @@ namespace MainDFF.Pages
             App.window.KeyDown += MenuKeyDown;
             if (newGame)
             {
-                NavigationService.RemoveBackEntry();
+                App.MainFrame.NavigationService.RemoveBackEntry();
                 newGame = false;
             }
             App.dataFileLists.CreateNewStats();
             App.charactersLists.PlayerList = App.dataFileLists.AssemblePartyCharacter();
+            SetChapters();
         }
         private void MenuKeyDown(object sender, KeyEventArgs e)
         {
@@ -63,7 +65,7 @@ namespace MainDFF.Pages
                     case -2:
                         if (menuAction.NavigateToPage != null)
                         {
-                            NavigationService.Navigate(menuAction.NavigateToPage);
+                            App.MainFrame.NavigationService.Navigate(menuAction.NavigateToPage);
                             ResetEvent();
                         }
                         break;
@@ -71,7 +73,7 @@ namespace MainDFF.Pages
                         ChangeMarginGrid(4);
                         break;
                     case -4:
-                        NavigationService.GoBack();
+                        App.MainFrame.NavigationService.GoBack();
                         ResetEvent();
                         break;
                     default:
@@ -87,6 +89,14 @@ namespace MainDFF.Pages
             ((Rectangle)((Grid)LowerMenu.Children[selected]).Children[0]).Stroke = Brushes.WhiteSmoke;
 
             menuAction.CurrentIndex = selected;
+        }
+        private void SetChapters()
+        {
+            for (int i = 0; i < App.dataFileLists.CompletedChapters + 1; i++)
+            {
+                var chapterCanvas = (Canvas)LevelIcons.Children[i];
+                chapterCanvas.Visibility = Visibility.Visible;
+            }
         }
         private void ResetEvent()
         {

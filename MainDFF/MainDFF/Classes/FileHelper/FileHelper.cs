@@ -2,6 +2,7 @@
 using MainDFF.Classes.Battle.AttackBehaviors;
 using MainDFF.Classes.Battle.CharacterClass;
 using MainDFF.Interface;
+using MainDFF.Interface.BattleBehavior;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -43,17 +44,23 @@ namespace MainDFF.Classes.FileHelper
         {
             var partyID = ReadStringFile(SaveDataPath + "/" + SaveSlot + "/", "SavedPartyID");
             var stats = ReadCharacterStatsFile(SaveDataPath + "/" + SaveSlot + "/", "SavedStats");
-            var chapter = ReadStringFile(SaveDataPath + "/" + SaveSlot + "/", "SavedCurrentChapter").FirstOrDefault();
+            var chapter = ReadStringFile(SaveDataPath + "/" + SaveSlot + "/", "SavedCurrentChapter");
             if (partyID != null || stats != null)
             {
                 App.dataFileLists.playerCurrentPartyIDList = partyID;
                 App.dataFileLists.playerLoadedStats = stats;
-                App.dataFileLists.CompletedChapters = int.Parse(chapter);
+                App.dataFileLists.CompletedChapters = int.Parse(chapter.FirstOrDefault());
 
                 return true;
             }
             return false;
         }
+
+        public void LoadEnemyBossData()
+        {
+            App.dataFileLists.SetEnemyBossFiles(ReadEnemyFile(DataFilesPath + "/EnemyFiles/Boss/", "BossEnemyData"));
+        }
+
         public bool SaveData()
         {
             var partyID = App.dataFileLists.playerCurrentPartyIDList;
@@ -213,7 +220,7 @@ namespace MainDFF.Classes.FileHelper
             }
             catch
             {
-                Debug.WriteLine("Could not read file '" + FileName + "' !");
+                Debug.WriteLine("Could not read Enemy file '" + FileName + "' !");
             }
             return null;
         }
@@ -237,55 +244,7 @@ namespace MainDFF.Classes.FileHelper
             }
             catch
             {
-                Debug.WriteLine("Could not read Behavior file '" + FileName + "' !");
-            }
-            return null;
-        }
-        public bool WriteBehaviorFile(string FileName)
-        {
-            List<IAttackBehavior> list = new List<IAttackBehavior>();
-
-            list.Add(new BasicAttackBehavior("Basic Attack"));
-            list.Add(new BasicAttackBehavior("Strong Attack"));
-
-            try
-            {
-                string json = JsonConvert.SerializeObject(list, Formatting.Indented, new JsonSerializerSettings
-                {
-                    TypeNameHandling = TypeNameHandling.All
-                });
-                File.WriteAllText(DataFilesPath + FileName + ".json", json);
-
-                return true;
-            }
-            catch
-            {
-                Debug.WriteLine("Could not write player file!");
-            }
-
-            return false;
-        }
-        public List<IAttackBehavior> ReadBehaviorFile(string Path, string FileName)
-        {
-            List<IAttackBehavior> list = new List<IAttackBehavior>();
-            try
-            {
-                string fileString = File.ReadAllText(Path + FileName + ".json");
-                var result = JsonConvert.DeserializeObject<List<IAttackBehavior>>(fileString, new JsonSerializerSettings
-                {
-                    TypeNameHandling = TypeNameHandling.Auto
-                });
-
-                foreach (IAttackBehavior data in result)
-                {
-                    list.Add(data);
-                }
-
-                return list;
-            }
-            catch
-            {
-                Debug.WriteLine("Could not read Behavior file '" + FileName + "' !");
+                Debug.WriteLine("Could not read Player file '" + FileName + "' !");
             }
             return null;
         }

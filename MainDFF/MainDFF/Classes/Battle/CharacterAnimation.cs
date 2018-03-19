@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MainDFF.Classes.Exploration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,17 @@ namespace MainDFF.Classes.Battle
         [JsonIgnore]
         public bool Loop = true;
         [JsonIgnore]
+        public int LoopCount = 0;
+        [JsonIgnore]
         public DispatcherTimer SpriteTimer;
-        public void CreateSprite(Image SpriteImage, TimeSpan TimeSpan)
+        [JsonIgnore]
+        public DispatcherTimer DamageTimer;
+        [JsonIgnore]
+        public int Tick = 0;
+        public void CreateSprite(Image SpriteImage, TimeSpan TimeSpan, DispatcherTimer damageTimer = null)
         {
+            Tick = 0;
+            DamageTimer = damageTimer;
             SpriteTimer = new DispatcherTimer(DispatcherPriority.Send);
             SpriteTimer.Interval = TimeSpan;
             SpriteTimer.Tick += (sender, args) => { PlaySprite(SpriteImage, SpriteTimer); };
@@ -40,7 +49,8 @@ namespace MainDFF.Classes.Battle
 
         public void PlaySprite(Image SpriteImage, DispatcherTimer SpriteTimer)
         {
-            if (!Loop && CurrentFrame == SpriteFramesCount)
+            DamageShow();
+            if (!Loop && CurrentFrame >= SpriteFramesCount)
             {
                 StopSprite();
             }
@@ -75,6 +85,16 @@ namespace MainDFF.Classes.Battle
                     Canvas.SetLeft(SpriteImage, SpritePos.X);
                     Canvas.SetTop(SpriteImage, SpritePos.Y);
                 }
+            }
+
+            Tick++;
+        }
+
+        private void DamageShow()
+        {
+            if (DamageTimer != null && (Tick >= LoopCount - 2 && LoopCount != 0 || !Loop && CurrentFrame >= SpriteFramesCount - 2))
+            {
+                DamageTimer.Start();
             }
         }
 

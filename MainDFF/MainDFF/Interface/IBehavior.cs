@@ -1,4 +1,5 @@
 ﻿using MainDFF.Classes.Battle;
+using MainDFF.Interface.BattleBehavior;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MainDFF.Interface
 {
-    public interface IBehavior : IUsable
+    public interface IBehavior : IUsableSkill
     {
         string Name { get; set; }
         int Cost { get; set; }

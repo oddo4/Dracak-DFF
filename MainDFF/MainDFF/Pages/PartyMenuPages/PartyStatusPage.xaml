@@ -1,0 +1,338 @@
+﻿<Page x:Class="MainDFF.Pages.PartyMenuPages.PartyStatusPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MainDFF.Pages.PartyMenuPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="480" d:DesignWidth="640"
+      Title="PartyStatusPage"
+      Loaded="MenuKey_Loaded">
+
+    <Grid Style="{StaticResource GridMenuBG}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,0,0,0">
+            <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="Help" Margin="0,0,0,0"/>
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="Status" Margin="0,0,0,0"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel x:Name="CharacterImage" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid Margin="10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Canvas Style="{StaticResource PanelCanvas}" Grid.Row="0" Grid.RowSpan="4">
+                    <Image x:Name="ImagePanel" Style="{StaticResource PanelImage}" Source="/Resources/CharacterPanels/15.png" Canvas.Top="0" Canvas.Left="0"/>
+                    <Image Style="{StaticResource PanelBevel}" Source="/Resources/PanelBevel.png"/>
+                </Canvas>
+            </Grid>
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.Column="2" Margin="0,40">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="CharacterInfo" Grid.Row="0" Grid.ColumnSpan="2">
+                <Rectangle Style="{StaticResource MenuRectangle}" Width="{Binding ActualWidth, ElementName=CharacterInfo}" Height="{Binding ActualHeight, ElementName=CharacterInfo}"/>
+                <StackPanel Margin="10,0">
+                    <TextBlock x:Name="FullName" Style="{StaticResource CharacterFullName}" Margin="5,0">Noctis Lucis Caelum</TextBlock>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel x:Name="StatusLvl" Grid.Row="0" Grid.Column="0" Margin="5,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource PartyMenuLvl}">
+                                LV
+                                </TextBlock>
+                                <TextBlock x:Name="LvlValue" Style="{StaticResource PartyMenuLvlValue}">
+                                1
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel x:Name="StatusHp" Grid.Row="1" Grid.Column="0" Margin="5,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource PartyMenuHp}">
+                                HP
+                                </TextBlock>
+                                <TextBlock x:Name="HpValue" Style="{StaticResource PartyMenuHpValue}">
+                                300/300
+                                </TextBlock>
+                            </StackPanel>
+                            <ProgressBar x:Name="HpBarValue" Style="{StaticResource HpBar}"/>
+                        </StackPanel>
+                        <StackPanel x:Name="StatusMp" Grid.Row="2" Grid.Column="0" Margin="5,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource PartyMenuHp}">
+                                MP
+                                </TextBlock>
+                                <TextBlock x:Name="MpValue" Style="{StaticResource PartyMenuHpValue}">
+                                100/100
+                                </TextBlock>
+                            </StackPanel>
+                            <ProgressBar x:Name="MpBarValue" Style="{StaticResource MpBar}"/>
+                        </StackPanel>
+                        <StackPanel x:Name="StatusClass" Grid.Row="0" Grid.Column="1" Margin="5,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource PartyMenuLvl}">
+                                Class:
+                                </TextBlock>
+                                <TextBlock x:Name="ClassValue" Style="{StaticResource PartyMenuLvlValue}">
+                                Assassin
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="5,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource PartyMenuLvl}">
+                                Current EXP:
+                                </TextBlock>
+                                <TextBlock x:Name="ExpValue" Style="{StaticResource PartyMenuLvlValue}">
+                                0
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="5,0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource PartyMenuLvl}">
+                                To next level:
+                                </TextBlock>
+                                <TextBlock x:Name="NextLvlValue" Style="{StaticResource PartyMenuLvlValue}">
+                                100
+                                </TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="2" Margin="5,0">
+                            <TextBlock Style="{StaticResource PartyMenuHp}" Grid.Column="1" HorizontalAlignment="Left">
+                            SP
+                            </TextBlock>
+                            <ProgressBar x:Name="SpBarValue" Style="{StaticResource SpBar}"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+
+            </Grid>
+            <Grid x:Name="CharacterStats" Grid.Row="1" Grid.Column="0">
+                <Rectangle Grid.RowSpan="9" Grid.ColumnSpan="2" Style="{StaticResource MenuRectangle}" Width="{Binding ActualWidth, ElementName=CharacterStats}" Height="{Binding ActualHeight, ElementName=CharacterStats}"/>
+                <Grid Margin="15,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource PartyMenuStat}">
+                                Attack:
+                        </TextBlock>
+                        <TextBlock x:Name="AtkValue" Grid.Column="1" Style="{StaticResource PartyMenuStatValue}">
+                                15
+                        </TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource PartyMenuStat}">
+                                Defense:
+                        </TextBlock>
+                        <TextBlock x:Name="DefValue" Grid.Column="1" Style="{StaticResource PartyMenuStatValue}">
+                                15
+                        </TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource PartyMenuStat}">
+                                Magic atk:
+                        </TextBlock>
+                        <TextBlock x:Name="MagAtkValue" Grid.Column="1" Style="{StaticResource PartyMenuStatValue}">
+                                15
+                        </TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource PartyMenuStat}">
+                                Magic def:
+                        </TextBlock>
+                        <TextBlock x:Name="MagDefValue" Grid.Column="1" Style="{StaticResource PartyMenuStatValue}">
+                                15
+                        </TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource PartyMenuStat}">
+                                Speed:
+                        </TextBlock>
+                        <TextBlock x:Name="SpdValue" Grid.Column="1" Style="{StaticResource PartyMenuStatValue}">
+                                5
+                        </TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="118*"/>
+                            <ColumnDefinition Width="46*"/>
+                            <ColumnDefinition Width="13*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource PartyMenuStat}" Margin="0,1,9.4,1">
+                                Fire res:
+                        </TextBlock>
+                        <TextBlock x:Name="FireResValue" Style="{StaticResource PartyMenuStatValue}" Grid.ColumnSpan="3" Margin="118,1,-0.4,1">
+                                1
+                        </TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource PartyMenuStat}">
+                                Ice res:
+                        </TextBlock>
+                        <TextBlock x:Name="IceResValue" Grid.Column="1" Style="{StaticResource PartyMenuStatValue}">
+                                1
+                        </TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource PartyMenuStat}">
+                                Thunder res:
+                        </TextBlock>
+                        <TextBlock x:Name="ThunderResValue" Grid.Column="1" Style="{StaticResource PartyMenuStatValue}">
+                                1
+                        </TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource PartyMenuStat}">
+                                Water res:
+                        </TextBlock>
+                        <TextBlock x:Name="WaterResValue" Grid.Column="1" Style="{StaticResource PartyMenuStatValue}">
+                                1
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid x:Name="CharacterEquipment" Grid.Row="1" Grid.Column="1">
+                <Rectangle Grid.RowSpan="9" Grid.ColumnSpan="2" Style="{StaticResource MenuRectangle}" Width="{Binding ActualWidth, ElementName=CharacterStats}" Height="{Binding ActualHeight, ElementName=CharacterStats}"/>
+                <Grid Margin="15,5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource PartyMenuStat}">
+                                Wpn:
+                        </TextBlock>
+                        <TextBlock x:Name="WpnValue" Grid.Column="1" Style="{StaticResource PartyMenuStatValue}">
+                                None
+                        </TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource PartyMenuStat}">
+                                Arm:
+                        </TextBlock>
+                        <TextBlock x:Name="ArmValue" Grid.Column="1" Style="{StaticResource PartyMenuStatValue}">
+                                None
+                        </TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource PartyMenuStat}">
+                                 Acc 1:
+                        </TextBlock>
+                        <TextBlock x:Name="Acc1Value" Grid.Column="1" Style="{StaticResource PartyMenuStatValue}">
+                                None
+                        </TextBlock>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Style="{StaticResource PartyMenuStat}">
+                                 Acc 2:
+                        </TextBlock>
+                        <TextBlock x:Name="Acc2Value" Grid.Column="1" Style="{StaticResource PartyMenuStatValue}">
+                                None
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="3" Grid.ColumnSpan="5">
+            <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="BACKSPACE Back" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,0" FontSize="12"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

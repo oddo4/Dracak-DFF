@@ -1,8 +1,11 @@
 ﻿using MainDFF.Classes;
 using MainDFF.Classes.Battle;
+using MainDFF.Classes.Battle.AttackBehaviors;
 using MainDFF.Classes.ControlActions.MenuActions;
 using MainDFF.Classes.FileHelper;
+using MainDFF.Classes.Items;
 using MainDFF.Interface;
+using MainDFF.Interface.BattleBehavior;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,25 +31,38 @@ namespace MainDFF.Pages
     public partial class BattlePage : Page
     {
         AMenuSelectAction menuAction = null;
-        AMenuSelectAction mainMenuAction;
-        AMenuSelectAction lastAction;
+        AMenuSelectAction mainMenuAction = null;
+        AMenuSelectAction lastAction = null;
         SetCharacterOnField setOnField = new SetCharacterOnField();
+        DamageInfoVisibility damageInfo;
         DispatcherTimer BattleTimer = new DispatcherTimer();
         DispatcherTimer WinTimer;
         int tick = 0;
         int pause = 0;
-        public BattlePage(string enemyElement)
+        bool PortalKey;
+        bool Boss = false;
+        public BattlePage(string enemyElement, bool portalKey = false)
         {
             InitializeComponent();
             //App.fileHelper.LoadData();
-
-            App.fileHelper.LoadEnemyData(enemyElement);
-            App.charactersLists.EnemyList = App.dataFileLists.AssembleEnemyCharacter();
+            PortalKey = portalKey;
+            if (enemyElement != "Boss")
+            {
+                App.fileHelper.LoadEnemyData(enemyElement);
+                App.charactersLists.EnemyList = App.dataFileLists.AssembleEnemyCharacter();
+            }
+            else
+            {
+                App.fileHelper.LoadEnemyBossData();
+                App.charactersLists.EnemyList = App.dataFileLists.AssembleBossEnemyCharacter(App.dataFileLists.CompletedChapters);
+                Boss = true;
+            }
             App.charactersLists.CreateOrder();
 
+            setBackground(enemyElement);
             setOnField.SetPlayerOnField(App.charactersLists.PlayerList, PlayerField, PlayerMenu);
-            setOnField.SetEnemyOnField(App.charactersLists.EnemyList, MonsterField, EnemyMenu);
-            setOnField.SetCharacterOrder(App.charactersLists, CharacterOrder); 
+            setOnField.SetEnemyOnField(App.charactersLists.EnemyList, MonsterField, EnemyMenu, Boss);
+            setOnField.SetCharacterOrder(App.charactersLists, CharacterOrder);
 
             BattleTimer = new DispatcherTimer(DispatcherPriority.Send);
             BattleTimer.Interval = new TimeSpan(0, 0, 1);
@@ -111,7 +127,7 @@ namespace MainDFF.Pages
             }
             else if (menuAction is BattlePagePlayerMenuAction)
             {
-
+                Grid.SetRow(PlayerMenuCursor, selected);
             }
             else if (menuAction is BattlePageTargetMenuAction)
             {
@@ -148,7 +164,7 @@ namespace MainDFF.Pages
             }
             else if (menuAction is BattlePagePlayerMenuAction)
             {
-
+                return PlayerMenu.RowDefinitions.Count - 1;
             }
             else if (menuAction is BattlePageTargetMenuAction)
             {
@@ -181,7 +197,14 @@ namespace MainDFF.Pages
 
                     mainMenuAction = menuAction;
                     lastAction = menuAction;
-                    menuAction = switchMenu.GetMenuAction(menuAction.CurrentIndex, EnemyMenuCursor, SubMenuGrid, behaviorList, null, player);
+                    if (menuAction.CurrentIndex == 2)
+                    {
+                        PlayerAction(player);
+                    }
+                    else
+                    {
+                        menuAction = switchMenu.GetMenuAction(mainMenuAction.CurrentIndex, EnemyMenuCursor, SubMenuGrid, behaviorList, null, player);
+                    }
                 }
             }
             else if (menuAction is BattlePageSubMenuAction)
@@ -194,12 +217,12 @@ namespace MainDFF.Pages
                 }
                 else
                 {
-                    lastAction = menuAction;
                     var player = App.charactersLists.CharacterOrder.First();
                     var behaviorIndex = SubMenu.SelectedIndex + 2;
                     var behavior = player.BehaviorList[behaviorIndex];
                     if (player.CharacterStatus.CurrentMP >= behavior.Cost)
                     {
+                        lastAction = menuAction;
                         menuAction = switchMenu.GetSubMenuAction(behavior, EnemyMenuCursor, PlayerMenuCursor);
                     }
                     
@@ -209,9 +232,18 @@ namespace MainDFF.Pages
             {
                 if (selected != -2)
                 {
-                    EnemyMenuCursor.Visibility = Visibility.Hidden;
+                    PlayerMenuCursor.Visibility = Visibility.Hidden;
 
                     menuAction = lastAction;
+                }
+                else
+                {
+                    var player = (PlayerCharacter)App.charactersLists.CharacterOrder.First();
+                    var target = App.charactersLists.PlayerList[menuAction.CurrentIndex];
+                    if (CheckPlayerTarget(target))
+                    {
+                        PlayerAction(player);
+                    }
                 }
             }
             else if (menuAction is BattlePageTargetMenuAction)
@@ -225,22 +257,28 @@ namespace MainDFF.Pages
                 else
                 {
                     var player = (PlayerCharacter)App.charactersLists.CharacterOrder.First();
-                    if (CheckTarget())
+                    if (CheckEnemyTarget())
                     {
                         PlayerAction(player);
                     }
                 } 
             }
+            else
+            {
+                Debug.WriteLine("Here!");
+            }
         }
 
-        private void PlayerAction(ACharacter target)
+        private void PlayerAction(ACharacter activePlayer)
         {
-            var player = (PlayerCharacter)target;
-            string cursor = Grid.GetRow(EnemyMenuCursor).ToString() + Grid.GetColumn(EnemyMenuCursor).ToString();
+            var player = (PlayerCharacter)activePlayer;
+            string enemyCursor = Grid.GetRow(EnemyMenuCursor).ToString() + Grid.GetColumn(EnemyMenuCursor).ToString();
+
             if (lastAction is BattlePageMenuAction)
             {
                 var playerRow = App.charactersLists.GetPlayerRow(player);
-                var enemy = App.charactersLists.EnemyList[TargetTranslate(cursor)];
+                var enemy = App.charactersLists.EnemyList[TargetTranslate(enemyCursor)];
+                damageInfo = new DamageInfoVisibility(enemy);
                 var playerCanvas = (Canvas)PlayerField.Children[playerRow];
                 Grid.SetRow(playerCanvas, Grid.GetRow(EnemyMenuCursor));
                 Grid.SetColumn(playerCanvas, 0);
@@ -252,94 +290,127 @@ namespace MainDFF.Pages
                     var behavior = player.BehaviorList[0];
 
                     damage = behavior.Action(player, enemy);
-                    player.SwitchAnimation(playerCanvas, 2, App.resourcePaths.GetPlayerPath(player.CharacterID), false);
-                    pause = (int)Math.Ceiling((double)((player.GetCurrentAnimation().SpriteFramesCount) * 75 / 1000)) + tick;
+                    player.SwitchAnimation(playerCanvas, 2, App.resourcePaths.GetPlayerPath(player.CharacterID), damageInfo.DamageTimer, 0, false);
+                    ShowEnemyDamage(damage.ToString(), enemy);
                 }
                 else if (lastAction.CurrentIndex == 2)
                 {
-
+                    Grid.SetRow(playerCanvas, App.charactersLists.GetPlayerRow(player));
+                    Grid.SetColumn(playerCanvas, 1);
+                    player.CharacterBuffsDebuff.SetDefense(player.CharacterStats);
+                    player.SwitchAnimation(playerCanvas, 7, App.resourcePaths.GetPlayerPath(player.CharacterID), damageInfo.DamageTimer, 0, false);
+                    ShowSkillName("Defense Up", true);
+                    ShowPlayerDamage("", player);
                 }
                 else if (lastAction.CurrentIndex == 4)
                 {
                     var behavior = player.BehaviorList[1];
 
                     damage = behavior.Action(player, enemy);
-                    player.SwitchAnimation(playerCanvas, 4, App.resourcePaths.GetPlayerPath(player.CharacterID), false);
-                    pause = (int)Math.Ceiling((double)((player.GetCurrentAnimation().SpriteFramesCount) * 75 / 1000)) + tick;
+                    ShowSkillName(behavior.Name, true);
+                    player.SwitchAnimation(playerCanvas, 4, App.resourcePaths.GetPlayerPath(player.CharacterID), damageInfo.DamageTimer, 0, false);
+                    player.CharacterStatus.ResetSP();
+                    setOnField.SetPlayerStatus(App.charactersLists.GetPlayerRow(player), player, PlayerMenu);
+                    ShowEnemyDamage(damage.ToString(), enemy);
                 }
 
                 ResetTurn();
-                ShowEnemyDamage(pause - tick, damage, enemy);
             }
             else if (lastAction is BattlePageSubMenuAction)
             {
+                var playerRow = App.charactersLists.GetPlayerRow(player);
                 var behaviorList = player.BehaviorList.GetRange(2, player.BehaviorList.Count - 2);
+                var playerCanvas = (Canvas)PlayerField.Children[playerRow];
+                var behavior = behaviorList[lastAction.CurrentIndex];
+                ShowSkillName(behavior.Name, true);
+                var damage = 0;
                 if (menuAction is BattlePageTargetMenuAction)
                 {
-                    var playerRow = App.charactersLists.GetPlayerRow(player);
-                    var enemy = App.charactersLists.EnemyList[TargetTranslate(cursor)];
-                    var playerCanvas = (Canvas)PlayerField.Children[playerRow];
+                    var enemy = App.charactersLists.EnemyList[TargetTranslate(enemyCursor)];
+                    damageInfo = new DamageInfoVisibility(enemy);
                     Grid.SetRow(playerCanvas, Grid.GetRow(EnemyMenuCursor));
                     Grid.SetColumn(playerCanvas, 0);
-                    var behavior = behaviorList[lastAction.CurrentIndex];
 
-                    var damage = behavior.Action(player, enemy);
+                    damage = behavior.Action(player, enemy);
 
-                    ShowSkillName(behavior.Name, true);
-
-                    player.SwitchAnimation(playerCanvas, 2, App.resourcePaths.GetPlayerPath(player.CharacterID), false);
-                    pause = (int)Math.Ceiling((double)((player.GetCurrentAnimation().SpriteFramesCount) * 75 / 1000)) + tick;
+                    if (behavior is SkillAttackBehavior)
+                    {
+                        player.SwitchAnimation(playerCanvas, 2, App.resourcePaths.GetPlayerPath(player.CharacterID), damageInfo.DamageTimer, 0, false);
+                    }
+                    else
+                    {
+                        player.SwitchAnimation(playerCanvas, 3, App.resourcePaths.GetPlayerPath(player.CharacterID), damageInfo.DamageTimer, 4);
+                    }
 
                     setOnField.SetPlayerStatus(App.charactersLists.GetPlayerRow(player), player, PlayerMenu);
 
-                    ResetTurn();
-                    ShowEnemyDamage(pause - tick, damage, enemy);
+                    ShowEnemyDamage(damage.ToString(), enemy);
                 }
                 else if (menuAction is BattlePagePlayerMenuAction)
                 {
+                    var target = App.charactersLists.PlayerList[menuAction.CurrentIndex];
+                    damageInfo = new DamageInfoVisibility(target);
+                    
+                    damage = behavior.Action(player, target);
 
+                    player.SwitchAnimation(playerCanvas, 3, App.resourcePaths.GetPlayerPath(player.CharacterID), damageInfo.DamageTimer, 4);
+
+                    setOnField.SetPlayerStatus(App.charactersLists.GetPlayerRow(target), target, PlayerMenu);
+
+                    ShowPlayerDamage(damage.ToString(), target);
+                }
+                ResetTurn();
+            }
+        }
+
+        private void CheckCharacterStatus(bool status, ACharacter last)
+        {
+            if (status)
+            {
+                if (last is PlayerCharacter)
+                {
+                    var enemy = (EnemyCharacter)damageInfo.Target;
+                    App.charactersLists.CharacterOrder.Remove(enemy);
+                    setOnField.DeleteEnemyElement(enemy, App.charactersLists.EnemyList, MonsterField, EnemyMenu);
+                    setOnField.SetCharacterOrder(App.charactersLists, CharacterOrder);
+                }
+                else if (last is EnemyCharacter)
+                {
+                    var player = (PlayerCharacter)damageInfo.Target;
+                    var playerCanvas = (Canvas)PlayerField.Children[App.charactersLists.GetPlayerRow(player)];
+                    player.SwitchAnimation(playerCanvas, 6, App.resourcePaths.GetPlayerPath(player.CharacterID), null, 0, false);
+                    App.charactersLists.CharacterOrder.Remove(player);
+                    setOnField.SetCharacterOrder(App.charactersLists, CharacterOrder);
                 }
             }
-        }
 
-        private void CheckPlayerStatus(bool status, PlayerCharacter player, Canvas playerCanvas)
-        {
-            if (status)
-            {
-                player.SwitchAnimation(playerCanvas, 6, App.resourcePaths.GetPlayerPath(player.CharacterID), false);
-                App.charactersLists.CharacterOrder.Remove(player);
-                setOnField.SetCharacterOrder(App.charactersLists, CharacterOrder);
-            }
-        }
-        private void CheckEnemyStatus(bool status, EnemyCharacter enemy)
-        {
-            if (status)
-            {
-                App.charactersLists.CharacterOrder.Remove(enemy);
-                setOnField.DeleteEnemyElement(enemy, App.charactersLists.EnemyList, MonsterField, EnemyMenu);
-                setOnField.SetCharacterOrder(App.charactersLists, CharacterOrder);
-            }
+            damageInfo.DamageStop();
         }
 
         private void CheckTurn()
         {
             var last = App.charactersLists.CharacterOrder.Last();
-            if (App.charactersLists.CheckEnemyAlive())
+            if (damageInfo != null)
             {
-                if (tick >= pause)
-                {
-                    SetIdleLastCharacter(last);
-                    ShowSkillName();
+                CheckCharacterStatus(damageInfo.Target.CharacterStatus.CheckAlive(damageInfo.Target, App.charactersLists.CharacterOrder), last);
+            }
+            if (App.charactersLists.CheckEnemyAlive())
+            { 
+                SetIdleLastCharacter(last);
+                ShowSkillName();
 
-                    var first = App.charactersLists.CharacterOrder.First();
-                    if (first is PlayerCharacter)
-                    {
-                        PlayerTurn();
-                    }
-                    else if (first is EnemyCharacter)
-                    {
-                        EnemyTurn();
-                    }
+                var first = App.charactersLists.CharacterOrder.First();
+                first.CharacterBuffsDebuff.CheckBuffsDebuffs();
+                
+                if (first is PlayerCharacter)
+                {
+                    CheckLimitBreak();
+                    first.CharacterBuffsDebuff.CheckBuffsDebuffs();
+                    PlayerTurn();
+                }
+                else if (first is EnemyCharacter)
+                {
+                    EnemyTurn();
                 }
             }
             else
@@ -351,7 +422,27 @@ namespace MainDFF.Pages
                 WinTimer = new DispatcherTimer(DispatcherPriority.Send);
                 WinTimer.Interval = new TimeSpan(0, 0, 1);
                 WinTimer.Tick += (sender, args) => { WinPose(); };
-                WinTimer.Start();
+
+                var alive = App.charactersLists.GetPlayerAlive();
+                var i = 0;
+                if (alive[0].CurrentAnimation != 7 && alive[0].CurrentAnimation != 8)
+                {
+                    foreach (PlayerCharacter player in alive)
+                    {
+                        var canvas = (Canvas)PlayerField.Children[i];
+                        player.SwitchAnimation(canvas, 7, App.resourcePaths.GetPlayerPath(player.CharacterID), WinTimer, 0, false);
+
+                        var animLenght = (int)Math.Ceiling((double)((player.GetCurrentAnimation().SpriteFramesCount) * 75 / 1000)) + tick;
+
+                        if (animLenght > pause)
+                        {
+                            pause = animLenght;
+                        }
+
+                        i++;
+                    }
+
+                }
             }
 
             tick++;
@@ -362,40 +453,19 @@ namespace MainDFF.Pages
         {
             var alive = App.charactersLists.GetPlayerAlive();
             var i = 0;
-            if (alive[0].CurrentAnimation != 7 && alive[0].CurrentAnimation != 8)
+            if (tick >= 3)
+            {
+                WinTimer.Stop();
+                App.MainFrame.NavigationService.Navigate(new BattleResultPage(PortalKey, Boss));
+                ResetEvent();
+            }
+            else
             {
                 foreach (PlayerCharacter player in alive)
                 {
                     var canvas = (Canvas)PlayerField.Children[i];
-                    player.SwitchAnimation(canvas, 7, App.resourcePaths.GetPlayerPath(player.CharacterID), false);
-
-                    var animLenght = (int)Math.Ceiling((double)((player.GetCurrentAnimation().SpriteFramesCount) * 75 / 1000)) + tick;
-                    
-                    if (animLenght > pause)
-                    {
-                        pause = animLenght;
-                    }
-
+                    player.SwitchAnimation(canvas, 8, App.resourcePaths.GetPlayerPath(player.CharacterID), WinTimer, 0, true);
                     i++;
-                }
-                
-            }
-            else if (tick >= pause)
-            {
-                if (tick >= pause + 3)
-                {
-                    WinTimer.Stop();
-                    NavigationService.GoBack();
-                    ResetEvent();
-                }
-                else
-                {
-                    foreach (PlayerCharacter player in alive)
-                    {
-                        var canvas = (Canvas)PlayerField.Children[i];
-                        player.SwitchAnimation(canvas, 8, App.resourcePaths.GetPlayerPath(player.CharacterID), true);
-                        i++;
-                    }
                 }
             }
 
@@ -405,11 +475,18 @@ namespace MainDFF.Pages
         private void ResetEvent()
         {
             App.window.KeyDown -= MenuKeyDown;
-            App.charactersLists.ResetLists();
             BattleTimer.Stop();
         }
+        private bool CheckPlayerTarget(PlayerCharacter target)
+        {
+            if (target.CharacterStatus.CurrentHP > 0)
+            {
+                return true;
+            }
+            return false;
+        }
 
-        private bool CheckTarget()
+        private bool CheckEnemyTarget()
         {
             var children = EnemyMenu.Children;
             for (int i = 2; i < EnemyMenu.Children.Count; i++)
@@ -442,27 +519,36 @@ namespace MainDFF.Pages
         }
         private void SetIdleLastCharacter(ACharacter c)
         {
+            var animID = 0;
             int Row = 0;
             Canvas Canvas = null;
             string path = "";
             if (c is PlayerCharacter)
             {
-                Row = App.charactersLists.GetPlayerRow((PlayerCharacter)c);
+                var player = (PlayerCharacter)c;
+                Row = App.charactersLists.GetPlayerRow(player);
                 Canvas = (Canvas)PlayerField.Children[Row];
                 path = App.resourcePaths.GetPlayerPath(c.CharacterID);
                 Grid.SetRow(Canvas, Row);
                 Grid.SetColumn(Canvas, 1);
+
+                if (player.CharacterStatus.CheckDying(player))
+                {
+                    animID = 5;
+                }
+
             }
             else if (c is EnemyCharacter)
             {
-                Row = App.charactersLists.GetEnemyRow((EnemyCharacter)c);
+                var enemy = (EnemyCharacter)c;
+                Row = App.charactersLists.GetEnemyRow(enemy);
                 Canvas = (Canvas)MonsterField.Children[Row];
                 path = App.resourcePaths.GetEnemyPath(c.CharacterID);
             }
 
-            c.SwitchAnimation(Canvas, 0, path);
+            c.SwitchAnimation(Canvas, animID, path);
         }
-        private void ShowEnemyDamage(int time, int damage, EnemyCharacter enemy)
+        private void ShowEnemyDamage(string damage, EnemyCharacter enemy)
         {
             TextBlock txtBlk = null;
 
@@ -470,13 +556,11 @@ namespace MainDFF.Pages
             var canvas = (Canvas)MonsterField.Children[i];
             var grid = (Grid)canvas.Children[1];
             txtBlk = (TextBlock)grid.Children[0];
-            txtBlk.Text = damage.ToString();
+            txtBlk.Text = damage;
 
-            DamageInfoVisibility damageInfo = new DamageInfoVisibility(time, txtBlk);
-
-            CheckEnemyStatus(enemy.CharacterStatus.CheckHP(enemy, App.charactersLists.CharacterOrder), enemy);
+            damageInfo.SetTickTimer(txtBlk, BattleTimer);
         }
-        private void ShowPlayerDamage(int time, int damage, PlayerCharacter player)
+        private void ShowPlayerDamage(string damage, PlayerCharacter player)
         {
             TextBlock txtBlk = null;
 
@@ -484,19 +568,17 @@ namespace MainDFF.Pages
             var canvas = (Canvas)PlayerField.Children[i];
             var grid = (Grid)canvas.Children[1];
             txtBlk = (TextBlock)grid.Children[0];
-            txtBlk.Text = damage.ToString();
+            txtBlk.Text = damage;
 
-            DamageInfoVisibility damageInfo = new DamageInfoVisibility(time, txtBlk);
-
-            CheckPlayerStatus(player.CharacterStatus.CheckHP(player, App.charactersLists.CharacterOrder), player, canvas);
+            damageInfo.SetTickTimer(txtBlk, BattleTimer);
         }
 
         private void PlayerTurn()
         {
+            BattleTimer.Stop();
             BattleMenuCursor.Visibility = Visibility.Visible;
 
             menuAction = new BattlePageMenuAction();
-            BattleTimer.Stop();
         }
         private void EnemyTurn()
         {
@@ -504,20 +586,24 @@ namespace MainDFF.Pages
             var enemy = App.charactersLists.CharacterOrder.First();
             var enemyRow = App.charactersLists.GetEnemyRow((EnemyCharacter)enemy);
             var player = App.charactersLists.GetPlayerTarget(rand);
+            damageInfo = new DamageInfoVisibility(player);
 
             var enemyCanvas = (Canvas)MonsterField.Children[enemyRow];
             var behavior = enemy.BehaviorList[0];
 
             var damage = behavior.Action(enemy, player);
-            enemy.SwitchAnimation(enemyCanvas, 1, App.resourcePaths.GetEnemyPath(enemy.CharacterID));
-            pause = (int)Math.Ceiling((double)((enemy.GetCurrentAnimation().SpriteFramesCount) * 75 / 1000)) + tick;
+            enemy.SwitchAnimation(enemyCanvas, 1, App.resourcePaths.GetEnemyPath(enemy.CharacterID), damageInfo.DamageTimer, 4);
 
-            ShowPlayerDamage(pause - tick, damage, player);
+            if (player.CharacterStatus.CheckDying(player))
+            {
+                SetIdleLastCharacter(player);
+            }
 
-            player.CharacterStatus.AddSP(damage);
+            player.CharacterStatus.AddSP(player.CharacterStats.SP, damage);
 
             setOnField.SetPlayerStatus(App.charactersLists.GetPlayerRow(player), player, PlayerMenu);
 
+            ShowPlayerDamage(damage.ToString(), player);
             ResetTurn();
         }
         private void ResetTurn()
@@ -531,15 +617,28 @@ namespace MainDFF.Pages
             Grid.SetColumn(EnemyMenuCursor, 0);
             SubMenuGrid.Visibility = Visibility.Hidden;
             Grid.SetRow(SubMenuCursor, 0);
+            BattleLimitBreak.Foreground = Brushes.Gray;
 
+            mainMenuAction = null;
+            lastAction = null;
             menuAction = null;
             ResetOrder();
-            BattleTimer.Start();
         }
         private void ResetOrder()
         {
             App.charactersLists.ReOrder(CharacterOrder);
         }
+
+        private void setBackground(string enemyElement)
+        {
+            var path = App.resourcePaths.GetBattleBackground(enemyElement);
+            BitmapImage source = new BitmapImage();
+            source.BeginInit();
+            source.UriSource = new Uri(path);
+            source.EndInit();
+            MainGrid.Background = new ImageBrush() { ImageSource = source };
+        }
+
         private bool CheckLimitBreak()
         {
             var player = App.charactersLists.CharacterOrder.First();

@@ -10,8 +10,9 @@ using System.Windows.Input;
 
 namespace MainDFF.Classes.ControlActions.MoveActions
 {
-    class PlayerMoveAction : AMoveAction
+    public class PlayerMoveAction : AMoveAction
     {
+        public Key Direction { get; set; }
         public PlayerMoveAction(Point pos)
         {
             StoryboardAnimation = new PlayerExploreStoryboardAnimation();
@@ -27,6 +28,7 @@ namespace MainDFF.Classes.ControlActions.MoveActions
                     {
                         SetLastPos();
                         Pos.Y = MoveCharacter(0, (int)Pos.Y, max);
+                        Direction = key;
                         return 1;
                     }
                     else
@@ -38,6 +40,7 @@ namespace MainDFF.Classes.ControlActions.MoveActions
                     {
                         SetLastPos();
                         Pos.Y = MoveCharacter(1, (int)Pos.Y, max);
+                        Direction = key;
                         return 1;
                     }
                     else
@@ -49,6 +52,7 @@ namespace MainDFF.Classes.ControlActions.MoveActions
                     {
                         SetLastPos();
                         Pos.X = MoveCharacter(0, (int)Pos.X, max);
+                        Direction = key;
                         return 1;
                     }
                     else
@@ -60,15 +64,18 @@ namespace MainDFF.Classes.ControlActions.MoveActions
                     {
                         SetLastPos();
                         Pos.X = MoveCharacter(1, (int)Pos.X, max);
+                        Direction = key;
                         return 1;
                     }
                     else
                     {
                         return 0;
                     }
+                case Key.Enter:
+                    return -2;
                 case Key.Back:
                     NavigateToPage = new PartyMenuPage();
-                    return -2;
+                    return -3;
                 default:
                     return 0;
             }

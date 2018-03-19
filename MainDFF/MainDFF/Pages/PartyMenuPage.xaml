@@ -9,15 +9,16 @@
       Title="PartyMenuPage"
       Loaded="MenuKey_Loaded">
 
-    <Grid Background="DarkGray">
+    <Grid Style="{StaticResource GridMenuBG}">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="142 "/>
+            <ColumnDefinition Width="142"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
@@ -28,7 +29,7 @@
                 <TextBlock x:Name="txtBlkInformation" Style="{StaticResource LevelMenuInfo}" Text="Information" Margin="0,0,0,0"/>
             </StackPanel>
         </Grid>
-        <Grid x:Name="gridPartyMenu" Style="{StaticResource GridPartyMenu}" Grid.Row="1" Grid.Column="1" Margin="0,40">
+        <Grid x:Name="gridPartyMenu" Style="{StaticResource GridPartyMenu}" Grid.Row="1" Grid.Column="1" Margin="0,30">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -41,27 +42,28 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            <Rectangle Grid.RowSpan="6" Grid.ColumnSpan="2" Style="{StaticResource MenuRectangle}" Width="142" Height="{Binding ActualHeight, ElementName=gridPartyMenu}"/>
             <Image x:Name="MenuCursor" Source="/Resources/cursor.png" Height="30" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0"/>
             <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0">
                 Status
             </TextBlock>
-            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0">
+            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" Foreground="Gray">
                 Equipment
             </TextBlock>
-            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,0">
+            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,0" Foreground="Gray">
                 Skill
             </TextBlock>
-            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,0">
+            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,0" Foreground="Gray">
                 Item
             </TextBlock>
-            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,0">
+            <!--<TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,0">
                 Options
-            </TextBlock>
-            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="5" Grid.Column="1" Margin="0,0,0,0">
+            </TextBlock>-->
+            <TextBlock Style="{StaticResource PartyMenuSelect}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,0">
                 Abort
             </TextBlock>
         </Grid>
-        <Grid Style="{StaticResource GridPartyMembers}" Grid.Row="1"  Grid.Column="2" Margin="0,40">
+        <Grid Style="{StaticResource GridPartyMembers}" Grid.Row="1"  Grid.Column="2" Margin="0,30">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -230,7 +232,14 @@
                 </Grid>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,0,0">
+        <Grid x:Name="GridMoney" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="0,0,0,0" HorizontalAlignment="Right" Visibility="Hidden">
+            <Rectangle Style="{StaticResource MenuRectangle}" Height="30" Width="110"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5,0">
+                <TextBlock x:Name="MoneyValue" Style="{StaticResource LevelMenuInfo}" Text="999999999" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0" FontSize="12"/>
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="G" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5,0" FontSize="12"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,0,0,0">
             <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Style="{StaticResource LevelMenuInfo}" Text="ENTER Confirm" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,0" FontSize="12"/>

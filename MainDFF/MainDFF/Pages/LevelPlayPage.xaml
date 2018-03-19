@@ -8,17 +8,26 @@
       d:DesignHeight="480" d:DesignWidth="640"
       Title="LevelPlayPage"
       Loaded="MenuKey_Loaded">
-    <Grid Background="White">
+    <Grid x:Name="MainGrid">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/Map/00/BG.png"/>
+        </Grid.Background>
         <Canvas x:Name="MainCamera" Height="480" Width="640" ClipToBounds="True">
-            <TextBlock x:Name="test" Text="0" Panel.ZIndex="100"/>
+            <Grid x:Name="gridInteract" HorizontalAlignment="Center" Width="{Binding ActualWidth, ElementName=MainCamera}" Visibility="Hidden" Panel.ZIndex="100">
+                <Rectangle Style="{StaticResource MenuRectangle}" Width="480" Height="30" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="txtBlkInteract" Style="{StaticResource LevelMenuInfo}" HorizontalAlignment="Center"></TextBlock>
+            </Grid>
+            <!--<TextBlock x:Name="test" Text="0" Panel.ZIndex="100"/>
             <Label x:Name="testMap" Content="0" Canvas.Right="0" Panel.ZIndex="100" FontSize="6">
                 <Label.Background>
                     <SolidColorBrush Color="WhiteSmoke" Opacity="0.75" />
                 </Label.Background>
-            </Label>
+            </Label>-->
             <Canvas x:Name="MapCanvas" Height="480" Width="640" Canvas.Top="0" Canvas.Left="0">
-                <Grid x:Name="MapGrid" Canvas.Top="227" Canvas.Left="307" Background="LawnGreen" ShowGridLines="True">
+                <Grid x:Name="MapGrid" Canvas.Top="227" Canvas.Left="307" Background="LawnGreen">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="26"/>
+                        <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
                         <RowDefinition Height="26"/>
@@ -53,11 +62,70 @@
                         <ColumnDefinition Width="26"/>
                         <ColumnDefinition Width="26"/>
                         <ColumnDefinition Width="26"/>
+                        <ColumnDefinition Width="26"/>
+                        <ColumnDefinition Width="26"/>
                     </Grid.ColumnDefinitions>
+                    <Grid x:Name="MapWalls" Grid.RowSpan="18" Grid.ColumnSpan="18" Panel.ZIndex="-100">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Map/00/Wall.png"/>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid x:Name="MapField" Grid.Row="1" Grid.RowSpan="16" Grid.Column="1" Grid.ColumnSpan="16" Panel.ZIndex="2">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="/Resources/Map/00/Floor.png"/>
+                        </Grid.Background>
+                    </Grid>
+                    <Grid x:Name="Paths" Grid.RowSpan="18" Grid.ColumnSpan="18">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                            <RowDefinition Height="26"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                            <ColumnDefinition Width="26"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
                 </Grid>
-            </Canvas>
-            <Canvas x:Name="PlayerCanvas" Height="58" Width="58" Canvas.Top="211" Canvas.Left="291" Canvas.ZIndex="0" ClipToBounds="True" Margin="0,-23,0,0">
-                <Image x:Name="PlayerImage" Source="/Resources/CharacterSprites/Exploration/HeroWalk.png" Height="232" Width="232" Canvas.Top="0" Canvas.Left="0"/>
+                <Canvas x:Name="CharacterField" Panel.ZIndex="5">
+                    <Canvas x:Name="PlayerCanvas" Height="58" Width="58" Canvas.Top="211" Canvas.Left="291 " Canvas.ZIndex="0" ClipToBounds="True" Margin="0,-23,0,0">
+                        <Image x:Name="PlayerImage" Source="/Resources/CharacterSprites/Exploration/HeroWalk.png" Height="232" Width="232" Canvas.Top="0" Canvas.Left="0"/>
+                    </Canvas>
+                    <Canvas x:Name="PortalCanvas" Height="58" Width="58" Canvas.Top="211" Canvas.Left="291" Canvas.ZIndex="0" ClipToBounds="True" Margin="0,-23,0,0" Visibility="Hidden">
+                        <Image x:Name="PortalImage" Source="/Resources/CharacterSprites/Exploration/PortalSprite.png" Height="58" Width="232" Canvas.Top="0" Canvas.Left="0"/>
+                    </Canvas>
+                </Canvas>
             </Canvas>
         </Canvas>
     </Grid>

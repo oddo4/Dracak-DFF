@@ -1,4 +1,5 @@
 ﻿using MainDFF.Interface;
+using MainDFF.Interface.BattleBehavior;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace MainDFF.Classes.Battle.AttackBehaviors
     {
         public string Name { get; set; }
         public int Cost { get; set; }
-        public bool IsUsable { get; set; }
+        public bool IsUsableSkill { get; set; }
 
         public int Action(ACharacter attacker, ACharacter defender)
         {
@@ -24,7 +25,7 @@ namespace MainDFF.Classes.Battle.AttackBehaviors
             var defenderBreakBuff = defender.CharacterBuffsDebuff.BuffsDebuffsValueList[3];
             var defense = defender.CharacterStats.DEF + defenderProtectBuff - defenderProtectBuff;
 
-            var damage = (int)(((attack + level) * 5) - defense);
+            var damage = (int)Math.Round((((attack + level) * 5) - defense));
             if (damage <= 0)
             {
                 damage = 1;
@@ -33,7 +34,16 @@ namespace MainDFF.Classes.Battle.AttackBehaviors
             attacker.CharacterStatus.CurrentSP = 0;
             defender.CharacterStatus.CurrentHP -= damage;
 
+            SetZeroHP(defender);
+
             return damage;
+        }
+        public void SetZeroHP(ACharacter defender)
+        {
+            if (defender.CharacterStatus.CurrentHP <= 0)
+            {
+                defender.CharacterStatus.CurrentHP = 0;
+            }
         }
         public LimitAttackBehavior(string name)
         {

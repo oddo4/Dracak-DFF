@@ -17,15 +17,35 @@ namespace MainDFF.Classes.Battle
         /// 5 - Slow
         /// 6 - Regen
         /// </summary>
-        public List<int> BuffsDebuffsValueList = new List<int>();
+        public List<double> BuffsDebuffsValueList = new List<double>();
         public List<int> BuffsDebuffsTurnList = new List<int>();
 
         public CharacterBuffsDebuffs()
         {
             for (int i = 0; i < 7; i++)
             {
-                BuffsDebuffsValueList.Add(1);
+                BuffsDebuffsValueList.Add(0);
                 BuffsDebuffsTurnList.Add(0);
+            }
+        }
+
+        public void SetDefense(CharacterStats stats)
+        {
+            BuffsDebuffsValueList[0] = stats.DEF;
+            BuffsDebuffsTurnList[0] = 1;
+        }
+
+        public void CheckBuffsDebuffs()
+        {
+            for (int i = 0; i < BuffsDebuffsTurnList.Count; i++)
+            {
+                BuffsDebuffsTurnList[i]--;
+
+                if (BuffsDebuffsTurnList[i] <= 0)
+                {
+                    BuffsDebuffsValueList[i] = 0;
+                    BuffsDebuffsTurnList[i] = 0;
+                }
             }
         }
     }

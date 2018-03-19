@@ -14,10 +14,6 @@ namespace MainDFF.Classes.ControlActions.MenuActions
         {
             switch (key)
             {
-                case Key.Up:
-                    return MoveCursor(0, max, min);
-                case Key.Down:
-                    return MoveCursor(1, max, min);
                 case Key.Enter:
                     return ConfirmSelection();
                 default:
@@ -29,7 +25,7 @@ namespace MainDFF.Classes.ControlActions.MenuActions
 
         public override int ConfirmSelection()
         {
-            return -1;
+            return -2;
         }
     }
 }

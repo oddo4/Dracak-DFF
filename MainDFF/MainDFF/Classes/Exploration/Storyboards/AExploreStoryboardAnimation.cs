@@ -14,12 +14,16 @@ namespace MainDFF.Classes.Exploration.Storyboards
     {
         public Storyboard MainStoryboard = new Storyboard();
         public bool AnimationComplete = true;
-        public abstract void CreateStoryboard(Key direction, Canvas Canvas);
+        public abstract void CreateStoryboard(Key direction, Canvas Canvas, bool Invert = false);
         public abstract void AddToStoryboard(DoubleAnimation Anim, Canvas Canvas, int Direction);
         public void AnimationCompleted()
         {
             MainStoryboard = new Storyboard();
             AnimationComplete = true;
+        }
+        public void SetCanvasZIndex(int Y, Canvas Canvas)
+        {
+            Panel.SetZIndex(Canvas, Y);
         }
     }
 }

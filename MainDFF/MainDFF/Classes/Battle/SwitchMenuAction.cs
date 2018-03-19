@@ -1,6 +1,7 @@
 ﻿using MainDFF.Classes.Battle.AttackBehaviors;
 using MainDFF.Classes.ControlActions.MenuActions;
 using MainDFF.Interface;
+using MainDFF.Interface.BattleBehavior;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -31,19 +32,17 @@ namespace MainDFF.Classes.Battle
                     {
                         if (player.CharacterStatus.CurrentMP >= b.Cost)
                         {
-                            b.IsUsable = true;
+                            b.IsUsableSkill = true;
                         }
                         else
                         {
-                            b.IsUsable = false;
+                            b.IsUsableSkill = false;
                         }
                     }
 
                     listBox.ItemsSource = behavior;
 
                     return new BattlePageSubMenuAction();
-                case 2:
-                    return null;
                 case 3:
                     SubMenuGrid.Visibility = Visibility.Visible;
                     listBox.ItemsSource = itemsList;
@@ -58,22 +57,12 @@ namespace MainDFF.Classes.Battle
         }
         public AMenuSelectAction GetSubMenuAction(IBehavior Behavior, Image EnemyMenuCursor, Image PlayerMenuCursor)
         {
-            if (Behavior is IAttackBehavior)
+            if (Behavior is IAttackBehavior || Behavior is IDebuffBehavior)
             {
                 EnemyMenuCursor.Visibility = Visibility.Visible;
                 return new BattlePageTargetMenuAction();
             }
-            else if (Behavior is IBuffBehavior)
-            {
-                PlayerMenuCursor.Visibility = Visibility.Visible;
-                return new BattlePagePlayerMenuAction();
-            }
-            else if (Behavior is IDebuffBehavior)
-            {
-                EnemyMenuCursor.Visibility = Visibility.Visible;
-                return new BattlePageTargetMenuAction();
-            }
-            else if (Behavior is IUseItemBehavior)
+            else if (Behavior is ISupportBehavior || Behavior is IBuffBehavior || Behavior is IUseItemBehavior)
             {
                 PlayerMenuCursor.Visibility = Visibility.Visible;
                 return new BattlePagePlayerMenuAction();

@@ -1,5 +1,6 @@
 ﻿using MainDFF.Classes.Exploration;
 using MainDFF.Classes.Exploration.Storyboards;
+using MainDFF.Classes.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,11 @@ namespace MainDFF.Classes.ControlActions.MoveActions
     {
         public Point BegPos = new Point(291, 211);
         public Point Pos = new Point();
-        public Point LastPos = new Point();
+        public Point LastPos { get; set; }
         public AExploreStoryboardAnimation StoryboardAnimation;
         public ExploreAnimation SpriteAnimation = new ExploreAnimation();
         public Page NavigateToPage = null;
+        public Item PortalKey = null;
         public int MoveCharacter(int direction, int current, int max)
         {
             switch (direction)

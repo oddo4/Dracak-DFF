@@ -49,12 +49,13 @@ namespace MainDFF.Classes.ControlActions.MenuActions
                     NavigateToPage = new PartySelectPage(true);
                     return -2;
                 case 1:
-                    App.fileHelper.LoadData();
-                    NavigateToPage = new MainMenuPage();
-                    return -2;
+                    if (App.fileHelper.LoadData())
+                    {
+                        NavigateToPage = new MainMenuPage();
+                        return -2;
+                    }
+                    return CurrentIndex;
                 case 2:
-                    return -2;
-                case 3:
                     return -3;
                 default:
                     return CurrentIndex;

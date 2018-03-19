@@ -18,10 +18,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8" Margin="0,0,0,0">
-            <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
+            <Rectangle Style="{StaticResource MenuRectangle}" Height="30" Width="640"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Style="{StaticResource LevelMenuInfo}" Text="Help" Margin="0,0,0,0"/>
-                <TextBlock x:Name="txtBlkInformation" Style="{StaticResource LevelMenuInfo}" Text="Information" Margin="0,0,0,0"/>
+                <TextBlock x:Name="txtBlkInformation" Style="{StaticResource LevelMenuInfo}" Text="Select level" Margin="0,0,0,0"/>
             </StackPanel>
         </Grid>
         <Image Grid.Row="1" Source="/Resources/WorldMap.jpg" Stretch="Uniform" Height="450"/>

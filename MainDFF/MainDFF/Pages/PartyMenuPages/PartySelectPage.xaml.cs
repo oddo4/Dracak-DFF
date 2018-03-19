@@ -152,11 +152,11 @@ namespace MainDFF.Pages.PartyMenuPages
         {
             if (page != null)
             {
-                NavigationService.Navigate(page);
+                App.MainFrame.NavigationService.Navigate(page);
             }
             else
             {
-                NavigationService.GoBack();
+                App.MainFrame.NavigationService.GoBack();
             }
 
             ResetEvent();

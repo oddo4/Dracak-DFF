@@ -30,10 +30,10 @@
             <TextBlock Style="{StaticResource MenuSelect}" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0">
                 Load Game
             </TextBlock>
-            <TextBlock Style="{StaticResource MenuSelect}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,0">
+            <!--<TextBlock Style="{StaticResource MenuSelect}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,0">
                 Options
-            </TextBlock>
-            <TextBlock Style="{StaticResource MenuSelect}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,0">
+            </TextBlock>-->
+            <TextBlock Style="{StaticResource MenuSelect}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,0">
                 Quit
             </TextBlock>
         </Grid>

@@ -57,7 +57,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\ASpriteAnimation.cs" />
+    <Compile Include="Classes\Battle\MagicBehaviors\WaterMagicBehavior.cs" />
+    <Compile Include="Classes\Battle\MagicBehaviors\ThunderMagicBehavior.cs" />
+    <Compile Include="Classes\Battle\MagicBehaviors\IceMagicBehavior.cs" />
+    <Compile Include="Classes\Battle\MagicBehaviors\FireMagicBehavior.cs" />
+    <Compile Include="Classes\Battle\SupportBehaviors\CureMagicBehavior.cs" />
+    <Compile Include="Classes\Exploration\ASpriteAnimation.cs" />
     <Compile Include="Classes\Battle\AttackBehaviors\LimitAttackBehavior.cs" />
     <Compile Include="Classes\Battle\AttackBehaviors\SkillAttackBehavior.cs" />
     <Compile Include="Classes\Battle\CharacterAnimation.cs" />
@@ -76,16 +81,48 @@
     <Compile Include="Classes\ControlActions\MenuActions\BattlePageSubMenuAction.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\BattlePageTargetMenuAction.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\BattleResultPageMenuAction.cs" />
+    <Compile Include="Classes\ControlActions\MenuActions\PartyStatusPageAction.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\PartySwitchCharacterAction.cs" />
+    <Compile Include="Classes\Exploration\LevelList.cs" />
+    <Compile Include="Classes\Exploration\PathToLevel.cs" />
+    <Compile Include="Classes\Exploration\Portal.cs" />
     <Compile Include="Classes\FileHelper\DataFileLists.cs" />
     <Compile Include="Classes\FileHelper\FileHelper.cs" />
+    <Compile Include="Classes\Items\AItemType.cs" />
+    <Compile Include="Classes\Items\Equipable\Accessory.cs" />
+    <Compile Include="Classes\Items\Equipable\AArmor.cs" />
+    <Compile Include="Classes\Items\Equipable\Armors\Armor.cs" />
+    <Compile Include="Classes\Items\Equipable\Armors\Robe.cs" />
+    <Compile Include="Classes\Items\Equipable\AWeapon.cs" />
+    <Compile Include="Classes\Items\Equipable\Weapons\Staff.cs" />
+    <Compile Include="Classes\Items\Equipable\Weapons\Sword.cs" />
+    <Compile Include="Classes\Items\Key\PortalKey.cs" />
+    <Compile Include="Classes\Items\Usable\Ether.cs" />
+    <Compile Include="Classes\Items\Usable\Potion.cs" />
+    <Compile Include="Classes\Items\Item.cs" />
     <Compile Include="Classes\PartyMenu\SwitchCharacterImage.cs" />
     <Compile Include="Classes\ResourcePaths.cs" />
+    <Compile Include="Interface\BattleBehavior\ISupportBehavior.cs" />
     <Compile Include="Interface\IBehavior.cs" />
-    <Compile Include="Interface\IBuffBehavior.cs" />
-    <Compile Include="Interface\IDebuffBehavior.cs" />
-    <Compile Include="Interface\IUsable.cs" />
-    <Compile Include="Interface\IUseItemBehavior.cs" />
+    <Compile Include="Interface\BattleBehavior\IBuffBehavior.cs" />
+    <Compile Include="Interface\BattleBehavior\IDebuffBehavior.cs" />
+    <Compile Include="Interface\Inventory\IBuyable.cs" />
+    <Compile Include="Interface\Inventory\IEquipable.cs" />
+    <Compile Include="Interface\Stats\IStatHP.cs" />
+    <Compile Include="Interface\Stats\IStatMP.cs" />
+    <Compile Include="Interface\Inventory\ISellable.cs" />
+    <Compile Include="Interface\BattleBehavior\IUsableSkill.cs" />
+    <Compile Include="Interface\BattleBehavior\IUseItemBehavior.cs" />
+    <Compile Include="Interface\Inventory\IUsableItem.cs" />
+    <Compile Include="Interface\Stats\IStatDEF.cs" />
+    <Compile Include="Interface\Stats\IStatATK.cs" />
+    <Compile Include="Interface\Stats\IStatRESFIRE.cs" />
+    <Compile Include="Interface\Stats\IStatRESICE.cs" />
+    <Compile Include="Interface\Stats\IStatMAGATK.cs" />
+    <Compile Include="Interface\Stats\IStatMAGDEF.cs" />
+    <Compile Include="Interface\Stats\IStatRESWATER.cs" />
+    <Compile Include="Interface\Stats\IStatSPD.cs" />
+    <Compile Include="Interface\Stats\IStatRESTHUNDER.cs" />
     <Compile Include="Pages\BattlePage.xaml.cs">
       <DependentUpon>BattlePage.xaml</DependentUpon>
     </Compile>
@@ -128,6 +165,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\PartyMenuPages\PartyStatusPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\TitleScreenPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,7 +177,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Classes\ExploreAnimation.cs" />
+    <Compile Include="Classes\Exploration\ExploreAnimation.cs" />
     <Compile Include="Classes\ControlActions\MoveActions\AMoveAction.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\PartyMenuAction.cs" />
     <Compile Include="Pages\BattleResultPage.xaml.cs">
@@ -162,7 +203,7 @@
     <Compile Include="Classes\Battle\CharacterStats.cs" />
     <Compile Include="Classes\Battle\ACharacterClass.cs" />
     <Compile Include="Classes\Battle\CharacterClass\ClassVanguard.cs" />
-    <Compile Include="Interface\IAttackBehavior.cs" />
+    <Compile Include="Interface\BattleBehavior\IAttackBehavior.cs" />
     <Compile Include="Classes\ControlActions\MenuActions\MainMenuSelectAction.cs" />
     <Compile Include="Pages\MainMenuPage.xaml.cs">
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
@@ -171,6 +212,9 @@
       <DependentUpon>PartySelectPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\ControlActions\MenuActions\TitleScreenSelectAction.cs" />
+    <Compile Include="Pages\PartyMenuPages\PartyStatusPage.xaml.cs">
+      <DependentUpon>PartyStatusPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\TitleScreenPage.xaml.cs">
       <DependentUpon>TitleScreenPage.xaml</DependentUpon>
     </Compile>
@@ -223,13 +267,39 @@
     <Resource Include="Resources\CharacterSprites\Battle\00\Move.png" />
     <Resource Include="Resources\CharacterSprites\Battle\00\Win.png" />
     <Resource Include="Resources\CharacterSprites\Battle\00\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\01\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\01\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\01\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\01\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\01\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\01\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\01\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\01\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\01\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\02\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\02\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\02\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\02\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\02\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\02\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\02\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\02\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\02\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\03\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\03\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\03\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\03\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\03\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\03\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\03\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\03\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\03\Winpose.png" />
     <Resource Include="Resources\CharacterSprites\Battle\07\Attack.png" />
     <Resource Include="Resources\CharacterSprites\Battle\07\Dead.png" />
     <Resource Include="Resources\CharacterSprites\Battle\07\Dying.png" />
     <Resource Include="Resources\CharacterSprites\Battle\07\Icon.png" />
     <Resource Include="Resources\CharacterSprites\Battle\07\Idle.png" />
     <Resource Include="Resources\CharacterSprites\Battle\07\Limit.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\07\Limit2.png" />
     <Resource Include="Resources\CharacterSprites\Battle\07\Magic.png" />
     <Resource Include="Resources\CharacterSprites\Battle\07\Move.png" />
     <Resource Include="Resources\CharacterSprites\Battle\07\Win.png" />
@@ -254,6 +324,19 @@
     <Resource Include="Resources\CharacterSprites\Battle\15\Move.png" />
     <Resource Include="Resources\CharacterSprites\Battle\15\Win.png" />
     <Resource Include="Resources\CharacterSprites\Battle\15\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\00\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\00\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\00\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\01\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\02\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\03\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\04\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\05\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\06\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\07\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\08\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\09\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\10\Idle.png" />
     <Resource Include="Resources\cursor.png" />
     <Resource Include="Resources\LevelIcons\0.png" />
     <Resource Include="Resources\MainMenuBG.png" />
@@ -265,27 +348,28 @@
     <Resource Include="Resources\CharacterSprites\Exploration\EnemyWalk.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Map\00\BG.png" />
+    <Resource Include="Resources\Map\00\Floor.png" />
+    <Resource Include="Resources\Map\00\Path.png" />
+    <Resource Include="Resources\Map\00\Wall.png" />
+    <Resource Include="Resources\Map\01\Floor.png" />
+    <Resource Include="Resources\Map\02\Floor.png" />
+    <Resource Include="Resources\Map\03\Floor.png" />
+    <Resource Include="Resources\Map\04\Floor.png" />
     <Resource Include="Resources\PanelShadow.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\CharacterSprites\Monsters\00\Idle.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\CharacterSprites\Monsters\00\Attack.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\CharacterSprites\Battle\04\" />
-    <Folder Include="Resources\CharacterSprites\Battle\05\" />
-    <Folder Include="Resources\CharacterSprites\Battle\06\" />
-    <Folder Include="Resources\CharacterSprites\Battle\08\" />
-    <Folder Include="Resources\CharacterSprites\Battle\09\" />
-    <Folder Include="Resources\CharacterSprites\Battle\11\" />
-    <Folder Include="Resources\CharacterSprites\Battle\12\" />
-    <Folder Include="Resources\CharacterSprites\Battle\13\" />
-    <Folder Include="Resources\CharacterSprites\Battle\14\" />
-    <Folder Include="Resources\CharacterSprites\Battle\16\" />
-    <Folder Include="Resources\CharacterSprites\Battle\17\" />
-    <Folder Include="Resources\CharacterSprites\Battle\18\" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\00\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\01\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\02\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\03\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\04\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\05\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\06\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\07\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\08\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\09\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Monsters\Boss\10\Attack.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\CharacterSprites\Monsters\Icon.png" />
@@ -326,35 +410,6 @@
     <Resource Include="Resources\CharacterPanels\18.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\CharacterSprites\Battle\01\Attack.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\01\Dead.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\01\Dying.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\01\Icon.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\01\Idle.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\01\Limit.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\01\Magic.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\01\Win.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\01\Winpose.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\02\Attack.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\02\Dead.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\02\Dying.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\02\Icon.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\02\Idle.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\02\Limit.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\02\Magic.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\02\Win.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\02\Winpose.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\03\Attack.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\03\Dead.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\03\Dying.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\03\Icon.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\03\Idle.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\03\Limit.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\03\Magic.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\03\Win.png" />
-    <Resource Include="Resources\CharacterSprites\Battle\03\Winpose.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\LevelIcons\1.png" />
     <Resource Include="Resources\LevelIcons\2.png" />
     <Resource Include="Resources\LevelIcons\3.png" />
@@ -367,6 +422,140 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\WorldMap.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CharacterSprites\Exploration\PortalSprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CharacterSprites\Battle\04\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\04\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\04\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\04\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\04\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\04\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\04\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\04\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\04\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\05\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\05\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\05\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\05\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\05\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\05\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\05\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\05\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\05\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\06\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\06\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\06\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\06\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\06\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\06\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\06\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\06\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\06\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\08\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\08\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\08\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\08\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\08\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\08\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\08\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\08\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\08\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\09\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\09\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\09\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\09\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\09\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\09\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\09\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\09\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\09\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\11\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\11\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\11\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\11\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\11\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\11\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\11\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\11\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\11\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\12\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\12\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\12\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\12\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\12\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\12\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\12\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\12\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\12\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\13\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\13\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\13\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\13\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\13\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\13\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\13\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\13\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\13\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\14\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\14\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\14\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\14\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\14\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\14\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\14\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\14\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\14\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\16\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\16\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\16\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\16\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\16\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\16\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\16\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\16\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\16\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\17\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\17\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\17\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\17\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\17\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\17\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\17\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\17\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\17\Winpose.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\18\Attack.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\18\Dead.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\18\Dying.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\18\Icon.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\18\Idle.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\18\Limit.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\18\Magic.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\18\Win.png" />
+    <Resource Include="Resources\CharacterSprites\Battle\18\Winpose.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\BattleBackgrounds\00.png" />
+    <Resource Include="Resources\BattleBackgrounds\01.png" />
+    <Resource Include="Resources\BattleBackgrounds\02.png" />
+    <Resource Include="Resources\BattleBackgrounds\03.png" />
+    <Resource Include="Resources\BattleBackgrounds\04.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Map\01\BG.png" />
+    <Resource Include="Resources\Map\01\Path.png" />
+    <Resource Include="Resources\Map\01\Wall.png" />
+    <Resource Include="Resources\Map\02\BG.png" />
+    <Resource Include="Resources\Map\02\Path.png" />
+    <Resource Include="Resources\Map\02\Wall.png" />
+    <Resource Include="Resources\Map\03\BG.png" />
+    <Resource Include="Resources\Map\03\Path.png" />
+    <Resource Include="Resources\Map\03\Wall.png" />
+    <Resource Include="Resources\Map\04\BG.png" />
+    <Resource Include="Resources\Map\04\Path.png" />
+    <Resource Include="Resources\Map\04\Wall.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MainDFF.Pages;
+using MainDFF.Pages.PartyMenuPages;
 
 namespace MainDFF.Classes.ControlActions.MenuActions
 {
@@ -32,20 +33,19 @@ namespace MainDFF.Classes.ControlActions.MenuActions
             switch (CurrentIndex)
             {
                 case 0:
+                    NavigateToPage = new PartyStatusPage();
                     return -2;
                 case 1:
-                    return -2;
+                    NavigateToPage = null;
+                    return CurrentIndex;
                 case 2:
-                    return -2;
+                    NavigateToPage = null;
+                    return CurrentIndex;
                 case 3:
                     NavigateToPage = null;
-                    return -2;
+                    return CurrentIndex;
                 case 4:
-                    NavigateToPage = null;
                     return -2;
-                case 5:
-                    NavigateToPage = null;
-                    return -4;
                 default:
                     return CurrentIndex;
             }

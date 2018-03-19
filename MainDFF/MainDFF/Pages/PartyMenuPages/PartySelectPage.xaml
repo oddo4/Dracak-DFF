@@ -9,7 +9,7 @@
       Title="PartySelectPage"
       Loaded="MenuKey_Loaded">
 
-    <Grid Background="DarkGray">
+    <Grid Style="{StaticResource GridMenuBG}">
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="*" />
@@ -24,7 +24,7 @@
             <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Style="{StaticResource LevelMenuInfo}" Text="Help" Margin="0,0,0,0"/>
-                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="Information" Margin="0,0,0,0"/>
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="Select party members" Margin="0,0,0,0"/>
             </StackPanel>
         </Grid>
         <StackPanel x:Name="PartyMembers" Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">

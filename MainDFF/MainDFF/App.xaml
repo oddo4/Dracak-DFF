@@ -74,6 +74,46 @@
             <Setter Property="Foreground" Value="WhiteSmoke"/>
         </Style>
         <!-- PartySelectPage END -->
+        <!-- PartyStatusPage START -->
+        <Style x:Key="CharacterFullName" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Typography.Capitals" Value="SmallCaps"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+        <Style x:Key="PartyMenuLvl" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+        </Style>
+        <Style x:Key="PartyMenuLvlValue" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+        <Style x:Key="PartyMenuStat" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+        </Style>
+        <Style x:Key="PartyMenuStatValue" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+        <!-- PartyStatusPage END -->
         <!-- PartyMenuPage START -->
         <Style x:Key="GridPartyMenu" TargetType="Grid">
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -290,12 +330,12 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
         <Style x:Key="PlayerCanvas" TargetType="Canvas">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
             <Setter Property="ClipToBounds" Value="True"/>
         </Style>
         <Style x:Key="EnemyCanvas" TargetType="Canvas">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
             <Setter Property="ClipToBounds" Value="True"/>
         </Style>
@@ -354,7 +394,56 @@
         </Style>
         <!-- BattlePage END -->
         <!-- BattleResultPage START -->
-        <Style x:Key="BattleResultBG" TargetType="Grid">
+        <Style x:Key="ResultNextLvlName" TargetType="TextBlock">
+            <Setter Property="Width" Value="67"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+        <Style x:Key="ResultNextLvlValue" TargetType="TextBlock">
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="DemiBold"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+        <Style x:Key="ResultExpBar" TargetType="ProgressBar">
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF712D2D" Offset="1"/>
+                        <GradientStop Color="#FFD65353" Offset="0.622"/>
+                        <GradientStop Color="#FFDA9595" Offset="0.321"/>
+                        <GradientStop Color="#FFD65353" Offset="0.104"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF404040" Offset="0"/>
+                        <GradientStop Color="#FF838383" Offset="0.1"/>
+                        <GradientStop Color="#FF404040" Offset="0.358"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0.75" BlurRadius="0" RenderingBias="Performance" Color="#FFD0D0D0">
+                    </DropShadowEffect>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="10"/>
+            <Setter Property="Height" Value="4"/>
+            <Setter Property="Maximum" Value="100"/>
+            <Setter Property="Value" Value="100"/>
+        </Style>
+        <!-- BattleResultPage END -->
+        <!-- GeneralStyles START -->
+        <Style x:Key="GridMenuBG" TargetType="Grid">
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -366,15 +455,13 @@
                                 <TranslateTransform/>
                             </TransformGroup>
                         </LinearGradientBrush.RelativeTransform>
-                        <GradientStop Color="#FF1E232C" Offset="0"/>
-                        <GradientStop Color="#FF454D63" Offset="0.635"/>
-                        <GradientStop Color="#FF282C38" Offset="0.973"/>
+                        <GradientStop Color="#FF12151B" Offset="0"/>
+                        <GradientStop Color="#FF212735" Offset="0.635"/>
+                        <GradientStop Color="#FF12151B" Offset="0.967"/>
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
         </Style>
-        <!-- BattleResultPage END -->
-        <!-- GeneralStyles START -->
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="DarkSlateGray"/>
         </Style>

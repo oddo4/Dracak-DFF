@@ -33,32 +33,31 @@ namespace MainDFF.Classes.Exploration.Storyboards
             AnimationComplete = false;
         }
 
-        public override void CreateStoryboard(Key direction, Canvas EnemyCanvas)
+        public override void CreateStoryboard(Key direction, Canvas Canvas, bool invert = false)
         {
-            Point MapPos = new Point(Canvas.GetLeft(EnemyCanvas), Canvas.GetTop(EnemyCanvas));
+            Point CanvasPos = new Point(Canvas.GetLeft(Canvas), Canvas.GetTop(Canvas));
 
-            DoubleAnimation MapAnim;
+            DoubleAnimation CanvasAnim;
 
             int tileWidth = 26;
 
             switch (direction)
             {
                 case Key.Up:
-                    MapAnim = new DoubleAnimation(MapPos.Y, MapPos.Y - tileWidth, TimeSpan.FromSeconds(0.2));
-                    AddToStoryboard(MapAnim, EnemyCanvas, 0);
+                    CanvasAnim = new DoubleAnimation(CanvasPos.Y, CanvasPos.Y - tileWidth, TimeSpan.FromSeconds(0.2));
+                    AddToStoryboard(CanvasAnim, Canvas, 0);
                     break;
                 case Key.Down:
-                    MapAnim = new DoubleAnimation(MapPos.Y, MapPos.Y + tileWidth, TimeSpan.FromSeconds(0.2));
-                    AddToStoryboard(MapAnim, EnemyCanvas, 0);
+                    CanvasAnim = new DoubleAnimation(CanvasPos.Y, CanvasPos.Y + tileWidth, TimeSpan.FromSeconds(0.2));
+                    AddToStoryboard(CanvasAnim, Canvas, 0);
                     break;
                 case Key.Left:
-                    MapAnim = new DoubleAnimation(MapPos.X, MapPos.X - tileWidth, TimeSpan.FromSeconds(0.2));
-                    AddToStoryboard(MapAnim, EnemyCanvas, 1);
-
+                    CanvasAnim = new DoubleAnimation(CanvasPos.X, CanvasPos.X - tileWidth, TimeSpan.FromSeconds(0.2));
+                    AddToStoryboard(CanvasAnim, Canvas, 1);
                     break;
                 case Key.Right:
-                    MapAnim = new DoubleAnimation(MapPos.X, MapPos.X + tileWidth, TimeSpan.FromSeconds(0.2));
-                    AddToStoryboard(MapAnim, EnemyCanvas, 1);
+                    CanvasAnim = new DoubleAnimation(CanvasPos.X, CanvasPos.X + tileWidth, TimeSpan.FromSeconds(0.2));
+                    AddToStoryboard(CanvasAnim, Canvas, 1);
                     break;
                 default:
                     break;

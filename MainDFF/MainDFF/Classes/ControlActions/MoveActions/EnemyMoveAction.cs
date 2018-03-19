@@ -1,5 +1,6 @@
 ﻿using MainDFF.Classes.Exploration.EnemySettings;
 using MainDFF.Classes.Exploration.Storyboards;
+using MainDFF.Classes.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Windows.Input;
 
 namespace MainDFF.Classes.ControlActions.MoveActions
 {
-    class EnemyMoveAction : AMoveAction
+    public class EnemyMoveAction : AMoveAction
     {
         public EnemyMoveSettings MoveSettings;
         public EnemyMoveAction(Point pos, Random rand)

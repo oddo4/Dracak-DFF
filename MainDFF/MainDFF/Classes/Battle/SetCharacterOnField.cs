@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -32,13 +33,13 @@ namespace MainDFF.Classes.Battle
             source.UriSource = new Uri("pack://application:,,,/Resources/CharacterSprites/Battle/" + player.CharacterID + "/" + player.CharacterAnimationList[0].SpriteFileName);
             source.EndInit();
             image.Source = source;
-            image.Width = source.Width;
-            image.Height = source.Height;
+            image.Width = source.PixelWidth;
+            image.Height = source.PixelHeight;
 
             Grid grid = new Grid()
             {
-                Width = source.Width / player.CharacterAnimationList[0].SpriteRowCol.X,
-                Height = source.Height / player.CharacterAnimationList[0].SpriteRowCol.Y,
+                Width = source.PixelWidth / player.CharacterAnimationList[0].SpriteRowCol.X,
+                Height = source.PixelHeight / player.CharacterAnimationList[0].SpriteRowCol.Y,
             };
             TextBlock txtBlk = new TextBlock();
             txtBlk.Style = (Style)(Application.Current.FindResource("PlayerDamageInfo"));
@@ -48,8 +49,8 @@ namespace MainDFF.Classes.Battle
             Canvas.SetLeft(image, 0);
             Canvas.SetTop(image, 0);
             Canvas canvas = new Canvas() {
-                Width = source.Width / player.CharacterAnimationList[0].SpriteRowCol.X,
-                Height = source.Height / player.CharacterAnimationList[0].SpriteRowCol.Y};
+                Width = source.PixelWidth / player.CharacterAnimationList[0].SpriteRowCol.X,
+                Height = source.PixelHeight / player.CharacterAnimationList[0].SpriteRowCol.Y};
             canvas.Style = (Style)(Application.Current.FindResource("PlayerCanvas"));
             canvas.Children.Add(image);
             canvas.Children.Add(grid);
@@ -59,7 +60,7 @@ namespace MainDFF.Classes.Battle
 
             playerField.Children.Add(canvas);
             var canvasImage = (Canvas)playerField.Children[row];
-            player.SwitchAnimation(canvasImage, 0, App.resourcePaths.GetPlayerPath(player.CharacterID));
+            player.SwitchAnimation(canvasImage, 0, App.resourcePaths.GetPlayerPath(player.CharacterID), null);
         }
         public void SetPlayerStatus(int row, PlayerCharacter player, Grid playerMenu)
         {
@@ -86,14 +87,14 @@ namespace MainDFF.Classes.Battle
             mpBar.Value = player.CharacterStatus.CurrentMP;
             spBar.Value = player.CharacterStatus.CurrentSP;
         }
-        public void SetEnemyOnField(List<EnemyCharacter> enemyList, Grid enemyField, Grid enemyMenu)
+        public void SetEnemyOnField(List<EnemyCharacter> enemyList, Grid enemyField, Grid enemyMenu, bool boss = false)
         {
             int col = 0;
             int rowOffset = 0;
             for (int i = 0; i < enemyList.Count; i++)
             {
                 var enemy = enemyList[i];
-                CreateEnemyElement(i - rowOffset, col, enemy, enemyField);
+                CreateEnemyElement(i - rowOffset, col, enemy, enemyField, boss);
                 SetEnemyStatus(i, enemy, enemyMenu);
                 if ((i + 1) % 3 == 0)
                 {
@@ -102,25 +103,31 @@ namespace MainDFF.Classes.Battle
                 }
             }
         }
-        private void CreateEnemyElement(int row, int col, EnemyCharacter enemy, Grid enemyField)
+        private void CreateEnemyElement(int row, int col, EnemyCharacter enemy, Grid enemyField, bool boss = false)
         {
             Image image = new Image();
             BitmapImage source = new BitmapImage();
-
+            image.Source = null;
             source.BeginInit();
-            source.UriSource = new Uri("pack://application:,,,/Resources/CharacterSprites/Monsters/" + enemy.CharacterID + "/" + enemy.CharacterAnimationList[0].SpriteFileName);
+            if (boss)
+            {
+                source.UriSource = new Uri("pack://application:,,,/Resources/CharacterSprites/Monsters/Boss/" + enemy.CharacterID + "/" + enemy.CharacterAnimationList[0].SpriteFileName);
+            }
+            else
+            {
+                source.UriSource = new Uri("pack://application:,,,/Resources/CharacterSprites/Monsters/" + enemy.CharacterID + "/" + enemy.CharacterAnimationList[0].SpriteFileName);
+            }
             source.EndInit();
             image.Source = source;
-            image.Width = source.Width;
-            image.Height = source.Height;
+            image.Width = source.PixelWidth;
+            image.Height = source.PixelHeight;
 
             Grid grid = new Grid()
             {
-                Width = source.Width / enemy.CharacterAnimationList[0].SpriteRowCol.X,
-                Height = source.Height / enemy.CharacterAnimationList[0].SpriteRowCol.Y,
+                Width = source.PixelWidth / enemy.CharacterAnimationList[0].SpriteRowCol.X,
+                Height = source.PixelHeight / enemy.CharacterAnimationList[0].SpriteRowCol.Y,
             };
             TextBlock txtBlk = new TextBlock();
-            txtBlk.Text = "ahoj";
             txtBlk.Style = (Style)(Application.Current.FindResource("EnemyDamageInfo"));
 
             grid.Children.Add(txtBlk);
@@ -129,19 +136,26 @@ namespace MainDFF.Classes.Battle
             Canvas.SetTop(image, 0);
             Canvas canvas = new Canvas()
             {
-                Width = source.Width / enemy.CharacterAnimationList[0].SpriteRowCol.X,
-                Height = source.Height / enemy.CharacterAnimationList[0].SpriteRowCol.Y
+                Width = source.PixelWidth / enemy.CharacterAnimationList[0].SpriteRowCol.X,
+                Height = source.PixelHeight / enemy.CharacterAnimationList[0].SpriteRowCol.Y
             };
             canvas.Style = (Style)(Application.Current.FindResource("EnemyCanvas"));
             canvas.Children.Add(image);
             canvas.Children.Add(grid);
 
-            Grid.SetRow(canvas, row);
+            if (boss)
+            {
+                Grid.SetRow(canvas, 1);
+            }
+            else
+            {
+                Grid.SetRow(canvas, row);
+            }
             Grid.SetColumn(canvas, col);
 
             enemyField.Children.Add(canvas);
             var canvasImage = (Canvas)enemyField.Children[row];
-            enemy.SwitchAnimation(canvasImage, 0, App.resourcePaths.GetEnemyPath(enemy.CharacterID));
+            enemy.SwitchAnimation(canvasImage, 0, App.resourcePaths.GetEnemyPath(enemy.CharacterID), null);
         }
         private void SetEnemyStatus(int row, EnemyCharacter enemy, Grid enemyMenu)
         {
@@ -157,8 +171,11 @@ namespace MainDFF.Classes.Battle
                 if (EnemyList[i] == enemy)
                 {
                     var grid = (Canvas)enemyField.Children[i];
-                    var image = (Image)grid.Children[0];
-                    image.Visibility = Visibility.Hidden;
+                    DoubleAnimation fadeOut = new DoubleAnimation();
+                    fadeOut.From = 1;
+                    fadeOut.To = 0;
+                    fadeOut.Duration = new Duration(TimeSpan.FromMilliseconds(200));
+                    grid.BeginAnimation(UIElement.OpacityProperty, fadeOut);
 
                     DeleteEnemyStatus(i, enemyMenu);
                 }

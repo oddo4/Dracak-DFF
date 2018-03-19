@@ -3,10 +3,12 @@ using MainDFF.Interface;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace MainDFF.Classes.Battle
 {
@@ -14,6 +16,7 @@ namespace MainDFF.Classes.Battle
     {
         public string CharacterID { get; set; }
         public string Name { get; set; }
+        public string FullName { get; set; }
         public CharacterStats CharacterStats { get; set; }
         [JsonIgnore]
         public CharacterStatus CharacterStatus { get; set; }
@@ -36,7 +39,7 @@ namespace MainDFF.Classes.Battle
         public List<CharacterAnimation> CharacterAnimationList = new List<CharacterAnimation>();
         public List<IBehavior> BehaviorList = new List<IBehavior>();
 
-        public void SwitchAnimation(Canvas canvas, int animID, string path, bool loop = true)
+        public void SwitchAnimation(Canvas canvas, int animID, string path, DispatcherTimer damageTimer = null, int loopCount = 0, bool loop = true)
         {
             var image = (Image)canvas.Children[0];
 
@@ -47,18 +50,19 @@ namespace MainDFF.Classes.Battle
             source.EndInit();
 
             image.Source = source;
-            image.Width = source.Width;
-            image.Height = source.Height;
+            image.Width = source.PixelWidth;
+            image.Height = source.PixelHeight;
 
-            canvas.Width = source.Width / newAnim.SpriteRowCol.X;
-            canvas.Height = source.Height / newAnim.SpriteRowCol.Y;
+            canvas.Width = source.PixelWidth / newAnim.SpriteRowCol.X;
+            canvas.Height = source.PixelHeight / newAnim.SpriteRowCol.Y;
 
             if(CurrentAnimation >= 0)
             {
                 CharacterAnimationList[CurrentAnimation].StopSprite();
             }
             newAnim.Loop = loop;
-            newAnim.CreateSprite(image, new TimeSpan(0,0,0,0,75));
+            newAnim.LoopCount = loopCount;
+            newAnim.CreateSprite(image, new TimeSpan(0,0,0,0,75), damageTimer);
             CurrentAnimation = animID;
         }
         public CharacterAnimation GetCurrentAnimation()

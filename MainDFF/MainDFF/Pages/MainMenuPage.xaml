@@ -8,7 +8,7 @@
       d:DesignHeight="480" d:DesignWidth="640"
       Title="MainMenuPage"
       Loaded="MenuKey_Loaded">
-    <Grid Background="Black">
+    <Grid Background="#FFF4F4F1">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
@@ -25,9 +25,39 @@
             <ColumnDefinition Width="80"/>
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.RowSpan="4" Grid.ColumnSpan="8" Background="LawnGreen">
-
-        </Grid>
+        <Image Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="8" Source="/Resources/WorldMap.jpg" Stretch="Uniform" Height="450"/>
+        <Canvas x:Name="LevelIcons" Grid.Row="1">
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="290" Canvas.Left="130">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/0.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="220" Canvas.Left="240">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/1.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="350" Canvas.Left="260">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/2.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="210" Canvas.Left="330">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/3.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="340" Canvas.Left="380">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/4.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="270" Canvas.Left="440">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/5.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="150" Canvas.Left="470">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/6.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="120" Canvas.Left="390">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/7.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="60" Canvas.Left="400">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/8.png" Canvas.Left="-50"/>
+            </Canvas>
+            <Canvas Style="{StaticResource LevelIconCanvas}" Canvas.Top="50" Canvas.Left="290">
+                <Image Style="{StaticResource LevelIconImage}" Source="/Resources/LevelIcons/9.png" Canvas.Left="-50"/>
+            </Canvas>
+        </Canvas>
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8" Margin="0,0,0,0">
             <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
             <StackPanel Orientation="Horizontal">
@@ -47,7 +77,7 @@
             </Grid>
             <Grid Margin="0,0,0,0">
                 <Rectangle Style="{StaticResource MenuRectangle}" Height="80" Width="80"/>
-                <TextBlock Style="{StaticResource LevelMenuSelect}" Text="Shop"/>
+                <TextBlock Style="{StaticResource LevelMenuSelect}" Text="Shop" Foreground="Gray"/>
             </Grid>
             <Grid Margin="0,0,0,0">
                 <Rectangle Style="{StaticResource MenuRectangle}" Height="80" Width="80"/>

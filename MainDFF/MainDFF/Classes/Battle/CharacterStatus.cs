@@ -17,7 +17,7 @@ namespace MainDFF.Classes.Battle
             this.CurrentMP = stats.MP;
             this.CurrentSP = 0;
         }
-        public bool CheckHP(ACharacter character, List<ACharacter> characterOrder)
+        public bool CheckAlive(ACharacter character, List<ACharacter> characterOrder)
         {
             if (CurrentHP <= 0)
             {
@@ -28,9 +28,30 @@ namespace MainDFF.Classes.Battle
             }
             return false;
         }
-        public void AddSP(int damage)
+        public bool CheckDying(ACharacter character)
         {
-            CurrentSP += damage * 0.5;
+            if (CurrentHP <= character.CharacterStats.HP * 0.3)
+            {
+                return true;
+            }
+            return false;
+        }
+        public void AddSP(double max, int damage)
+        {
+            var valueSP = damage;
+            if(CurrentSP + valueSP < max)
+            {
+                CurrentSP += valueSP;
+            }
+            else
+            {
+                CurrentSP = max;
+            }
+        }
+
+        public void ResetSP()
+        {
+            CurrentSP = 0;
         }
     }
 }

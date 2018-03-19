@@ -9,7 +9,146 @@
       Title="BattleResultPage"
       Loaded="MenuKey_Loaded">
 
-    <Grid Style="{StaticResource BattleResultBG}">
-        
+    <Grid Style="{StaticResource GridMenuBG}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,0,0,0">
+            <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="Help" Margin="0,0,0,0"/>
+                <TextBlock x:Name="HelpInfo" Style="{StaticResource LevelMenuInfo}" Text="Battle result" Margin="0,0,0,0"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,0,0,0">
+            <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="500"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock x:Name="txtBlkReward" Style="{StaticResource LevelMenuInfo}" Text="" Margin="0,0,0,0"/>
+            </StackPanel>
+        </Grid>
+        <StackPanel x:Name="PartyMembers" Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid Margin="10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Canvas Style="{StaticResource PanelCanvas}" Grid.Row="0" Grid.RowSpan="5">
+                    <Image Style="{StaticResource PanelImage}" Source="/Resources/CharacterPanels/15.png" Canvas.Top="0" Canvas.Left="0"/>
+                    <Image Style="{StaticResource PanelShadow}" Source="/Resources/PanelShadow.png"/>
+                    <Image Style="{StaticResource PanelBevel}" Source="/Resources/PanelBevel.png"/>
+                </Canvas>
+                <TextBlock Style="{StaticResource PartyMemberName}" Grid.Row="1">
+                    Noctis
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource PartyMemberName}" Padding="5,0">
+                    Lv
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource PartyMemberName}" Padding="5,0">
+                    99
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="3"  Margin="5,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource ResultNextLvlName}">
+                            Next level:
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource ResultNextLvlValue}">
+                            1800
+                        </TextBlock>
+                    </StackPanel>
+                    <ProgressBar Style="{StaticResource ResultExpBar}" Value="50"/>
+                </StackPanel>
+            </Grid>
+            <Grid Margin="10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Canvas Style="{StaticResource PanelCanvas}" Grid.Row="0" Grid.RowSpan="5">
+                    <Image Style="{StaticResource PanelImage}" Source="/Resources/CharacterPanels/15.png" Canvas.Top="0" Canvas.Left="0"/>
+                    <Image Style="{StaticResource PanelShadow}" Source="/Resources/PanelShadow.png"/>
+                    <Image Style="{StaticResource PanelBevel}" Source="/Resources/PanelBevel.png"/>
+                </Canvas>
+                <TextBlock Style="{StaticResource PartyMemberName}" Grid.Row="1">
+                    Noctis
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource PartyMemberName}" Padding="5,0">
+                    Lv
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource PartyMemberName}" Padding="5,0">
+                    99
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="3"  Margin="5,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource ResultNextLvlName}">
+                            Next level:
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource ResultNextLvlValue}">
+                            1800
+                        </TextBlock>
+                    </StackPanel>
+                    <ProgressBar Style="{StaticResource ResultExpBar}" Value="50"/>
+                </StackPanel>
+            </Grid>
+            <Grid Margin="10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Canvas Style="{StaticResource PanelCanvas}" Grid.Row="0" Grid.RowSpan="5">
+                    <Image Style="{StaticResource PanelImage}" Source="/Resources/CharacterPanels/15.png" Canvas.Top="0" Canvas.Left="0"/>
+                    <Image Style="{StaticResource PanelShadow}" Source="/Resources/PanelShadow.png"/>
+                    <Image Style="{StaticResource PanelBevel}" Source="/Resources/PanelBevel.png"/>
+                </Canvas>
+                <TextBlock Style="{StaticResource PartyMemberName}" Grid.Row="1">
+                    Noctis
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource PartyMemberName}" Padding="5,0">
+                    Lv
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource PartyMemberName}" Padding="5,0">
+                    99
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="3"  Margin="5,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource ResultNextLvlName}">
+                            Next level:
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource ResultNextLvlValue}">
+                            1800
+                        </TextBlock>
+                    </StackPanel>
+                    <ProgressBar Style="{StaticResource ResultExpBar}" Value="50"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <Grid Grid.Row="3" Grid.ColumnSpan="5">
+            <Rectangle Style="{StaticResource MenuRectangle}"  Height="30" Width="640"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Style="{StaticResource LevelMenuInfo}" Text="ENTER Confirm" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,0" FontSize="12"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

@@ -46,20 +46,17 @@ namespace MainDFF.Pages
             }
             else
             {
-                switch (selected)
+                if (selected != -2)
                 {
-                    case -2:
-                        if (menuAction.NavigateToPage != null)
-                        {
-                            NavigationService.Navigate(menuAction.NavigateToPage);
-                            ResetEvent();
-                        }
-                        break;
-                    case -3:
-                        App.window.Close();
-                        break;
-                    default:
-                        break;
+                    App.window.Close();
+                }
+                else
+                {
+                    if (menuAction.NavigateToPage != null)
+                    {
+                        App.MainFrame.NavigationService.Navigate(menuAction.NavigateToPage);
+                        ResetEvent();
+                    }
                 }
             }
         }

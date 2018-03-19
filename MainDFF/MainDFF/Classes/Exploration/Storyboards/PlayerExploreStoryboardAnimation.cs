@@ -12,36 +12,49 @@ namespace MainDFF.Classes.Exploration.Storyboards
 {
     public class PlayerExploreStoryboardAnimation : AExploreStoryboardAnimation
     {
-        public override void CreateStoryboard(Key direction, Canvas MapCanvas)
+        public override void CreateStoryboard(Key direction, Canvas Canvas, bool invert = false)
         {
-            Point MapPos = new Point(Canvas.GetLeft(MapCanvas), Canvas.GetTop(MapCanvas));
+            Point CanvasPos = new Point(Canvas.GetLeft(Canvas), Canvas.GetTop(Canvas));
 
-            DoubleAnimation MapAnim;
+            if (invert)
+            {
+                direction = InvertDirection(direction);
+            }
+
+            DoubleAnimation CanvasAnim;
 
             int tileWidth = 26;
 
             switch (direction)
             {
                 case Key.Up:
-                    MapAnim = new DoubleAnimation(MapPos.Y, MapPos.Y + tileWidth, TimeSpan.FromSeconds(0.2));
-                    AddToStoryboard(MapAnim, MapCanvas, 0);
+                    CanvasAnim = new DoubleAnimation(CanvasPos.Y, CanvasPos.Y + tileWidth, TimeSpan.FromSeconds(0.2));
+                    AddToStoryboard(CanvasAnim, Canvas, 0);
                     break;
                 case Key.Down:
-                    MapAnim = new DoubleAnimation(MapPos.Y, MapPos.Y - tileWidth, TimeSpan.FromSeconds(0.2));
-                    AddToStoryboard(MapAnim, MapCanvas, 0);
+                    CanvasAnim = new DoubleAnimation(CanvasPos.Y, CanvasPos.Y - tileWidth, TimeSpan.FromSeconds(0.2));
+                    AddToStoryboard(CanvasAnim, Canvas, 0);
                     break;
                 case Key.Left:
-                    MapAnim = new DoubleAnimation(MapPos.X, MapPos.X + tileWidth, TimeSpan.FromSeconds(0.2));
-                    AddToStoryboard(MapAnim, MapCanvas, 1);
+                    CanvasAnim = new DoubleAnimation(CanvasPos.X, CanvasPos.X + tileWidth, TimeSpan.FromSeconds(0.2));
+                    AddToStoryboard(CanvasAnim, Canvas, 1);
                     break;
                 case Key.Right:
-                    MapAnim = new DoubleAnimation(MapPos.X, MapPos.X - tileWidth, TimeSpan.FromSeconds(0.2));
-                    AddToStoryboard(MapAnim, MapCanvas, 1);
+                    CanvasAnim = new DoubleAnimation(CanvasPos.X, CanvasPos.X - tileWidth, TimeSpan.FromSeconds(0.2));
+                    AddToStoryboard(CanvasAnim, Canvas, 1);
                     break;
                 default:
                     break;
             }
         }
+
+        private Key InvertDirection(Key direction)
+        {
+            Dictionary<Key, Key> switchDirection = new Dictionary<Key, Key>() { { Key.Up, Key.Down }, { Key.Down, Key.Up }, { Key.Left, Key.Right }, { Key.Right, Key.Left } };
+
+            return switchDirection[direction];
+        }
+
         public override void AddToStoryboard(DoubleAnimation Anim, Canvas Canvas, int Direction)
         {
             switch (Direction)

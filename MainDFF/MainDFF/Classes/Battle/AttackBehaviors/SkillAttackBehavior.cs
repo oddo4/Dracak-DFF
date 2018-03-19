@@ -1,5 +1,6 @@
 ﻿using MainDFF.Classes.Battle.CharacterClass;
 using MainDFF.Interface;
+using MainDFF.Interface.BattleBehavior;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,7 +14,7 @@ namespace MainDFF.Classes.Battle.AttackBehaviors
     {
         public string Name { get; set; }
         public int Cost { get; set; }
-        public bool IsUsable { get; set; }
+        public bool IsUsableSkill { get; set; }
 
         public int Action(ACharacter attacker, ACharacter defender)
         {
@@ -39,21 +40,30 @@ namespace MainDFF.Classes.Battle.AttackBehaviors
             {
                 attack *= 1.75;
             }
+            else
+            {
+                attack *= 1.5;
+            }
 
-            var damage = (int)(attack - defense);
+            var damage = (int)Math.Round((attack - defense));
             if (damage <= 0)
             {
                 damage = 1;
             }
 
-            Debug.WriteLine(attacker.CharacterStatus.CurrentMP);
-
             attacker.CharacterStatus.CurrentMP -= Cost;
             defender.CharacterStatus.CurrentHP -= damage;
 
-            Debug.WriteLine(attacker.CharacterStatus.CurrentMP);
+            SetZeroHP(defender);
 
             return damage;
+        }
+        public void SetZeroHP(ACharacter defender)
+        {
+            if (defender.CharacterStatus.CurrentHP <= 0)
+            {
+                defender.CharacterStatus.CurrentHP = 0;
+            }
         }
         public SkillAttackBehavior()
         {

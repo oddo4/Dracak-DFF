@@ -9,7 +9,7 @@
       Title="BattlePage"
       Loaded="MenuKey_Loaded">
 
-    <Grid Background="SpringGreen">
+    <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
@@ -64,19 +64,19 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <!--<Canvas Grid.Row="0" Grid.Column="1" Width="57" Height="69" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                    <Image Source="/Resources/CharacterSprites/Battle/15/Idle.png" Canvas.Top="0" Canvas.Left="0"/>
+                <!--<Canvas Grid.Row="0" Grid.Column="0" Width="318" Height="315" ClipToBounds="True" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Image Source="/Resources/CharacterSprites/Monsters/Boss/00/Idle.png" Width="954" Canvas.Top="0" Canvas.Left="0"/>
                 </Canvas>
-                <Canvas Grid.Row="1" Grid.Column="1" Width="57" Height="69" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <Canvas Grid.Row="1" Grid.Column="1" Width="57" Height="69" ClipToBounds="True" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <Image Source="/Resources/CharacterSprites/Battle/15/Idle.png" Canvas.Top="0" Canvas.Left="-0"/>
                 </Canvas>
-                <Canvas Grid.Row="2" Grid.Column="1" Width="57" Height="69" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <Canvas Grid.Row="2" Grid.Column="1" Width="57" Height="69" ClipToBounds="True" HorizontalAlignment="Right" VerticalAlignment="Center">
                     <Image Source="/Resources/CharacterSprites/Battle/15/Idle.png" Canvas.Top="0" Canvas.Left="-0"/>
                 </Canvas>
                 -->
             </Grid>
         </Grid>
-        <Grid Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top">
+        <Grid Grid.Row="1" Grid.RowSpan="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource MenuRectangle}" Height="160" Width="60"/>
             <ListBox x:Name="CharacterOrder" Style="{StaticResource CharacterOrder}">
                 <!--<ListBoxItem HorizontalAlignment="Center" Margin="1,0,0,0">
@@ -177,7 +177,7 @@
                 <TextBlock x:Name="BattleItems" Style="{StaticResource BattleMenuSelect}" Grid.Row="3" Grid.Column="1" Margin="0,0,0,0">
                     Items
                 </TextBlock>
-                <TextBlock x:Name="BattleLimitBreak" Style="{StaticResource BattleMenuSelect}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,0">
+                <TextBlock x:Name="BattleLimitBreak" Style="{StaticResource BattleMenuSelect}" Grid.Row="4" Grid.Column="1" Margin="0,0,0,0" Foreground="Gray">
                     Limit Break
                 </TextBlock>
             </Grid>
@@ -205,11 +205,11 @@
                         <DataTemplate>
                             <TextBlock x:Name="SubMenuItemName" Style="{StaticResource SubMenuSelect}" Text="{Binding Name}"/>
                             <DataTemplate.Triggers>
-                                <DataTrigger Binding="{Binding IsUsable}" Value="True">
+                                <DataTrigger Binding="{Binding IsUsableSkill}" Value="True">
                                     <Setter TargetName="SubMenuItemName" Property="Foreground" Value="WhiteSmoke"/>
                                 </DataTrigger>
 
-                                <DataTrigger Binding="{Binding IsUsable}" Value="False">
+                                <DataTrigger Binding="{Binding IsUsableSkill}" Value="False">
                                     <Setter TargetName="SubMenuItemName" Property="Foreground" Value="Gray"/>
                                 </DataTrigger>
                             </DataTemplate.Triggers>

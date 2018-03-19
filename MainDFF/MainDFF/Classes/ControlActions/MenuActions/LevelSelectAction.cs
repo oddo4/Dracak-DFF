@@ -12,10 +12,7 @@ namespace MainDFF.Classes.ControlActions.MenuActions
     {
         public override int ConfirmSelection()
         {
-
-            NavigateToPage = new LevelPlayPage(CurrentIndex);
             return -2;
-
         }
 
         public override int GetDirection(Key key, int max, int min = 0)

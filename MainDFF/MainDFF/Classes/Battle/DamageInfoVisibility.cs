@@ -11,32 +11,44 @@ namespace MainDFF.Classes.Battle
 {
     public class DamageInfoVisibility
     {
+        public ACharacter Target;
         public DispatcherTimer DamageTimer;
+        public DispatcherTimer BattleTimer;
+        public TextBlock TxtBlk;
         public int Ctr = 0;
-        public int Offset = 0;
-        public DamageInfoVisibility(int time, TextBlock txtBlk)
+        public int Offset = 1;
+        public DamageInfoVisibility(ACharacter target)
         {
+            Target = target;
             Ctr = 0;
-            Offset = time;
             DamageTimer = new DispatcherTimer(DispatcherPriority.Send);
-            DamageTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
-            DamageTimer.Tick += (sender, args) => { ShowDamageInfo(txtBlk); };
-
-            DamageTimer.Start();
+            DamageTimer.Interval = new TimeSpan(0, 0, 0, 0, 75);
         }
-        public void ShowDamageInfo(TextBlock txtBlk)
+        public void SetTickTimer(TextBlock txtBlk, DispatcherTimer battleTimer)
         {
-            if (Ctr >= Offset + 1)
+            BattleTimer = battleTimer;
+            TxtBlk = txtBlk;
+            DamageTimer.Tick += (sender, args) => { ShowDamageInfo(); };
+        }
+        public void ShowDamageInfo()
+        {
+            if (Ctr >= Offset + 5)
             {
-                txtBlk.Visibility = Visibility.Hidden;
-                DamageTimer.Stop();
+                DamageStop();
             }
             else if (Ctr >= Offset)
             {
-                txtBlk.Visibility = Visibility.Visible;
+                TxtBlk.Visibility = Visibility.Visible;
             }
 
             Ctr++;
+        }
+
+        public void DamageStop()
+        {
+            TxtBlk.Visibility = Visibility.Hidden;
+            DamageTimer.Stop();
+            BattleTimer.Start();
         }
     }
 }
